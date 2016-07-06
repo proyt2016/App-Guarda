@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/ventaEfectivo"
+            android:icon="@drawable/cash_multiple"
+            android:title="Venta en Efectivo" />
+        <item
+            android:id="@+id/ventaOnline"
+            android:icon="@drawable/venta_online_icono"
+            android:title="Venta Online" />
+        <item
+            android:id="@+id/procesarPasajesEscaner"
+            android:icon="@drawable/procesar_pasajes_iconos"
+            android:title="Procesar Pasajes con Escaner" />
+        <item
+            android:id="@+id/procesarPasajesManual"
+            android:icon="@drawable/buscar_negro"
+            android:title="Procesar Pasajes por Codigo" />
+
+
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+
+            <!-- AGREGAR MAS ITEM COMO ARRIBA-->
+
+        </menu>
+    </item>
+
+</menu>

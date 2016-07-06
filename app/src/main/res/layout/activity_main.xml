@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.fedoraapps.www.appguarda.Main"
+    android:background="#FFFFFFFF"
+    >
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+
+        <EditText
+            android:id="@+id/inputSearch"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:hint="Buscar viaje..."
+            android:textSize="18dp"
+            android:layout_gravity="center"
+            android:textColorLink="@color/white"
+            android:textColorHint="@color/white"
+
+            android:inputType="textVisiblePassword"
+            android:textColor="@color/white"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:drawableRight="@drawable/buscar"
+            android:drawableLeft="@drawable/bondi_blanco"
+            />
+
+
+    </android.support.design.widget.AppBarLayout>
+    <ListView
+        android:id="@+id/listTrip"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="65dp"
+
+
+        android:layout_alignParentLeft="true"
+
+        android:background="@color/white" />
+
+
+
+
+</android.support.design.widget.CoordinatorLayout>

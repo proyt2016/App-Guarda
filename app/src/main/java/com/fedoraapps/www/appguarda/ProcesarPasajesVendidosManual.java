@@ -25,7 +25,8 @@ import retrofit2.Response;
 public class ProcesarPasajesVendidosManual extends AppCompatActivity implements View.OnClickListener {
 
     private List<Pasaje> PasajesVendidos = new ArrayList<>();
-    private int codViaje;
+    private String codViaje;
+    private String codRecorrido;
     private EditText inputCodigo;
     private Button confirmar;
 
@@ -33,7 +34,8 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vista_procesar_pasajes_manual);
 
-        codViaje = getIntent().getExtras().getInt("codigo");
+        codViaje = getIntent().getExtras().getString("codigoViaje");
+        codRecorrido = getIntent().getExtras().getString("codigo");
 
         confirmar = (Button)findViewById(R.id.confirmarManual);
         inputCodigo = (EditText)findViewById(R.id.codigoPasaje);

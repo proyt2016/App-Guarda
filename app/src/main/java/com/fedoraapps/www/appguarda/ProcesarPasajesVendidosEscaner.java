@@ -30,13 +30,15 @@ public class ProcesarPasajesVendidosEscaner extends AppCompatActivity implements
 
     private Button scanBtn;
     private List<Pasaje> PasajesVendidos = new ArrayList<>();
-    private int codViaje;
+    private String codViaje;
+    private String codRecorrido;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vista_procesar_pasajes_escaner);
-        codViaje = getIntent().getExtras().getInt("codigo");
+        codViaje = getIntent().getExtras().getString("codigoViaje");
+        codRecorrido = getIntent().getExtras().getString("codigo");
         scanBtn = (Button)findViewById(R.id.scan_button);
         scanBtn.setOnClickListener(this);
     }

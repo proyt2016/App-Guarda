@@ -1,6 +1,6 @@
 package com.fedoraapps.www.appguarda.Api;
 
-import com.fedoraapps.www.appguarda.Model.PuntosDeRecorrido;
+import com.fedoraapps.www.appguarda.Shares.DataRecorridoConvertor;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ public class PuntosRecorridoApi {
     public static PuntosRecorridoApiInterface createService() {
         if (recorridosService == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://574f74b25dd0e51100a9408c.mockapi.io")
+                    .baseUrl("http://192.168.1.188:8080")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build())
                     .build();
@@ -33,7 +33,8 @@ public class PuntosRecorridoApi {
     }
 
     public interface PuntosRecorridoApiInterface {
-        @GET("/PuntosDeRecorrido")
-        Call<List<PuntosDeRecorrido>> getAll();
+        @GET("/lcbsapi/rest/viajes/listarrecorridos/1/99")
+        Call<List<DataRecorridoConvertor>> getAll();
+
     }
 }

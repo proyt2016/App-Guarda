@@ -1,5 +1,7 @@
 package com.fedoraapps.www.appguarda;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,7 +15,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.fedoraapps.www.appguarda.Api.ViajeApi;
-import com.fedoraapps.www.appguarda.Model.Viaje;
+import com.fedoraapps.www.appguarda.Shares.DataViaje;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,8 +26,8 @@ import retrofit2.Response;
 
 public class Main extends AppCompatActivity implements View.OnClickListener{
     ListView listTrip;
-    ArrayAdapter<Viaje> adapter;
-    List<Viaje> ListResponse;
+    ArrayAdapter<DataViaje> adapter;
+    List<DataViaje> ListResponse;
     EditText filtro;
 
     @Override
@@ -37,29 +39,39 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         //Asociar Elementos XML
         listTrip =(ListView)findViewById(R.id.listTrip);
         filtro = (EditText)findViewById(R.id.inputSearch);
+        filtro.setOnClickListener(this);
         listTrip.setTextFilterEnabled(true);
 
-        Call<List<Viaje>> call = ViajeApi.createService().getAll();
-        call.enqueue(new Callback<List<Viaje>>() {
+
+        Call<List<DataViaje>> call = ViajeApi.createService().getAll();
+        call.enqueue(new Callback<List<DataViaje>>() {
             @Override
-            public void onResponse(Call<List<Viaje>> call, Response<List<Viaje>> response) {
+            public void onResponse(Call<List<DataViaje>> call, Response<List<DataViaje>> response) {
                 ListResponse = response.body();
-                adapter = new InteractiveArrayAdapterTerminales(Main.this,getModel());
-                listTrip.setAdapter(adapter);
-                for (Viaje t : ListResponse) {
-                    adapter.notifyDataSetChanged();
+                System.out.println("----------------***************************->>>"+ListResponse.size());
+                if(ListResponse != null){
+
+
+                        adapter = new InteractiveArrayAdapterRecorridos(Main.this, ListResponse);
+                        listTrip.setAdapter(adapter);
+                        for (DataViaje t : ListResponse) {
+                            adapter.notifyDataSetChanged();
+                        }
+
+                }else{
+                    ListaVaciaDialog().show();
                 }
             }
             @Override
-            public void onFailure(Call<List<Viaje>> call, Throwable t) {
-                System.out.println("onFailure");}
+            public void onFailure(Call<List<DataViaje>> call, Throwable t) {
+                System.out.println("onFailure****************************************");}
         });
 
 
 
         //CALL LOGIN
        // Intent i = new Intent(Main.this,Login.class);
-      //  startActivity(i);
+        //startActivity(i);
 
 
      if (filtro.getText() != null) {
@@ -109,15 +121,53 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
 
         return super.onOptionsItemSelected(item);
     }
-    private List<Viaje> getModel() {
-        List<Viaje> list = new ArrayList<Viaje>();
-        for (Viaje t : ListResponse) {
-            list.add(t);
-        }return list;
+    private List<DataViaje> getModel() {
+        List<DataViaje> list = new ArrayList<DataViaje>();
+          for (DataViaje t : ListResponse) {
+                list.add(t);
+            }
+            return list;
+        }
+
+
+    private String getModelEmpty() {
+        return "No existen recorridos cargados";
     }
 
     @Override
     public void onClick(View v) {
 
+    }
+    private AlertDialog ListaVaciaDialog()
+    {
+        // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Atencion!");
+        alertDialogBuilder.setMessage("No existen Viajes cargados");
+        alertDialogBuilder.setIcon(R.drawable.icono_alerta);;
+
+        // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
+        DialogInterface.OnClickListener listenerOk = new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        };
+
+        // Creamos un nuevo OnClickListener para el boton Cancelar
+        DialogInterface.OnClickListener listenerCancelar = new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        };
+
+        // Asignamos los botones positivo y negativo a sus respectivos listeners
+        alertDialogBuilder.setPositiveButton(R.string.ACEPTAR, listenerOk);
+        // alertDialogBuilder.setNegativeButton(R.string.Cancelar, listenerCancelar);
+
+        return alertDialogBuilder.create();
     }
 }

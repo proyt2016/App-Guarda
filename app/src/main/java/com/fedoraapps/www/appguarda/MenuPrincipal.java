@@ -17,7 +17,8 @@ import android.view.MenuItem;
 public class MenuPrincipal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private int codViaje;
+    private String codRecorrido;
+    private String codViaje;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,27 +85,35 @@ public class MenuPrincipal extends AppCompatActivity
 
         if (id == R.id.ventaEfectivo) {
 
-            codViaje = getIntent().getExtras().getInt("codigo");
+            codRecorrido = getIntent().getExtras().getString("codigo");
+            codViaje = getIntent().getExtras().getString("codigoViaje");
             Intent i = new Intent(MenuPrincipal.this,VentaPasajesEfectivo.class);
-            i.putExtra("codigo",codViaje);
+            i.putExtra("codigo",codRecorrido);
+            i.putExtra("codigoViaje",codViaje);
             startActivity(i);
 
             // Handle the camera action
         } else if (id == R.id.ventaOnline) {
-            codViaje = getIntent().getExtras().getInt("codigo");
+            codRecorrido = getIntent().getExtras().getString("codigo");
+            codViaje = getIntent().getExtras().getString("codigoViaje");
             Intent i = new Intent(MenuPrincipal.this,VentaPasajesOnline.class);
-            i.putExtra("codigo",codViaje);
+            i.putExtra("codigo",codRecorrido);
+            i.putExtra("codigoViaje",codViaje);
             startActivity(i);
         }else if (id == R.id.procesarPasajesEscaner) {
-            codViaje = getIntent().getExtras().getInt("codigo");
+            codRecorrido = getIntent().getExtras().getString("codigo");
+            codViaje = getIntent().getExtras().getString("codigoViaje");
             Intent i = new Intent(MenuPrincipal.this,ProcesarPasajesVendidosEscaner.class);
-            i.putExtra("codigo",codViaje);
+            i.putExtra("codigo",codRecorrido);
+            i.putExtra("codigoViaje",codViaje);
             startActivity(i);
         }
         else if (id == R.id.procesarPasajesManual) {
-            codViaje = getIntent().getExtras().getInt("codigo");
+            codRecorrido = getIntent().getExtras().getString("codigo");
+            codViaje = getIntent().getExtras().getString("codigoViaje");
             Intent i = new Intent(MenuPrincipal.this,ProcesarPasajesVendidosManual.class);
-            i.putExtra("codigo",codViaje);
+            i.putExtra("codigo",codRecorrido);
+            i.putExtra("codigoViaje",codViaje);
             startActivity(i);
         }
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

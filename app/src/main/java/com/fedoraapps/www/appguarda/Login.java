@@ -2,6 +2,8 @@ package com.fedoraapps.www.appguarda;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -11,6 +13,8 @@ import android.widget.Toast;
 
 import com.fedoraapps.www.appguarda.Api.UsuarioApi;
 import com.fedoraapps.www.appguarda.Model.Usuario;
+import com.google.gson.JsonObject;
+
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -26,10 +30,12 @@ public class Login extends AppCompatActivity {
     private static final String TAG = "Login";
 
     @Bind(R.id.input_user)
+
     EditText _userText;
-    @Bind(R.id.input_password) EditText _passwordText;
-    @Bind(R.id.btn_login)
-    Button _loginButton;
+    @Bind(R.id.input_password)
+
+    EditText _passwordText;
+    @Bind(R.id.btn_login)Button _loginButton;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,8 +67,9 @@ public class Login extends AppCompatActivity {
         progressDialog.show();
 
         String user = _userText.getText().toString();
+        String password = _passwordText.getText().toString();
 
-        int userId = 0;
+        /*int userId = 0;
         if(user.equals("admin")){
             userId = 1;
         }else if(user.equals("empleado")){
@@ -71,17 +78,20 @@ public class Login extends AppCompatActivity {
             onLoginFailed();
             progressDialog.hide();
             return;
-        }
+        }*/
+        JsonObject caca = new JsonObject();
+        caca.addProperty("usuario",_userText.getText().toString());
+        caca.addProperty("clave",_passwordText.getText().toString());
 
-        Call<Usuario> call = UsuarioApi.createService().getByUsuario(userId);
-        call.enqueue(new Callback<Usuario>() {
+        Call<Boolean> call = UsuarioApi.createService().getByUsuario(caca);
+        call.enqueue(new Callback<Boolean>() {
             @Override
-            public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if(response.isSuccessful()){
-                    String password = _passwordText.getText().toString();
-                    Usuario user = response.body();
 
-                    if (password.equals(user.getClave())){
+                    boolean log = response.body();
+
+                    if (log == true){
                         new android.os.Handler().postDelayed(
                                 new Runnable() {
                                     public void run() {
@@ -103,7 +113,7 @@ public class Login extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Usuario> call, Throwable t) {
+            public void onFailure(Call<Boolean> call, Throwable t) {
                 System.out.println("onFailure");
                 onLoginFailed();
                 progressDialog.dismiss();

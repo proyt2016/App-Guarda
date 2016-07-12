@@ -14,32 +14,51 @@
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
 
-
-        <EditText
-            android:id="@+id/inputSearch"
+        <TextView
+            android:id="@+id/nada"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_marginTop="15dp"
-            android:hint="Buscar viaje..."
+
             android:textSize="18dp"
             android:layout_gravity="center"
-            android:textColorLink="@color/white"
-            android:textColorHint="@color/white"
+            android:textColorLink="@color/black"
+            android:textColorHint="@color/black"
 
             android:inputType="textVisiblePassword"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:theme="@style/AppTheme.AppBarOverlay"
-            android:drawableRight="@drawable/buscar"
-            android:drawableLeft="@drawable/bondi_blanco"
+
             />
 
 
     </android.support.design.widget.AppBarLayout>
+
+    <EditText
+        android:id="@+id/inputSearch"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:hint="Buscar viaje..."
+        android:textSize="18dp"
+
+
+        android:textColorLink="@color/black"
+        android:textColorHighlight="@color/black"
+        android:textColorHint="@color/black"
+        android:backgroundTint="@color/white"
+
+        android:inputType="textVisiblePassword"
+        android:textColor="@color/black"
+        android:drawableRight="@drawable/buscar_negro"
+        android:drawableLeft="@drawable/icono_bondi"
+        />
+
     <ListView
         android:id="@+id/listTrip"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="65dp"
+        android:layout_marginTop="100dp"
 
 
         android:layout_alignParentLeft="true"

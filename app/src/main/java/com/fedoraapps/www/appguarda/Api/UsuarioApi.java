@@ -1,12 +1,15 @@
 package com.fedoraapps.www.appguarda.Api;
 
 import com.fedoraapps.www.appguarda.Model.Usuario;
+import com.google.gson.JsonObject;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 /**
@@ -19,7 +22,7 @@ public class UsuarioApi {
     public static UsuarioApiInterface createService() {
         if (usuarioService == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://574f74b25dd0e51100a9408c.mockapi.io")
+                    .baseUrl("http://192.168.1.188:8080")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build())
                     .build();
@@ -31,7 +34,8 @@ public class UsuarioApi {
     }
 
     public interface UsuarioApiInterface {
-        @GET("/usuarios/{id}")
-        Call<Usuario> getByUsuario(@Path("id") int id);
+
+        @POST("/lcbsapi/rest/usuarios/loginusuario")
+        Call<Boolean> getByUsuario(@Body JsonObject caca);
     }
 }

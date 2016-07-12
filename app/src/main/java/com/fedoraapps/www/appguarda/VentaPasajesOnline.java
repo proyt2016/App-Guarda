@@ -41,7 +41,8 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
     String valOfSpinner2;
     PuntosDeRecorrido puntoOrigen;
     PuntosDeRecorrido puntoDestino;
-    int codViaje;
+    private String codViaje;
+    private String codRecorrido;
     int ultimoIdPasaje;
     List<PuntosDeRecorrido> lista;
     ArrayAdapter<PuntosDeRecorrido> paradas;
@@ -57,13 +58,15 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vista_venta_online);
 
-        codViaje = getIntent().getExtras().getInt("codigo");
+        codViaje = getIntent().getExtras().getString("codigoViaje");
+        codRecorrido = getIntent().getExtras().getString("codigo");
 
         origen = (Spinner) findViewById(R.id.spinner);
         destino = (Spinner) findViewById(R.id.spinner2);
         generar = (Button) findViewById(R.id.button);
         generar.setOnClickListener(this);
-
+    }
+/*
         Call<List<PuntosDeRecorrido>> call = PuntosRecorridoApi.createService().getAll();
         call.enqueue(new Callback<List<PuntosDeRecorrido>>() {
             @Override
@@ -211,14 +214,14 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
                     }
                 }
 
-            }
+
         });
 
 
 
 
 
-    }
+    }*/
     private AlertDialog dialogOrigenDestinoIguales()
     {
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje

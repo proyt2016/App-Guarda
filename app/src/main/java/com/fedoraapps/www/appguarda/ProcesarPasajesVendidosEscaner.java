@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.fedoraapps.www.appguarda.Api.PasajeApi;
 import com.fedoraapps.www.appguarda.Model.Pasaje;
+import com.fedoraapps.www.appguarda.Shares.DataPasaje;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -29,7 +30,7 @@ public class ProcesarPasajesVendidosEscaner extends AppCompatActivity implements
 
 
     private Button scanBtn;
-    private List<Pasaje> PasajesVendidos = new ArrayList<>();
+    private List<DataPasaje> PasajesVendidos = new ArrayList<>();
     private String codViaje;
     private String codRecorrido;
 
@@ -57,33 +58,30 @@ public class ProcesarPasajesVendidosEscaner extends AppCompatActivity implements
 
 
             if (scanningResult != null) {
-
-                final int scanContent = Integer.parseInt(scanningResult.getContents());
+                //OBTENGO EL CODIGO DEL PASAJE
+                final String scanContent = scanningResult.getContents();
+                //OBTENGO EL FORMATE DEL CODIGO DE BARRAS COMO INFORMACION ADICIONAL
                 String scanFormat = scanningResult.getFormatName();
-                Call<List<Pasaje>> call = PasajeApi.createService().getAll();
-                call.enqueue(new Callback<List<Pasaje>>() {
-                    @Override
-                    public void onResponse(Call<List<Pasaje>> call, Response<List<Pasaje>> response) {
-                        PasajesVendidos = response.body();
-                        Pasaje pa = existePasaje(scanContent);
-                        if (pa != null) {
-                            crearDialogoConexion(pa).show();
-                        } else {
-                            dialogNoExistePasaje().show();
+                Call<List<DataPasaje>> call = PasajeApi.createService().getAll();
+                    call.enqueue(new Callback<List<DataPasaje>>() {
+                        @Override
+                        public void onResponse(Call<List<DataPasaje>> call, Response<List<DataPasaje>> response) {
+                            PasajesVendidos = response.body();
+                            DataPasaje pa = existePasaje(scanContent);
+                                if (pa != null) {
+                                    //EXISTE PASAJE MUESTRO DIALOG OPERACION EXITOSA
+                                    crearDialogoConexion(pa).show();
+                                }else {
+                                        //NO EXISTE PASAJE
+                                        dialogNoExistePasaje().show();}
                         }
-                    }
-
-                    @Override
-                    public void onFailure(Call<List<Pasaje>> call, Throwable t) {
-                        System.out.println("onFailure");
-                    }
-                });
-
-
+                        @Override
+                        public void onFailure(Call<List<DataPasaje>> call, Throwable t) {
+                            System.out.println("onFailure");}
+                    });
             } else {
-                Toast.makeText(getApplication(), "NO HAY DATOS DEL ESCANEO!", Toast.LENGTH_SHORT).show();
-            }
-
+                    //NO SE REALIZO EL ESCANEO
+                    Toast.makeText(getApplication(), "NO HAY DATOS DEL ESCANEO!", Toast.LENGTH_SHORT).show();}
         }
     }
     private AlertDialog dialogNoExistePasaje()
@@ -139,14 +137,14 @@ public class ProcesarPasajesVendidosEscaner extends AppCompatActivity implements
         // alertDialogBuilder.setNegativeButton(R.string.Cancelar, listenerCancelar);
         return alertDialogBuilder.create();
     }
-    private AlertDialog crearDialogoConexion(Pasaje pasaje)
+    private AlertDialog crearDialogoConexion(DataPasaje pasaje)
     {
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Pasaje Vendido");
         alertDialogBuilder.setMessage("Numero de Pasaje:"+" "+pasaje.getId()+"\n"
-                +"Monto:"+" "+pasaje.getMonto()+"\n"
-                + "Con destino a"+" "+pasaje.getIdDestino());
+                +"Monto:"+" "+/*pasaje.getMonto()+*/"\n"
+                + "Con destino a"+" "+pasaje.getDestino().getNombre());
         alertDialogBuilder.setIcon(R.drawable.icono_cash_black);;
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
         DialogInterface.OnClickListener listenerOk = new DialogInterface.OnClickListener() {
@@ -167,9 +165,9 @@ public class ProcesarPasajesVendidosEscaner extends AppCompatActivity implements
         // alertDialogBuilder.setNegativeButton(R.string.Cancelar, listenerCancelar);
         return alertDialogBuilder.create();
     }
-    public Pasaje existePasaje(int codPasaje){
-        for(Pasaje p: PasajesVendidos){
-            if( p.getId() == codPasaje){
+    public DataPasaje existePasaje(String codPasaje){
+        for(DataPasaje p: PasajesVendidos){
+            if( p.getId().equals(codPasaje)){
                 return p;
             }
         }return null;

@@ -1,6 +1,7 @@
 package com.fedoraapps.www.appguarda.Api;
 
 import com.fedoraapps.www.appguarda.Model.Usuario;
+import com.fedoraapps.www.appguarda.Shares.DataUsuario;
 import com.google.gson.JsonObject;
 
 import okhttp3.OkHttpClient;
@@ -36,6 +37,6 @@ public class UsuarioApi {
     public interface UsuarioApiInterface {
 
         @POST("/lcbsapi/rest/usuarios/loginusuario")
-        Call<Boolean> getByUsuario(@Body JsonObject caca);
+        Call<DataUsuario> getByUsuario(@Body JsonObject caca);
     }
 }

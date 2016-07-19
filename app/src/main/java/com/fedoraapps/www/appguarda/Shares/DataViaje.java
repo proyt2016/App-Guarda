@@ -19,6 +19,7 @@ public class DataViaje {
 
 
 
+
     public DataViaje() {}
 
     public DataViaje(String id, DataPuntoRecorridoConverter rec, DataHorario hor, Date fecSalida, List<DataEmpleado> emp, DataVehiculo coche, List<DataEncomienda> enc, List<DataReserva> res) {

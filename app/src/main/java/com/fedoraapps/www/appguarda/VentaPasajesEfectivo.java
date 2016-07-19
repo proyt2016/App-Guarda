@@ -142,11 +142,28 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
                                     DataUsuario usuario = new DataUsuario();
                                     DataEmpleado empleado = new DataEmpleado();
                                     Date fechaVenc = new Date();
-                                    String ciUsuario = "";
+                                    String ciUsuario = "4444";
                                 DataPrecio precio = new DataPrecio();
                                 JsonObject caca = new JsonObject();
-                                DataViaje caca2 = new DataViaje();
-                                caca2.setId(viaje.getId());
+                                DataViaje VIAJE = new DataViaje();
+                                VIAJE.setId(viaje.getId());
+
+                               // caca.addProperty("id","5555");
+                               caca.addProperty("viaje",codViaje);
+                                caca.addProperty("precio","555");
+                                caca.addProperty("origen",puntoOrigen.getId());
+                                caca.addProperty("destino",puntoDestino.getId());
+                                caca.addProperty("fechaCompra","10/10/100");
+                                caca.addProperty("comprador","fdafdsf");
+                                caca.addProperty("ciPersona","44100014");
+                                caca.addProperty("vendedor","DARIO COMILON");
+                                caca.addProperty("usado",true);
+                                caca.addProperty("pago",true);
+                                caca.addProperty("eliminado",false);
+
+
+
+
 
 
                                 DataPuntoRecorridoConverter ori = new DataPuntoRecorridoConverter();
@@ -157,11 +174,7 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
 
 
 
-
-
-
-
-                                    DataPasaje pasaje = new DataPasaje(caca2,null,ori,dest,fechaVenc,usuario,ciUsuario,empleado,true,true,false);
+                                    DataPasaje pasaje = new DataPasaje(VIAJE,precio,null,null,fechaVenc,usuario,ciUsuario,empleado,true,true,false);
 
                                     //DataPasaje pasaje = new DataPasaje("5555");
                                     Call<DataPasaje> call2 = PasajeApi.createService().venderPasaje(pasaje);

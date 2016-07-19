@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.fedoraapps.www.appguarda.Api.UsuarioApi;
 import com.fedoraapps.www.appguarda.Model.Usuario;
+import com.fedoraapps.www.appguarda.Shares.DataUsuario;
 import com.google.gson.JsonObject;
 
 
@@ -83,38 +84,41 @@ public class Login extends AppCompatActivity {
         caca.addProperty("usuario",_userText.getText().toString());
         caca.addProperty("clave",_passwordText.getText().toString());
 
-        Call<Boolean> call = UsuarioApi.createService().getByUsuario(caca);
-        call.enqueue(new Callback<Boolean>() {
+        Call<DataUsuario> call = UsuarioApi.createService().getByUsuario(caca);
+        call.enqueue(new Callback<DataUsuario>() {
             @Override
-            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
-                if(response.isSuccessful()){
+            public void onResponse(Call<DataUsuario> call, Response<DataUsuario> response) {
+                if(response.isSuccessful()) {
 
-                    boolean log = response.body();
+                    DataUsuario usr = response.body();
 
-                    if (log == true){
-                        new android.os.Handler().postDelayed(
-                                new Runnable() {
-                                    public void run() {
-                                        // On complete call either onLoginSuccess or onLoginFailed
-                                        onLoginSuccess();
-                                        progressDialog.dismiss();
-                                    }
-                                }, 3000);
-                    }else{
-                        System.out.println("onResponse password distintos");
+                    if (usr!=null) {
+
+                        if ( usr.getEmail().getEmail().equals(_userText.getText().toString()) && usr.getClave().equals(_passwordText.getText().toString())) {
+                            new android.os.Handler().postDelayed(
+                                    new Runnable() {
+                                        public void run() {
+                                            // On complete call either onLoginSuccess or onLoginFailed
+                                            onLoginSuccess();
+                                            progressDialog.dismiss();
+                                        }
+                                    }, 3000);
+                        } else {
+                            System.out.println("onResponse password distintos");
+                            onLoginFailed();
+                            progressDialog.dismiss();
+                        }
+                    } else {
                         onLoginFailed();
+                        System.out.println("Fallo la consulta");
                         progressDialog.dismiss();
                     }
-                }else{
-                    onLoginFailed();
-                    System.out.println("onResponse no isSuccessful");
-                    progressDialog.dismiss();
                 }
             }
 
             @Override
-            public void onFailure(Call<Boolean> call, Throwable t) {
-                System.out.println("onFailure");
+            public void onFailure(Call<DataUsuario> call, Throwable t) {
+                System.out.println("onFailure SE CAGO");
                 onLoginFailed();
                 progressDialog.dismiss();
             }

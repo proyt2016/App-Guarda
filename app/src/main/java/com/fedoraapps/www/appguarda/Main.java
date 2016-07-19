@@ -2,6 +2,7 @@ package com.fedoraapps.www.appguarda;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -64,14 +65,14 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
             }
             @Override
             public void onFailure(Call<List<DataViaje>> call, Throwable t) {
-                System.out.println("onFailure****************************************");}
+                System.out.println("onFailure***************************************//////*"+t.getCause()+" "+call.request().toString());}
         });
 
 
 
         //CALL LOGIN
-       // Intent i = new Intent(Main.this,Login.class);
-        //startActivity(i);
+       Intent i = new Intent(Main.this,Login.class);
+        startActivity(i);
 
 
      if (filtro.getText() != null) {

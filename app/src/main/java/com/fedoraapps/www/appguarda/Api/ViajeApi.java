@@ -8,7 +8,9 @@ import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 /**
@@ -39,10 +41,8 @@ public class ViajeApi {
 
         @GET("/lcbsapi/rest/viajes/getviaje/{idViaje}")
         Call<DataViaje> getViaje(@Path("idViaje") String idViaje);
-        //@GET("/terminales/{id}")
-        //Call<Viaje> getById(@Path("id") int id);
 
-//        @GET("/terminales/{id}?search={search}")
+    //        @GET("/terminales/{id}?search={search}")
 //        Call<List<Terminal>> getSearch(@Path("id") int id, @Path("search") String search);
     }
 }

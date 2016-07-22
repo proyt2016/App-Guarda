@@ -7,7 +7,6 @@ import java.util.Date;
  */
 public class DataPasaje {
 
-
     private String id;
     private DataViaje viaje;
     private DataPrecio precio;
@@ -17,16 +16,38 @@ public class DataPasaje {
     private DataUsuario comprador;
     private String ciPersona;
     private DataEmpleado vendedor;
+    private int codigoPasaje;
     private Boolean usado;
     private Boolean pago;
     private Boolean eliminado;
 
+    //PARA VENDER LOS PASAJES
+    public DataPasaje(int codigoPasaje, DataViaje via, DataPrecio prec, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter des, Date fecVen, DataUsuario comp,
+                      String ciPer, DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
+        this.codigoPasaje = codigoPasaje;
+        this.viaje = via;
+        this.precio = prec;
+        this.origen = orig;
+        this.destino = des;
+        this.fechaCompra = fecVen;
+        this.comprador = comp;
+        this.ciPersona = ciPer;
+        this.vendedor = vend;
+        this.usado = usd;
+        this.pago = pg;
+        this.eliminado = elim;
+    }
+
+
 
 
     public DataPasaje() {}
-    //PARA TRAER LOS PASAJES
-    public DataPasaje(String id, DataViaje via, DataPrecio prec, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter des, Date fecVen, DataUsuario comp, String ciPer, DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
+
+    public DataPasaje(String id, int codigoPasaje, DataViaje via, DataPrecio prec, DataPuntoRecorridoConverter orig,
+                      DataPuntoRecorridoConverter des, Date fecVen, DataUsuario comp, String ciPer,
+                      DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
         this.id = id;
+        this.codigoPasaje = codigoPasaje;
         this.viaje = via;
         this.precio = prec;
         this.origen = orig;
@@ -39,23 +60,13 @@ public class DataPasaje {
         this.pago = pg;
         this.eliminado = elim;
     }
-    //PARA VENDER LOS PASAJES
-    public DataPasaje(DataViaje via, DataPrecio prec, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter des, Date fecVen, DataUsuario comp,
-                      String ciPer, DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
-        this.viaje = via;
-        this.precio = prec;
-        this.origen = orig;
-        this.destino = des;
-        this.fechaCompra = fecVen;
-        this.comprador = comp;
-        this.ciPersona = ciPer;
-        this.vendedor = vend;
-        this.usado = usd;
-        this.pago = pg;
-        this.eliminado = elim;
+
+    public void setCodigoPasaje(int cod){
+        this.codigoPasaje = cod;
     }
-    public DataPasaje(String ciPersona){
-        this.ciPersona = ciPersona;
+
+    public int getCodigoPasaje(){
+        return this.codigoPasaje;
     }
 
     public void setId(String val){

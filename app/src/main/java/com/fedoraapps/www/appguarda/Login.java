@@ -1,9 +1,8 @@
 package com.fedoraapps.www.appguarda;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -11,8 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.fedoraapps.www.appguarda.Api.UsuarioApi;
-import com.fedoraapps.www.appguarda.Model.Usuario;
+import com.fedoraapps.www.appguarda.Api.EmpleadoApi;
 import com.fedoraapps.www.appguarda.Shares.DataUsuario;
 import com.google.gson.JsonObject;
 
@@ -70,31 +68,21 @@ public class Login extends AppCompatActivity {
         String user = _userText.getText().toString();
         String password = _passwordText.getText().toString();
 
-        /*int userId = 0;
-        if(user.equals("admin")){
-            userId = 1;
-        }else if(user.equals("empleado")){
-            userId = 2;
-        }else{
-            onLoginFailed();
-            progressDialog.hide();
-            return;
-        }*/
-        JsonObject caca = new JsonObject();
-        caca.addProperty("usuario",_userText.getText().toString());
-        caca.addProperty("clave",_passwordText.getText().toString());
+        JsonObject empleado = new JsonObject();
+        empleado.addProperty("usuario",_userText.getText().toString());
+        empleado.addProperty("clave",_passwordText.getText().toString());
 
-        Call<DataUsuario> call = UsuarioApi.createService().getByUsuario(caca);
-        call.enqueue(new Callback<DataUsuario>() {
+        Call<Boolean> call = EmpleadoApi.createService().login(empleado);
+        call.enqueue(new Callback<Boolean>() {
             @Override
-            public void onResponse(Call<DataUsuario> call, Response<DataUsuario> response) {
+            public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if(response.isSuccessful()) {
 
-                    DataUsuario usr = response.body();
+                    Boolean existe = response.body();
 
-                    if (usr!=null) {
+                    if (existe!=null) {
 
-                        if ( usr.getEmail().getEmail().equals(_userText.getText().toString()) && usr.getClave().equals(_passwordText.getText().toString())) {
+                        if (existe == true) {
                             new android.os.Handler().postDelayed(
                                     new Runnable() {
                                         public void run() {
@@ -104,21 +92,21 @@ public class Login extends AppCompatActivity {
                                         }
                                     }, 3000);
                         } else {
-                            System.out.println("onResponse password distintos");
+                            System.out.println("No existe Usuario Registrado");
                             onLoginFailed();
                             progressDialog.dismiss();
                         }
                     } else {
                         onLoginFailed();
-                        System.out.println("Fallo la consulta");
+                        System.out.println("Fallo la consulta, Response = NULL, contactar con LacBus");
                         progressDialog.dismiss();
                     }
                 }
             }
 
             @Override
-            public void onFailure(Call<DataUsuario> call, Throwable t) {
-                System.out.println("onFailure SE CAGO");
+            public void onFailure(Call<Boolean> call, Throwable t) {
+                System.out.println("Fallo el Servicio, contactar LacBus");
                 onLoginFailed();
                 progressDialog.dismiss();
             }
@@ -137,8 +125,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Fallo el inicio de sesión", Toast.LENGTH_LONG).show();
-
+        Toast.makeText(getBaseContext(), "Problemas con el Servidor, contactar con LacBus", Toast.LENGTH_LONG).show();
         _loginButton.setEnabled(true);
     }
 
@@ -149,14 +136,14 @@ public class Login extends AppCompatActivity {
         String password = _passwordText.getText().toString();
 
         if (email.isEmpty()) {
-            _userText.setError("ingrese su usuario");
+            _userText.setError("Ingrese su usuario");
             valid = false;
         } else {
             _userText.setError(null);
         }
 
         if (password.isEmpty()) {
-            _passwordText.setError("ingrese su clave");
+            _passwordText.setError("Ingrese su clave");
             valid = false;
         } else {
             _passwordText.setError(null);

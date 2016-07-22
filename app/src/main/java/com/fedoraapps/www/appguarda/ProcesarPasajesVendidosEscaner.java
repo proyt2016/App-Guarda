@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.fedoraapps.www.appguarda.Api.PasajeApi;
-import com.fedoraapps.www.appguarda.Model.Pasaje;
 import com.fedoraapps.www.appguarda.Shares.DataPasaje;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;

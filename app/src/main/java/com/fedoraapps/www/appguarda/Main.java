@@ -43,39 +43,28 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         filtro.setOnClickListener(this);
         listTrip.setTextFilterEnabled(true);
 
-
         Call<List<DataViaje>> call = ViajeApi.createService().getAll();
         call.enqueue(new Callback<List<DataViaje>>() {
             @Override
             public void onResponse(Call<List<DataViaje>> call, Response<List<DataViaje>> response) {
                 ListResponse = response.body();
-                System.out.println("----------------***************************->>>"+ListResponse.size());
+                System.out.println("LISTADO DE VIAJES-------->"+ListResponse.size()+"<---------LISTADO DE VIAJES");
                 if(ListResponse != null){
-
-
                         adapter = new InteractiveArrayAdapterRecorridos(Main.this, ListResponse);
                         listTrip.setAdapter(adapter);
-                        for (DataViaje t : ListResponse) {
-                            adapter.notifyDataSetChanged();
-                        }
-
-                }else{
-                    ListaVaciaDialog().show();
-                }
+                    for (DataViaje t : ListResponse) {
+                        adapter.notifyDataSetChanged();}
+                }else{ListaVaciaDialog().show();}
             }
             @Override
             public void onFailure(Call<List<DataViaje>> call, Throwable t) {
-                System.out.println("onFailure***************************************//////*"+t.getCause()+" "+call.request().toString());}
+                System.out.println("******FALLO EL SERVICIO******"+t.getCause()+" "+call.request().toString());}
         });
-
-
-
         //CALL LOGIN
        Intent i = new Intent(Main.this,Login.class);
         startActivity(i);
 
-
-     if (filtro.getText() != null) {
+        if (filtro.getText() != null) {
             //FILTRO DE BUSQUEDA
             filtro.addTextChangedListener(new TextWatcher() {
                 @Override
@@ -84,20 +73,14 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
                         Main.this.adapter.getFilter().filter(arg0);
                     }
                 }
-
                 @Override
-                public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-
-                }
-
+                public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
                 @Override
                 public void afterTextChanged(Editable arg0) {
                     adapter.getFilter().filter(arg0);
                 }
-            });}
-         /* Activando el filtro de busqueda */
-
-
+            });
+        }
 
     }
 
@@ -130,15 +113,11 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
             return list;
         }
 
-
     private String getModelEmpty() {
         return "No existen recorridos cargados";
     }
-
     @Override
-    public void onClick(View v) {
-
-    }
+    public void onClick(View v) {}
     private AlertDialog ListaVaciaDialog()
     {
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
@@ -146,16 +125,11 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         alertDialogBuilder.setTitle("Atencion!");
         alertDialogBuilder.setMessage("No existen Viajes cargados");
         alertDialogBuilder.setIcon(R.drawable.icono_alerta);;
-
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
         DialogInterface.OnClickListener listenerOk = new DialogInterface.OnClickListener() {
-
             @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-            }
+            public void onClick(DialogInterface dialog, int which) {}
         };
-
         // Creamos un nuevo OnClickListener para el boton Cancelar
         DialogInterface.OnClickListener listenerCancelar = new DialogInterface.OnClickListener() {
 
@@ -164,11 +138,9 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
                 return;
             }
         };
-
         // Asignamos los botones positivo y negativo a sus respectivos listeners
         alertDialogBuilder.setPositiveButton(R.string.ACEPTAR, listenerOk);
         // alertDialogBuilder.setNegativeButton(R.string.Cancelar, listenerCancelar);
-
         return alertDialogBuilder.create();
     }
 }

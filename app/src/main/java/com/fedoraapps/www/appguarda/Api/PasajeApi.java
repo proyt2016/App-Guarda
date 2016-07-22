@@ -1,8 +1,6 @@
 package com.fedoraapps.www.appguarda.Api;
 
-import com.fedoraapps.www.appguarda.Model.Pasaje;
 import com.fedoraapps.www.appguarda.Shares.DataPasaje;
-import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -13,7 +11,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
-import retrofit2.http.Path;
 
 /**
  * Created by maxi on 06/06/2016.
@@ -26,7 +23,7 @@ public class PasajeApi {
     public static PasajeApiInterface createService() {
         if (pasajeService == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.1.188:8080")
+                    .baseUrl("http://192.168.1.43:8080")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build())
                     .build();
@@ -42,7 +39,7 @@ public class PasajeApi {
         Call<List<DataPasaje>> getAll();
 
         @POST("/lcbsapi/rest/viajes/comprarpasaje")
-        Call<DataPasaje> venderPasaje(@Body DataPasaje   pasaje);
+        Call<DataPasaje> venderPasaje(@Body DataPasaje pasaje);
 
 
         @POST("/procesarpasaje")

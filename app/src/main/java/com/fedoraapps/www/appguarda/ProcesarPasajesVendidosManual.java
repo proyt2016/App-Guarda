@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.fedoraapps.www.appguarda.Api.PasajeApi;
-import com.fedoraapps.www.appguarda.Model.Pasaje;
 import com.fedoraapps.www.appguarda.Shares.DataPasaje;
 
 import java.util.ArrayList;
@@ -72,7 +71,7 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
                                     public void onResponse(Call<Void> call, Response<Void> response) {}
                                     @Override
                                     public void onFailure(Call<Void> call, Throwable t) {
-                                        System.out.println("onFailure");}
+                                        System.out.println("*****FALLO EL SERVICIO*****");}
                             });
                             //MUESTRO EN DIALOG OPERACION EXITOSA
                             crearDialogoConexion(pa).show();

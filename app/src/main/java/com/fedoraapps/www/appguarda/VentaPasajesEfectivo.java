@@ -22,8 +22,6 @@ import com.fedoraapps.www.appguarda.Shares.DataPuntoRecorridoConverter;
 import com.fedoraapps.www.appguarda.Shares.DataRecorridoConvertor;
 import com.fedoraapps.www.appguarda.Shares.DataUsuario;
 import com.fedoraapps.www.appguarda.Shares.DataViaje;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,11 +38,13 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
 
     Spinner origen;
     Spinner destino;
+    private int codigoPasaje;
     Button generar;
     String valOfSpinner;
     String valOfSpinner2;
     DataPuntoRecorridoConverter puntoOrigen;
     DataPuntoRecorridoConverter puntoDestino;
+    private List<DataPasaje> PasajesVendidos = new ArrayList<>();
     private String codRecorrido;
     int ultimoIdPasaje;
     int idPrecio;
@@ -54,7 +54,7 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
 
     //List<DataPuntoRecorridoConverter> lista;
     ArrayAdapter<DataPuntoRecorridoConverter> paradas;
-    private List<Pasaje> PasajesVendidos = new ArrayList<>();
+
     private List<Precio> listadoPrecios = new ArrayList<>();
 
 
@@ -67,8 +67,6 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
         codRecorrido = getIntent().getExtras().getString("codigo");
         codViaje = getIntent().getExtras().getString("codigoViaje");
 
-
-
         origen = (Spinner) findViewById(R.id.spinner);
         destino = (Spinner) findViewById(R.id.spinner2);
         generar = (Button) findViewById(R.id.button);
@@ -78,19 +76,22 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
         call.enqueue(new Callback<List<DataRecorridoConvertor>>() {
             @Override
             public void onResponse(Call<List<DataRecorridoConvertor>> call, Response<List<DataRecorridoConvertor>> response) {
-                List<DataRecorridoConvertor> lista = response.body();
-
-                for(DataRecorridoConvertor data: lista){
+               List<DataRecorridoConvertor> recorrido = response.body();
+                System.out.println(recorrido);
+                if(recorrido!=null){
+                for(DataRecorridoConvertor data: recorrido){
                     if(data.getId().equals(codRecorrido)){
                         paradas = new InteractiveArrayAdapterSpinner(VentaPasajesEfectivo.this, data.getPuntosDeRecorrido());
                         origen.setAdapter(paradas);
                         destino.setAdapter(paradas);
                     }
                 }
+                }
+
             }
             @Override
             public void onFailure(Call<List<DataRecorridoConvertor>> call, Throwable t) {
-                System.out.println("onFailure++++++++++++++++++++++++++++++++++++++++++++++++++");
+                System.out.println("*****FALLO EL SERVICIO*****");
             }
         });
 
@@ -139,51 +140,59 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
                                 DataViaje viaje = response.body();
                                 System.out.println("VIAJE ***********************"+viaje);
                               //  if ( viaje.getCoche().getCantidadAsientos()>0) {
-                                    DataUsuario usuario = new DataUsuario();
-                                    DataEmpleado empleado = new DataEmpleado();
-                                    Date fechaVenc = new Date();
-                                    String ciUsuario = "4444";
+
+                                DataUsuario usuario = new DataUsuario();
+                                //usuario.getEmail().setEmail("dfdfdfdf");
+                                DataEmpleado empleado = new DataEmpleado();
+
+                                Date fechaVenc = new Date();
+                                String ciUsuario = "4444";
                                 DataPrecio precio = new DataPrecio();
-                                JsonObject caca = new JsonObject();
+                               // precio.setId("666");
                                 DataViaje VIAJE = new DataViaje();
                                 VIAJE.setId(viaje.getId());
-
-                               // caca.addProperty("id","5555");
-                               caca.addProperty("viaje",codViaje);
-                                caca.addProperty("precio","555");
-                                caca.addProperty("origen",puntoOrigen.getId());
-                                caca.addProperty("destino",puntoDestino.getId());
-                                caca.addProperty("fechaCompra","10/10/100");
-                                caca.addProperty("comprador","fdafdsf");
-                                caca.addProperty("ciPersona","44100014");
-                                caca.addProperty("vendedor","DARIO COMILON");
-                                caca.addProperty("usado",true);
-                                caca.addProperty("pago",true);
-                                caca.addProperty("eliminado",false);
-
-
-
-
-
 
                                 DataPuntoRecorridoConverter ori = new DataPuntoRecorridoConverter();
                                 DataPuntoRecorridoConverter dest = new DataPuntoRecorridoConverter();
                                 ori.setId(puntoOrigen.getId());
+                                ori.setTipo(puntoOrigen.getTipo());
                                 dest.setId(puntoDestino.getId());
+                                dest.setTipo(puntoDestino.getTipo());
+
+                                Call<List<DataPasaje>> call2 = PasajeApi.createService().getAll();
+                                call2.enqueue(new Callback<List<DataPasaje>>() {
+                                    @Override
+                                    public void onResponse(Call<List<DataPasaje>> call, Response<List<DataPasaje>> response) {
+                                        PasajesVendidos = response.body();
+                                        System.out.println("****************PASAJES VENDIDOS***************"+PasajesVendidos.size());
+                                        System.out.println("****************PASAJES VENDIDOS***************"+response.errorBody());
+
+                                        if (PasajesVendidos != null) {
+
+                                           codigoPasaje =  PasajesVendidos.size()+1;
 
 
+                                            }else{  //NO EXISTE EL PASAJE SE MUESTRA EL DIALOG CORRESPONDIENTE
+                                                  System.out.println("*****NO EXISTEN PASAJES VENDIDOS EN EL SISTEMA*****");
+                                                  codigoPasaje = 1;
+                                        }
+                                    }
+                                    @Override
+                                    public void onFailure(Call<List<DataPasaje>> call, Throwable t) {
+                                        System.out.println("onFailure");}
+                                });
 
 
-                                    DataPasaje pasaje = new DataPasaje(VIAJE,precio,null,null,fechaVenc,usuario,ciUsuario,empleado,true,true,false);
+                                    DataPasaje pasaje = new DataPasaje(codigoPasaje,VIAJE,null,ori,dest,null,null,null,null,true,true,false);
 
                                     //DataPasaje pasaje = new DataPasaje("5555");
-                                    Call<DataPasaje> call2 = PasajeApi.createService().venderPasaje(pasaje);
-                                    call2.enqueue(new Callback<DataPasaje>() {
+                                    Call<DataPasaje> call3 = PasajeApi.createService().venderPasaje(pasaje);
+                                    call3.enqueue(new Callback<DataPasaje>() {
 
                                         @Override
                                         public void onResponse(Call<DataPasaje> call, Response<DataPasaje> response) {
                                             DataPasaje p = response.body();
-                                            System.out.println("PASAJE ***********************"+p);
+                                            System.out.println("PASAJE---->"+p+"<----PASAJE");
 
                                             if(p!=null){
                                                 final DataPasaje pe = new DataPasaje();
@@ -195,56 +204,14 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
                                         }
                                         @Override
                                         public void onFailure(Call<DataPasaje> call, Throwable t) {
-                                            System.out.println("onFailure"+"*****************************************"+t.getCause());
+                                            System.out.println("*****FALLO EL SERVICIO*****"+t.getCause());
                                         }
                                     });
-                                /*
-                                    //LLAMO LISTA PRECIOS DE API PARA PODER CREAR PASAJE
-                                    Call<List<Precio>> call3 = PrecioApi.createService().getAll();
-                                    call3.enqueue(new Callback<List<Precio>>() {
-                                        @Override
-                                        public void onResponse(Call<List<Precio>> call, Response<List<Precio>> response) {
-                                            listadoPrecios = response.body();
-                                            for(Precio p: listadoPrecios) {
 
-                                                System.out.println(p.getId()+" "+p.getIdViaje()+" "+p.getMonto());
-                                                if(p.getIdViaje() == codRecorrido){
-
-                                                    idPrecio = p.getId();
-                                                    montoPrecio = p.getMonto();
-
-                                                }
-                                            }
-                                            pasaje = new Pasaje(ultimoIdPasaje, codViaje, puntoOrigen.getId(), puntoDestino.getId(), idPrecio, 1, montoPrecio, true);
-                                            Call<Pasaje> call2 = PasajeApi.createService().setPasaje(pasaje);
-                                            call2.enqueue(new Callback<Pasaje>() {
-                                                @Override
-                                                public void onResponse(Call<Pasaje> call, Response<Pasaje> response) {
-                                                    Pasaje p = response.body();
-                                                    if(p!=null){
-                                                        dialogoPasajeVendido(p).show();}
-                                                    else{
-                                                        Toast.makeText(VentaPasajesEfectivo.this, "No se pudo generar el pasaje con Destino:" + " " + puntoDestino.getNombre(), Toast.LENGTH_LONG).show();
-                                                    }
-                                                }
-                                                @Override
-                                                public void onFailure(Call<Pasaje> call, Throwable t) {
-                                                    System.out.println("onFailure");
-                                                }
-                                            });
-                                        }
-                                        @Override
-                                        public void onFailure(Call<List<Precio>> call, Throwable t) {
-                                            System.out.println("onFailure");}
-                                    });*/
-
-
-
-                              //  } else {Toast.makeText(VentaPasajesEfectivo.this, "Es lamentable pero no hay lugar para ti", Toast.LENGTH_LONG).show();}
                             }
                             @Override
                             public void onFailure(Call<DataViaje> call, Throwable t) {
-                                System.out.println("onFailure------------------------->"+"FALLO GETVIAJE");
+                                System.out.println("*****FALLO EL SERVICIO*****");
                             }
                         });
 

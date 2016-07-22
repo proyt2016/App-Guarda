@@ -159,9 +159,6 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
                                 dest.setId(puntoDestino.getId());
                                 dest.setTipo(puntoDestino.getTipo());
 
-
-
-
                                     DataPasaje pasaje = new DataPasaje(VIAJE,null,ori,dest,null,null,null,null,true,true,false);
 
                                     //DataPasaje pasaje = new DataPasaje("5555");

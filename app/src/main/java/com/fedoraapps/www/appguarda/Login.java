@@ -125,7 +125,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Problemas con el Servidor, contactar con LacBus", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "No existe el Empleado Registrado", Toast.LENGTH_LONG).show();
         _loginButton.setEnabled(true);
     }
 

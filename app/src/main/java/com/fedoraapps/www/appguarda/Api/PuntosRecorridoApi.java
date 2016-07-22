@@ -21,7 +21,7 @@ public class PuntosRecorridoApi {
     public static PuntosRecorridoApiInterface createService() {
         if (recorridosService == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.1.43:8080")
+                    .baseUrl("http://192.168.1.191:8080")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build())
                     .build();

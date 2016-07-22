@@ -159,31 +159,10 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
                                 dest.setId(puntoDestino.getId());
                                 dest.setTipo(puntoDestino.getTipo());
 
-                                Call<List<DataPasaje>> call2 = PasajeApi.createService().getAll();
-                                call2.enqueue(new Callback<List<DataPasaje>>() {
-                                    @Override
-                                    public void onResponse(Call<List<DataPasaje>> call, Response<List<DataPasaje>> response) {
-                                        PasajesVendidos = response.body();
-                                        System.out.println("****************PASAJES VENDIDOS***************"+PasajesVendidos.size());
-                                        System.out.println("****************PASAJES VENDIDOS***************"+response.errorBody());
-
-                                        if (PasajesVendidos != null) {
-
-                                           codigoPasaje =  PasajesVendidos.size()+1;
 
 
-                                            }else{  //NO EXISTE EL PASAJE SE MUESTRA EL DIALOG CORRESPONDIENTE
-                                                  System.out.println("*****NO EXISTEN PASAJES VENDIDOS EN EL SISTEMA*****");
-                                                  codigoPasaje = 1;
-                                        }
-                                    }
-                                    @Override
-                                    public void onFailure(Call<List<DataPasaje>> call, Throwable t) {
-                                        System.out.println("onFailure");}
-                                });
 
-
-                                    DataPasaje pasaje = new DataPasaje(codigoPasaje,VIAJE,null,ori,dest,null,null,null,null,true,true,false);
+                                    DataPasaje pasaje = new DataPasaje(VIAJE,null,ori,dest,null,null,null,null,true,true,false);
 
                                     //DataPasaje pasaje = new DataPasaje("5555");
                                     Call<DataPasaje> call3 = PasajeApi.createService().venderPasaje(pasaje);

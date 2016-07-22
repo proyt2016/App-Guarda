@@ -21,9 +21,10 @@ public class DataPasaje {
     private Boolean pago;
     private Boolean eliminado;
 
-    //PARA VENDER LOS PASAJES
-    public DataPasaje(int codigoPasaje, DataViaje via, DataPrecio prec, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter des, Date fecVen, DataUsuario comp,
+
+    public DataPasaje(String id, DataViaje via, DataPrecio prec, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter des, Date fecVen,int codigoPasaje , DataUsuario comp,
                       String ciPer, DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
+        this.id = id;
         this.codigoPasaje = codigoPasaje;
         this.viaje = via;
         this.precio = prec;
@@ -43,11 +44,12 @@ public class DataPasaje {
 
     public DataPasaje() {}
 
-    public DataPasaje(String id, int codigoPasaje, DataViaje via, DataPrecio prec, DataPuntoRecorridoConverter orig,
+    //PARA VENDER LOS PASAJES
+
+    public DataPasaje(DataViaje via, DataPrecio prec, DataPuntoRecorridoConverter orig,
                       DataPuntoRecorridoConverter des, Date fecVen, DataUsuario comp, String ciPer,
                       DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
-        this.id = id;
-        this.codigoPasaje = codigoPasaje;
+
         this.viaje = via;
         this.precio = prec;
         this.origen = orig;

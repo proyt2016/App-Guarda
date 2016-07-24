@@ -5,7 +5,7 @@ import java.util.Date;
 /**
  * Created by maxi on 10/07/16.
  */
-public class DataPasaje {
+public class DataPasajeConvertor {
 
     private String id;
     private DataViaje viaje;
@@ -21,12 +21,15 @@ public class DataPasaje {
     private Boolean pago;
     private Boolean eliminado;
 
-    public DataPasaje(){}
 
-    //PARA TRAER LOS PASAJES O EL PASAJE
 
-    public DataPasaje(String id, int codigoPasaje, DataViaje via, DataPrecio prec, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter des, Date fecVen, DataUsuario comp,
-                      String ciPer, DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
+    public DataPasajeConvertor() {}
+
+    //PARA TRAER LOS PASAJES
+
+    public DataPasajeConvertor(String id, int codigoPasaje, DataViaje via, DataPrecio prec, DataPuntoRecorridoConverter orig,
+                               DataPuntoRecorridoConverter des,	Date fecVen, DataUsuario comp, String ciPer,
+                               DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
         this.id = id;
         this.codigoPasaje = codigoPasaje;
         this.viaje = via;
@@ -42,12 +45,11 @@ public class DataPasaje {
         this.eliminado = elim;
     }
 
-   //PARA VENDER LOS PASAJES
+    //PARA COMPRAR PASAJE
 
-    public DataPasaje(DataViaje via, DataPrecio prec, DataPuntoRecorridoConverter orig,
-                      DataPuntoRecorridoConverter des, Date fecVen, DataUsuario comp, String ciPer,
-                      DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
-
+    public DataPasajeConvertor(DataViaje via, DataPrecio prec, DataPuntoRecorridoConverter orig,
+                               DataPuntoRecorridoConverter des,	Date fecVen, DataUsuario comp, String ciPer,
+                               DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
         this.viaje = via;
         this.precio = prec;
         this.origen = orig;
@@ -60,6 +62,8 @@ public class DataPasaje {
         this.pago = pg;
         this.eliminado = elim;
     }
+
+
 
     public void setCodigoPasaje(int cod){
         this.codigoPasaje = cod;

@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.fedoraapps.www.appguarda.Api.PasajeApi;
-import com.fedoraapps.www.appguarda.Shares.DataPasaje;
+import com.fedoraapps.www.appguarda.Shares.DataPasajeConvertor;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -29,7 +29,7 @@ public class ProcesarPasajesVendidosEscaner extends AppCompatActivity implements
 
 
     private Button scanBtn;
-    private List<DataPasaje> PasajesVendidos = new ArrayList<>();
+    private List<DataPasajeConvertor> PasajesVendidos = new ArrayList<>();
     private String codViaje;
     private String codRecorrido;
 
@@ -61,12 +61,12 @@ public class ProcesarPasajesVendidosEscaner extends AppCompatActivity implements
                 final String scanContent = scanningResult.getContents();
                 //OBTENGO EL FORMATE DEL CODIGO DE BARRAS COMO INFORMACION ADICIONAL
                 String scanFormat = scanningResult.getFormatName();
-                Call<List<DataPasaje>> call = PasajeApi.createService().getAll();
-                    call.enqueue(new Callback<List<DataPasaje>>() {
+                Call<List<DataPasajeConvertor>> call = PasajeApi.createService().getAll();
+                    call.enqueue(new Callback<List<DataPasajeConvertor>>() {
                         @Override
-                        public void onResponse(Call<List<DataPasaje>> call, Response<List<DataPasaje>> response) {
+                        public void onResponse(Call<List<DataPasajeConvertor>> call, Response<List<DataPasajeConvertor>> response) {
                             PasajesVendidos = response.body();
-                            DataPasaje pa = existePasaje(scanContent);
+                            DataPasajeConvertor pa = existePasaje(scanContent);
                                 if (pa != null) {
                                     //EXISTE PASAJE MUESTRO DIALOG OPERACION EXITOSA
                                     crearDialogoConexion(pa).show();
@@ -75,7 +75,7 @@ public class ProcesarPasajesVendidosEscaner extends AppCompatActivity implements
                                         dialogNoExistePasaje().show();}
                         }
                         @Override
-                        public void onFailure(Call<List<DataPasaje>> call, Throwable t) {
+                        public void onFailure(Call<List<DataPasajeConvertor>> call, Throwable t) {
                             System.out.println("onFailure");}
                     });
             } else {
@@ -136,7 +136,7 @@ public class ProcesarPasajesVendidosEscaner extends AppCompatActivity implements
         // alertDialogBuilder.setNegativeButton(R.string.Cancelar, listenerCancelar);
         return alertDialogBuilder.create();
     }
-    private AlertDialog crearDialogoConexion(DataPasaje pasaje)
+    private AlertDialog crearDialogoConexion(DataPasajeConvertor pasaje)
     {
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -164,8 +164,8 @@ public class ProcesarPasajesVendidosEscaner extends AppCompatActivity implements
         // alertDialogBuilder.setNegativeButton(R.string.Cancelar, listenerCancelar);
         return alertDialogBuilder.create();
     }
-    public DataPasaje existePasaje(String codPasaje){
-        for(DataPasaje p: PasajesVendidos){
+    public DataPasajeConvertor existePasaje(String codPasaje){
+        for(DataPasajeConvertor p: PasajesVendidos){
             if( p.getId().equals(codPasaje)){
                 return p;
             }

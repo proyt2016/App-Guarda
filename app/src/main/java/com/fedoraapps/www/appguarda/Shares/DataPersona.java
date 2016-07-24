@@ -6,15 +6,16 @@ import java.util.List;
 /**
  * Created by maxi on 13/07/16.
  */
-public class DataPersona {
-    private String id;
-    private String nombrePila;
-    private String apellido;
-    private DataEmail email;
-    private String clave;
-    private List<DataTelefono> telefonosContacto;
-    private Date fechaNacimiento;
-    private boolean eliminado;
+public abstract class DataPersona {
+    protected String id;
+    protected String nombrePila;
+    protected String apellido;
+    protected DataEmail email;
+    protected String clave;
+    protected List<DataTelefono> telefonosContacto;
+    protected Date fechaNacimiento;
+    protected boolean eliminado;
+
 
     public void setId(String val){
         this.id = val;

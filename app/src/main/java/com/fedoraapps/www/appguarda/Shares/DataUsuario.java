@@ -8,8 +8,6 @@ import java.util.List;
  */
 public class DataUsuario extends DataPersona{
 
-    private String nombreAMostrar;
-    private String clave;
     private String redSocialUsada;
     private String idRedSocial;
     private DataCuponera cuponera;
@@ -20,7 +18,8 @@ public class DataUsuario extends DataPersona{
 
     public DataUsuario() {}
 
-    public DataUsuario(String id, String nm, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, Boolean elim, String nomMos, String clave, String redSoc, String idRedsoc, DataCuponera cup, List<DataEncomienda> enc, List<DataNotificacion> not) {
+    public DataUsuario(String id, String nm, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, Boolean elim, String clave,
+                       String redSoc, String idRedsoc, DataCuponera cup, List<DataEncomienda> enc, List<DataNotificacion> not) {
         super.setId(id);
         super.setNombrePila(nm);
         super.setApellido(ape);
@@ -28,20 +27,12 @@ public class DataUsuario extends DataPersona{
         super.setTelefonosContacto(tels);
         super.setFechaNacimiento(fecNac);
         super.setEliminado(elim);
-        this.clave = clave;
+        super.setClave(clave);
         this.redSocialUsada = redSoc;
         this.idRedSocial = idRedsoc;
         this.cuponera = cup;
         this.encomiendas = enc;
         this.notificaciones = not;
-    }
-
-    public void setClave(String val){
-        this.clave = val;
-    }
-
-    public String getClave(){
-        return this.clave;
     }
 
     public void setRedSocialUsada(String val){

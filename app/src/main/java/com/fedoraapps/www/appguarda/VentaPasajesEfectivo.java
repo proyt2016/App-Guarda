@@ -16,7 +16,7 @@ import com.fedoraapps.www.appguarda.Api.ViajeApi;
 import com.fedoraapps.www.appguarda.Model.Pasaje;
 import com.fedoraapps.www.appguarda.Model.Precio;
 import com.fedoraapps.www.appguarda.Shares.DataEmpleado;
-import com.fedoraapps.www.appguarda.Shares.DataPasaje;
+import com.fedoraapps.www.appguarda.Shares.DataPasajeConvertor;
 import com.fedoraapps.www.appguarda.Shares.DataPrecio;
 import com.fedoraapps.www.appguarda.Shares.DataPuntoRecorridoConverter;
 import com.fedoraapps.www.appguarda.Shares.DataRecorridoConvertor;
@@ -44,7 +44,7 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
     String valOfSpinner2;
     DataPuntoRecorridoConverter puntoOrigen;
     DataPuntoRecorridoConverter puntoDestino;
-    private List<DataPasaje> PasajesVendidos = new ArrayList<>();
+    private List<DataPasajeConvertor> PasajesVendidos = new ArrayList<>();
     private String codRecorrido;
     int ultimoIdPasaje;
     int idPrecio;
@@ -159,27 +159,27 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
                                 dest.setId(puntoDestino.getId());
                                 dest.setTipo(puntoDestino.getTipo());
 
-                                    DataPasaje pasaje = new DataPasaje(VIAJE,null,ori,dest,null,null,null,null,true,true,false);
+                                    DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE,null,ori,dest,null,null,null,null,true,true,false);
 
-                                    //DataPasaje pasaje = new DataPasaje("5555");
-                                    Call<DataPasaje> call3 = PasajeApi.createService().venderPasaje(pasaje);
-                                    call3.enqueue(new Callback<DataPasaje>() {
+                                    //DataPasajeConvertor pasaje = new DataPasajeConvertor("5555");
+                                    Call<DataPasajeConvertor> call3 = PasajeApi.createService().venderPasaje(pasaje);
+                                    call3.enqueue(new Callback<DataPasajeConvertor>() {
 
                                         @Override
-                                        public void onResponse(Call<DataPasaje> call, Response<DataPasaje> response) {
-                                            DataPasaje p = response.body();
+                                        public void onResponse(Call<DataPasajeConvertor> call, Response<DataPasajeConvertor> response) {
+                                            DataPasajeConvertor p = response.body();
                                             System.out.println("PASAJE---->"+p+"<----PASAJE");
 
                                             if(p!=null){
-                                                final DataPasaje pe = new DataPasaje();
+                                                final DataPasajeConvertor pe = new DataPasajeConvertor();
                                                 dialogoPasajeVendido(pe).show();}
                                             else {
-                                                final DataPasaje pe = new DataPasaje();
+                                                final DataPasajeConvertor pe = new DataPasajeConvertor();
                                                 dialogoPasajeNoVendido(pe).show();
                                             }
                                         }
                                         @Override
-                                        public void onFailure(Call<DataPasaje> call, Throwable t) {
+                                        public void onFailure(Call<DataPasajeConvertor> call, Throwable t) {
                                             System.out.println("*****FALLO EL SERVICIO*****"+t.getCause());
                                         }
                                     });
@@ -198,7 +198,7 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
             }
         });
     }
-    private AlertDialog dialogoPasajeVendido(DataPasaje pasaje)
+    private AlertDialog dialogoPasajeVendido(DataPasajeConvertor pasaje)
     {
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -231,7 +231,7 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
         return alertDialogBuilder.create();
     }
 
-    private AlertDialog dialogoPasajeNoVendido(DataPasaje pasaje)
+    private AlertDialog dialogoPasajeNoVendido(DataPasajeConvertor pasaje)
     {
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);

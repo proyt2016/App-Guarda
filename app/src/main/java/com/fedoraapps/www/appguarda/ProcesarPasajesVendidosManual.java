@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.fedoraapps.www.appguarda.Api.PasajeApi;
-import com.fedoraapps.www.appguarda.Shares.DataPasaje;
+import com.fedoraapps.www.appguarda.Shares.DataPasajeConvertor;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import retrofit2.Response;
  */
 public class ProcesarPasajesVendidosManual extends AppCompatActivity implements View.OnClickListener {
 
-    private List<DataPasaje> PasajesVendidos = new ArrayList<>();
+    private List<DataPasajeConvertor> PasajesVendidos = new ArrayList<>();
     private String codViaje;
     private String codRecorrido;
     private EditText inputCodigo;
@@ -56,13 +56,13 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
                 //OBTENGO CODIGO DEL PASAJE
                 final String codigoPasaje = String.valueOf(inputCodigo.getText().toString());
                 //VERIFICO SI EXISTE PASAJE EN MEMORIA
-                Call<List<DataPasaje>> call = PasajeApi.createService().getAll();
-                call.enqueue(new Callback<List<DataPasaje>>() {
+                Call<List<DataPasajeConvertor>> call = PasajeApi.createService().getAll();
+                call.enqueue(new Callback<List<DataPasajeConvertor>>() {
                     @Override
-                    public void onResponse(Call<List<DataPasaje>> call, Response<List<DataPasaje>> response) {
+                    public void onResponse(Call<List<DataPasajeConvertor>> call, Response<List<DataPasajeConvertor>> response) {
                         PasajesVendidos = response.body();
                         System.out.println("****************PASAJES VENDIDOS***************"+PasajesVendidos.size());
-                        DataPasaje pa = existePasaje(codigoPasaje);
+                        DataPasajeConvertor pa = existePasaje(codigoPasaje);
                             if (pa != null) {
                                 //CAMBIO ESTADO A PASAJE UTILIZADO
                                 Call<Void> call2 = PasajeApi.createService().procesarPasaje(codigoPasaje);
@@ -80,7 +80,7 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
                                 dialogNoExistePasaje().show();}
                     }
                     @Override
-                    public void onFailure(Call<List<DataPasaje>> call, Throwable t) {
+                    public void onFailure(Call<List<DataPasajeConvertor>> call, Throwable t) {
                         System.out.println("onFailure");}
                 });
             }
@@ -158,7 +158,7 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
 
         return alertDialogBuilder.create();
     }
-    private AlertDialog crearDialogoConexion(DataPasaje pasaje)
+    private AlertDialog crearDialogoConexion(DataPasajeConvertor pasaje)
     {
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -192,8 +192,8 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
 
         return alertDialogBuilder.create();
     }
-    public DataPasaje existePasaje(String codPasaje){
-        for(DataPasaje p: PasajesVendidos){
+    public DataPasajeConvertor existePasaje(String codPasaje){
+        for(DataPasajeConvertor p: PasajesVendidos){
             if( p.getId().equals(codPasaje)){
                 return p;
             }

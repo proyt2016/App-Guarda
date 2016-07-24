@@ -1,6 +1,6 @@
 package com.fedoraapps.www.appguarda.Api;
 
-import com.fedoraapps.www.appguarda.Shares.DataPasaje;
+import com.fedoraapps.www.appguarda.Shares.DataPasajeConvertor;
 
 import java.util.List;
 
@@ -11,6 +11,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.Path;
 
 /**
  * Created by maxi on 06/06/2016.
@@ -23,7 +24,7 @@ public class PasajeApi {
     public static PasajeApiInterface createService() {
         if (pasajeService == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.1.191:8080")
+                    .baseUrl("http://192.168.1.43:8080")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build())
                     .build();
@@ -36,11 +37,13 @@ public class PasajeApi {
     public interface PasajeApiInterface {
 
         @GET("/lcbsapi/rest/viajes/getpasajes/1/99")
-        Call<List<DataPasaje>> getAll();
+        Call<List<DataPasajeConvertor>> getAll();
 
         @POST("/lcbsapi/rest/viajes/comprarpasaje")
-        Call<DataPasaje> venderPasaje(@Body DataPasaje pasaje);
+        Call<DataPasajeConvertor> venderPasaje(@Body DataPasajeConvertor pasaje);
 
+        @GET("/lcbsapi/rest/viajes/getpasajeporcodigo/{codigoPasaje}")
+        Call<DataPasajeConvertor> getPasajePorCodigo(@Path("codigoPasaje") int codigoPasaje);
 
         @POST("/procesarpasaje")
         Call<Void> procesarPasaje(@Body String idPasaje);

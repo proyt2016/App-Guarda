@@ -27,6 +27,7 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
     private List<DataPasajeConvertor> PasajesVendidos = new ArrayList<>();
     private String codViaje;
     private String codRecorrido;
+    private int codigoPasaje;
     private EditText inputCodigo;
     private Button confirmar;
 
@@ -54,18 +55,17 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
                 dialogCodigoIncorrectoTipeo().show();
             }else {
                 //OBTENGO CODIGO DEL PASAJE
-                final String codigoPasaje = String.valueOf(inputCodigo.getText().toString());
+                 codigoPasaje = Integer.parseInt(inputCodigo.getText().toString());
                 //VERIFICO SI EXISTE PASAJE EN MEMORIA
-                Call<List<DataPasajeConvertor>> call = PasajeApi.createService().getAll();
-                call.enqueue(new Callback<List<DataPasajeConvertor>>() {
+                Call<DataPasajeConvertor> call = PasajeApi.createService().getPasajePorCodigo(codigoPasaje);
+                call.enqueue(new Callback<DataPasajeConvertor>() {
                     @Override
-                    public void onResponse(Call<List<DataPasajeConvertor>> call, Response<List<DataPasajeConvertor>> response) {
-                        PasajesVendidos = response.body();
-                        System.out.println("****************PASAJES VENDIDOS***************"+PasajesVendidos.size());
-                        DataPasajeConvertor pa = existePasaje(codigoPasaje);
-                            if (pa != null) {
+                    public void onResponse(Call<DataPasajeConvertor> call, Response<DataPasajeConvertor> response) {
+                        DataPasajeConvertor pasaje = response.body();
+
+                            if (pasaje != null) {
                                 //CAMBIO ESTADO A PASAJE UTILIZADO
-                                Call<Void> call2 = PasajeApi.createService().procesarPasaje(codigoPasaje);
+                                Call<Void> call2 = PasajeApi.createService().procesarPasaje(pasaje.getId());
                                 call2.enqueue(new Callback<Void>() {
                                     @Override
                                     public void onResponse(Call<Void> call, Response<Void> response) {}
@@ -74,13 +74,13 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
                                         System.out.println("*****FALLO EL SERVICIO*****");}
                             });
                             //MUESTRO EN DIALOG OPERACION EXITOSA
-                            crearDialogoConexion(pa).show();
+                            crearDialogoConexion(pasaje).show();
 
                         }else{  //NO EXISTE EL PASAJE SE MUESTRA EL DIALOG CORRESPONDIENTE
                                 dialogNoExistePasaje().show();}
                     }
                     @Override
-                    public void onFailure(Call<List<DataPasajeConvertor>> call, Throwable t) {
+                    public void onFailure(Call<DataPasajeConvertor> call, Throwable t) {
                         System.out.println("onFailure");}
                 });
             }

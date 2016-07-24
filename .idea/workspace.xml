@@ -10,27 +10,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="807cbf18-65c8-4c09-b8c1-4ffc8d977f05" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Shares/DataPasaje.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Shares/DataPasajeConvertor.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/cache.properties.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileHashes.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/fileSnapshots.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/outputFileStates.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/taskArtifacts/taskArtifacts.bin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localClassSetAnalysis/localClassSetAnalysis.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.bin" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" afterPath="$PROJECT_DIR$/.gradle/2.10/tasks/_app_compileDebugJavaWithJavac/localJarClasspathSnapshot/localJarClasspathSnapshot.lock" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Api/EmpleadoApi.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Api/EmpleadoApi.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Api/PasajeApi.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Api/PasajeApi.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Api/PuntosRecorridoApi.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Api/PuntosRecorridoApi.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Api/ViajeApi.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Api/ViajeApi.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/ProcesarPasajesVendidosEscaner.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/ProcesarPasajesVendidosEscaner.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/ProcesarPasajesVendidosManual.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/ProcesarPasajesVendidosManual.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Shares/DataPersona.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Shares/DataPersona.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Shares/DataUsuario.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Shares/DataUsuario.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/VentaPasajesEfectivo.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/VentaPasajesEfectivo.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/VentaPasajesOnline.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/VentaPasajesOnline.java" />
     </list>
     <ignored path="App-Guarda.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -93,21 +81,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VentaPasajesEfectivo.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/VentaPasajesEfectivo.java">
+      <file leaf-file-name="PasajeApi.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Api/PasajeApi.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="135" column="21" selection-start-line="135" selection-start-column="21" selection-end-line="191" selection-end-column="27" />
+              <caret line="48" column="19" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ViajeApi.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Api/ViajeApi.java">
+      <file leaf-file-name="ProcesarPasajesVendidosManual.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/ProcesarPasajesVendidosManual.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.51359516">
-              <caret line="26" column="55" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
+            <state vertical-scroll-proportion="1.1993958">
+              <caret line="73" column="91" selection-start-line="73" selection-start-column="91" selection-end-line="73" selection-end-column="91" />
               <folding />
             </state>
           </provider>
@@ -1748,7 +1736,6 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Api/UsuarioApi.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Shares/DataEmpleado.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Main.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/ProcesarPasajesVendidosManual.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Shares/DataPasaje.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Shares/DataPasajeConvertor.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/VentaPasajesEfectivo.java" />
@@ -1760,6 +1747,7 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Api/PuntosRecorridoApi.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/VentaPasajesOnline.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Api/ViajeApi.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/ProcesarPasajesVendidosManual.java" />
       </list>
     </option>
   </component>
@@ -2532,14 +2520,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/ProcesarPasajesVendidosManual.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2542373">
-          <caret line="26" column="3" selection-start-line="26" selection-start-column="3" selection-end-line="26" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.025423728">
@@ -2616,14 +2596,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Api/PasajeApi.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23728813">
-          <caret line="26" column="49" selection-start-line="26" selection-start-column="49" selection-end-line="26" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/InteractiveArrayAdapterSpinner.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2661017">
@@ -2648,6 +2620,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Api/ViajeApi.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="55" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/VentaPasajesOnline.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2668,10 +2648,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Api/ViajeApi.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/Api/PasajeApi.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.51359516">
-          <caret line="26" column="55" selection-start-line="26" selection-start-column="55" selection-end-line="26" selection-end-column="55" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="19" selection-start-line="48" selection-start-column="19" selection-end-line="48" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fedoraapps/www/appguarda/ProcesarPasajesVendidosManual.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="1.1993958">
+          <caret line="73" column="91" selection-start-line="73" selection-start-column="91" selection-end-line="73" selection-end-column="91" />
           <folding />
         </state>
       </provider>

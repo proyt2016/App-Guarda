@@ -166,7 +166,7 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
                                     dest.setId(puntoDestino.getId());
                                     dest.setTipo(puntoDestino.getTipo());
 
-                                    DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE,null,ori,dest,null,null,null,null,true,true,false);
+                                    DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE,null,ori,dest,null,null,null,null,false,false,false);
 
                                     //DataPasajeConvertor pasaje = new DataPasajeConvertor("5555");
                                     Call<DataPasajeConvertor> call3 = PasajeApi.createService().venderPasaje(pasaje);

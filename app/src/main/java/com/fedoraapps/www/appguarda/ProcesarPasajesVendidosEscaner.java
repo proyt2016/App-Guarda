@@ -31,6 +31,7 @@ public class ProcesarPasajesVendidosEscaner extends AppCompatActivity implements
     private Button scanBtn;
     private List<DataPasajeConvertor> PasajesVendidos = new ArrayList<>();
     private String codViaje;
+    private int codigoPasaje;
     private String codRecorrido;
 
     @Override
@@ -61,23 +62,47 @@ public class ProcesarPasajesVendidosEscaner extends AppCompatActivity implements
                 final String scanContent = scanningResult.getContents();
                 //OBTENGO EL FORMATE DEL CODIGO DE BARRAS COMO INFORMACION ADICIONAL
                 String scanFormat = scanningResult.getFormatName();
-                Call<List<DataPasajeConvertor>> call = PasajeApi.createService().getAll();
-                    call.enqueue(new Callback<List<DataPasajeConvertor>>() {
-                        @Override
-                        public void onResponse(Call<List<DataPasajeConvertor>> call, Response<List<DataPasajeConvertor>> response) {
-                            PasajesVendidos = response.body();
-                            DataPasajeConvertor pa = existePasaje(scanContent);
-                                if (pa != null) {
-                                    //EXISTE PASAJE MUESTRO DIALOG OPERACION EXITOSA
-                                    crearDialogoConexion(pa).show();
-                                }else {
-                                        //NO EXISTE PASAJE
-                                        dialogNoExistePasaje().show();}
+
+                //VERIFICO SI EXISTE PASAJE EN MEMORIA
+                Call<DataPasajeConvertor> call = PasajeApi.createService().getPasajePorCodigo(Integer.parseInt(scanContent));
+                call.enqueue(new Callback<DataPasajeConvertor>() {
+                    @Override
+                    public void onResponse(Call<DataPasajeConvertor> call, Response<DataPasajeConvertor> response) {
+                        DataPasajeConvertor pasaje = response.body();
+
+                        if (pasaje != null && pasaje.getUsado()==false) {
+                            //CAMBIO ESTADO A PASAJE UTILIZADO
+                            Call<Void> call2 = PasajeApi.createService().procesarPasaje(pasaje.getId());
+                            call2.enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, Response<Void> response) {}
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
+                                    System.out.println("*****FALLO EL SERVICIO*****");}
+                            });
+                            //MUESTRO EN DIALOG OPERACION EXITOSA
+                            crearDialogoConexion(pasaje).show();
+
+                        }else{
+                            //PASAJE YA FUE UTILIZADO
+                            if (pasaje == null) {
+                                dialogNoExistePasaje().show();
+
+                            }else {
+                                //PASAJE YA FUE UTILIZADO
+                                if (pasaje.getUsado() == true) {
+                                    dialogPasajeUsado().show();
+                                } else {
+                                    //NO EXISTE EL PASAJE SE MUESTRA EL DIALOG CORRESPONDIENTE
+                                    dialogNoExistePasaje().show();
+                                }
+                            }
                         }
-                        @Override
-                        public void onFailure(Call<List<DataPasajeConvertor>> call, Throwable t) {
-                            System.out.println("onFailure");}
-                    });
+                    }
+                    @Override
+                    public void onFailure(Call<DataPasajeConvertor> call, Throwable t) {
+                        System.out.println("onFailure");}
+                });
             } else {
                     //NO SE REALIZO EL ESCANEO
                     Toast.makeText(getApplication(), "NO HAY DATOS DEL ESCANEO!", Toast.LENGTH_SHORT).show();}
@@ -96,6 +121,33 @@ public class ProcesarPasajesVendidosEscaner extends AppCompatActivity implements
         public void onClick(DialogInterface dialog, int which) {
 
          }
+        };
+        // Creamos un nuevo OnClickListener para el boton Cancelar
+        DialogInterface.OnClickListener listenerCancelar = new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        };
+        // Asignamos los botones positivo y negativo a sus respectivos listeners
+        alertDialogBuilder.setPositiveButton(R.string.ACEPTAR, listenerOk);
+        // alertDialogBuilder.setNegativeButton(R.string.Cancelar, listenerCancelar);
+        return alertDialogBuilder.create();
+    }
+    private AlertDialog dialogPasajeUsado()
+    {
+        // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Atencion");
+        alertDialogBuilder.setMessage("El pasaje  ya fue utilizado, Te quiere cagar!");
+        alertDialogBuilder.setIcon(R.drawable.icono_alerta);;
+        // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
+        DialogInterface.OnClickListener listenerOk = new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
         };
         // Creamos un nuevo OnClickListener para el boton Cancelar
         DialogInterface.OnClickListener listenerCancelar = new DialogInterface.OnClickListener() {

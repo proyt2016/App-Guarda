@@ -210,7 +210,7 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Pasaje Vendido");
-        alertDialogBuilder.setMessage("Numero de Pasaje:"+" "+pasaje.getId()+"\n"
+        alertDialogBuilder.setMessage("Numero de Pasaje:"+" "+pasaje.getCodigoPasaje()+"\n"
                 +"Monto:"+" "+/*pasaje.getPrecio().getMonto()*/"\n"
                 + "Con destino a"+" "+pasaje.getDestino().getNombre());
         alertDialogBuilder.setIcon(R.drawable.icono_cash_black);;

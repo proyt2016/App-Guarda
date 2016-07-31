@@ -73,12 +73,14 @@ public class Login extends AppCompatActivity {
         empleado.addProperty("clave",_passwordText.getText().toString());
 
         Call<Boolean> call = EmpleadoApi.createService().login(empleado);
+        System.out.println("HEADER - REQUEST START----->"+" "+call.request().headers()+" "+"<--------HEADER REQUEST FINAL");
         call.enqueue(new Callback<Boolean>() {
             @Override
             public void onResponse(Call<Boolean> call, Response<Boolean> response) {
                 if(response.isSuccessful()) {
 
                     Boolean existe = response.body();
+
 
                     if (existe!=null) {
 
@@ -92,7 +94,7 @@ public class Login extends AppCompatActivity {
                                         }
                                     }, 3000);
                         } else {
-                            System.out.println("No existe Usuario Registrado");
+                            System.out.println("Fallo la Autenticacion, volver a intentarlo!");
                             onLoginFailed();
                             progressDialog.dismiss();
                         }

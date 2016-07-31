@@ -1,6 +1,7 @@
 package com.fedoraapps.www.appguarda;
 
 import android.app.AlertDialog;
+import com.google.maps.android.SphericalUtil;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,8 +18,11 @@ import android.widget.ListView;
 
 import com.fedoraapps.www.appguarda.Api.ViajeApi;
 import com.fedoraapps.www.appguarda.Shares.DataViaje;
+import com.google.gson.JsonObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import retrofit2.Call;
@@ -42,13 +46,19 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         filtro = (EditText)findViewById(R.id.inputSearch);
         filtro.setOnClickListener(this);
         listTrip.setTextFilterEnabled(true);
+        JsonObject filtroviaje = new JsonObject();
 
-        Call<List<DataViaje>> call = ViajeApi.createService().getAll();
+        filtroviaje.addProperty( "fechaSalida",new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+
+
+        System.out.println("************"+filtroviaje+"*********************");
+
+        Call<List<DataViaje>> call = ViajeApi.createService().getAll(filtroviaje);
         call.enqueue(new Callback<List<DataViaje>>() {
             @Override
             public void onResponse(Call<List<DataViaje>> call, Response<List<DataViaje>> response) {
                 ListResponse = response.body();
-                System.out.println("LISTADO DE VIAJES-------->"+ListResponse.size()+"<---------LISTADO DE VIAJES");
+             //   System.out.println("LISTADO DE VIAJES-------->"+ListResponse.size()+"<---------LISTADO DE VIAJES");
                 if(ListResponse != null){
                         adapter = new InteractiveArrayAdapterRecorridos(Main.this, ListResponse);
                         listTrip.setAdapter(adapter);

@@ -24,7 +24,7 @@ public class PasajeApi {
     public static PasajeApiInterface createService() {
         if (pasajeService == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.1.43:8080")
+                    .baseUrl("http://10.0.22.146:8080")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build())
                     .build();
@@ -36,7 +36,7 @@ public class PasajeApi {
     }
     public interface PasajeApiInterface {
 
-        @GET("/lcbsapi/rest/viajes/getpasajes/1/99")
+        @GET("/lcbsapi/rest/viajes/getpasajes/1/999999898")
         Call<List<DataPasajeConvertor>> getAll();
 
         @POST("/lcbsapi/rest/viajes/comprarpasaje")

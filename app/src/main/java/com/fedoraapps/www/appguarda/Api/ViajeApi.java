@@ -1,6 +1,7 @@
 package com.fedoraapps.www.appguarda.Api;
 
 import com.fedoraapps.www.appguarda.Shares.DataViaje;
+import com.google.gson.JsonObject;
 
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class ViajeApi {
     public static ViajeApiInterface createService() {
         if (viajeService == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.1.43:8080")
+                    .baseUrl("http://10.0.22.146:8080")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build())
                     .build();
@@ -36,8 +37,8 @@ public class ViajeApi {
 
     public interface ViajeApiInterface {
 
-        @GET("/lcbsapi/rest/viajes/getviajes/1/99")
-        Call<List<DataViaje>> getAll();
+        @POST("/lcbsapi/rest/viajes/buscarviaje/1/9999989")
+        Call<List<DataViaje>> getAll(@Body JsonObject filtro);
 
         @GET("/lcbsapi/rest/viajes/getviaje/{idViaje}")
         Call<DataViaje> getViaje(@Path("idViaje") String idViaje);

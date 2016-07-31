@@ -28,7 +28,7 @@ public class InteractiveArrayAdapterRecorridos extends ArrayAdapter<DataViaje> {
     }
     static class ViewHolder {
         protected TextView titulo;
-       //protected TextView subTitulo;
+        protected TextView subTitulo;
       // protected TextView nroCoche;
         protected Button boton;
     }
@@ -40,6 +40,7 @@ public class InteractiveArrayAdapterRecorridos extends ArrayAdapter<DataViaje> {
             view = inflator.inflate(R.layout.vista_lista_viajes,null);
             final ViewHolder viewHolder = new ViewHolder();
             viewHolder.titulo = (TextView) view.findViewById(R.id.nroCoche);
+            viewHolder.subTitulo = (TextView)view.findViewById(R.id.subTitulo);
 
             viewHolder.boton = (Button) view.findViewById(R.id.next);
             viewHolder.boton.setOnClickListener(new View.OnClickListener() {
@@ -56,7 +57,7 @@ public class InteractiveArrayAdapterRecorridos extends ArrayAdapter<DataViaje> {
 
             view.setTag(viewHolder);
             viewHolder.titulo.setTag(lista.get(position));
-         //  viewHolder.subTitulo.setTag(lista.get(position));
+          viewHolder.subTitulo.setTag(lista.get(position));
         //   viewHolder.nroCoche.setTag(lista.get(position));
             viewHolder.boton.setTag(lista.get(position));
         }else {
@@ -66,7 +67,7 @@ public class InteractiveArrayAdapterRecorridos extends ArrayAdapter<DataViaje> {
 
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.titulo.setText(lista.get(position).getRecorrido().getNombre().toString());
-       // holder.subTitulo.setText("Horario Salida:"+" "+ String.valueOf(lista.get(position).getEliminado()));
+       holder.subTitulo.setText("Horario Salida:"+" "+ String.valueOf(lista.get(position).getHorario().getNombre()));
       //  holder.nroCoche.setText("Numero Coche:"+" "+lista.get(position));
         return view;
     }

@@ -21,7 +21,7 @@ public class PuntosRecorridoApi {
     public static PuntosRecorridoApiInterface createService() {
         if (recorridosService == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.1.43:8080")
+                    .baseUrl("http://10.0.22.146:8080")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build())
                     .build();
@@ -33,7 +33,7 @@ public class PuntosRecorridoApi {
     }
 
     public interface PuntosRecorridoApiInterface {
-        @GET("/lcbsapi/rest/viajes/listarrecorridos/1/99")
+        @GET("/lcbsapi/rest/viajes/listarrecorridos/1/999999998")
         Call<List<DataRecorridoConvertor>> getAll();
 
     }

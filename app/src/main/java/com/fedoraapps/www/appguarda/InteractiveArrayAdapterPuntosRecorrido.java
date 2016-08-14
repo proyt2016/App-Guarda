@@ -59,9 +59,10 @@ public class InteractiveArrayAdapterPuntosRecorrido extends ArrayAdapter<DataPun
                 public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
                     DataPuntoRecorridoConverter element = (DataPuntoRecorridoConverter) viewHolder.checkbox.getTag();
-                    element.setSelected(buttonView.isChecked());
-                    if (element.isSelected()) {
+                    element.isSelected(buttonView.isChecked());
+                    if (buttonView.isChecked()) {
                         Farcade.DestinoSeleccionado = element;
+                        System.out.println("SELECCIONE---->"+" "+element.getNombre());
                     }else{
                         Farcade.DestinoSeleccionado = null;
                     }
@@ -78,7 +79,7 @@ public class InteractiveArrayAdapterPuntosRecorrido extends ArrayAdapter<DataPun
         }
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.text.setText(lista.get(position).toString());//"Encomienda:"+" "+lista.get(position).getId().toString()+" "+"Estado:"+" "+lista.get(position).getUltimoEstado());//+" "+"Estado:"+" "+lista.get(position).getUltimoEstado().toString());
-        holder.checkbox.setChecked(lista.get(position).isSelected());
+        //holder.checkbox.setChecked(lista.get(position).isSelected;);
 
         return view;
 

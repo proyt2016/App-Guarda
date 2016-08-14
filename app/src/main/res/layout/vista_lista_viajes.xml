@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:baselineAligned="false"
-    android:background="#FFFFFFFF"
+    android:background="#ff4444"
     android:weightSum="1">
     <!-- Los elementos de la lista se setean en textview  -->
 
@@ -11,28 +11,23 @@
         android:orientation="vertical"
         android:layout_width="271dp"
         android:layout_height="wrap_content"
+        android:background="#ff4444"
         android:id="@+id/linearLayout6">
 
-        <TextView
-            android:id="@+id/titulo"
-            android:layout_width="300dp"
-            android:layout_height="16dp"
-            android:padding="5dp"
-            android:layout_gravity="center_horizontal"
 
-
-            android:textSize="30dp"
-            android:textColor="@color/black"
-            />
 
        <TextView
            android:id="@+id/nroCoche"
            android:layout_width="300dp"
            android:layout_height="wrap_content"
            android:padding="2dp"
-           android:textSize="15dp"
-           android:textColor="@color/black"
-           />
+           android:textSize="17dip"
+           android:background="#ff4444"
+
+           android:textColorHint="@color/black"
+           android:textColorHighlight="@color/black"
+
+           android:textColor="@android:color/primary_text_light_nodisable" />
 
        <TextView
            android:id="@+id/subTitulo"
@@ -40,8 +35,12 @@
            android:layout_height="wrap_content"
            android:padding="2dp"
            android:textSize="14dip"
-           android:textColor="@color/primary_dark_material_light"
-           />
+           android:background="#ff4444"
+           android:textColor="@color/black"
+           android:textColorLink="@color/black"
+           android:textColorHint="@color/black"
+           android:textColorHighlight="@color/black"
+           style="@style/AppTheme.Dark" />
    </LinearLayout>
 
    <LinearLayout
@@ -67,7 +66,7 @@
            android:clickable="true"
            android:onClick="onClick"
            android:background="@drawable/siguiente"
-           android:layout_marginTop="12dp"
+           android:layout_marginTop="10dp"
            android:layout_alignParentRight="true"
            android:layout_alignParentEnd="true" />
 

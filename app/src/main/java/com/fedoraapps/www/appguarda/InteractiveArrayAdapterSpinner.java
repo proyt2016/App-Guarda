@@ -19,7 +19,6 @@ public class InteractiveArrayAdapterSpinner extends ArrayAdapter<DataPuntoRecorr
 
     private final List<DataPuntoRecorridoConverter> lista;
     private final Activity context;
-    private final DataPuntoRecorridoConverter punto = null;
     public InteractiveArrayAdapterSpinner(Activity context, List<DataPuntoRecorridoConverter> lista){
         super(context,R.layout.vista_spinner,R.id.titulos, lista);
         this.context = context;

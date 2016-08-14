@@ -15,9 +15,13 @@ public class DataPuntoRecorridoConverter {
     private Boolean aceptaEncomiendas;
     private String tipo;
 
+    private boolean eliminada;
+    private boolean selected;
+
     public DataPuntoRecorridoConverter(){}
 
-    public DataPuntoRecorridoConverter(String id, String nom, String uMap, List<DataTelefono> tels, List<DataEmail> mails, Boolean acEnc, Boolean elim,String tip) {
+
+    public DataPuntoRecorridoConverter(String id, String nom, String uMap, List<DataTelefono> tels, List<DataEmail> mails, Boolean acEnc, Boolean elim,String tip,boolean selected) {
         setId(id);
         setNombre(nom);
         setUbicacionMapa(uMap);
@@ -26,12 +30,18 @@ public class DataPuntoRecorridoConverter {
         setMailsDeContacto(mails);
         setAceptaEncomiendas(acEnc);
         setTipo(tip);
+        this.selected = selected;
     }
 
     public String toString(){
         return this.nombre;
     }
-
+    public boolean isSelected(){
+        return this.selected;
+    }
+    public void setSelected(Boolean selected){
+        this.selected = selected;
+    }
 
     public void setId(String val){
         this.id = val;

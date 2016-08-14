@@ -6,67 +6,81 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.fedoraapps.www.appguarda.Main"
-    android:background="#FFFFFFFF"
-    >
-
+android:background="@android:color/holo_red_light"
+    android:backgroundTint="@android:color/holo_red_light">
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
-
-     <!--   <TextView
-            android:id="@+id/nada"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:layout_marginTop="15dp"
-
-            android:textSize="18dp"
-            android:layout_gravity="center"
-            android:textColorLink="@color/black"
-            android:textColorHint="@color/black"
-
-            android:inputType="textVisiblePassword"
-            android:textColor="@color/black"
-            android:theme="@style/AppTheme.AppBarOverlay"
-
-            />-->
-
-        <EditText
-            android:id="@+id/inputSearch"
+        <TextView
+            android:id="@+id/txt"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:hint=""
-            android:textSize="18dp"
+            android:padding="15dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="0dp"
+            android:text="Listado de viajes"
+            android:textSize="20dip"
+            android:textColor="@color/white"
 
-
-            android:textColorLink="@color/black"
-            android:textColorHighlight="@color/white"
-            android:textColorHint="@color/black"
-            android:backgroundTint="@color/white"
-
-            android:inputType="textVisiblePassword"
-            android:textColor="@color/black"
-            android:drawableRight="@drawable/buscar"
+            android:textStyle="bold"
             />
-
 
     </android.support.design.widget.AppBarLayout>
 
+    <EditText
+        android:id="@+id/inputSearch"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:hint="Buscar por Recorrido"
+        android:textSize="15dp"
+        android:background="@android:color/holo_red_light"
+        android:textColorLink="@color/black"
 
+        android:textColorHint="@color/aluminum"
+
+        android:inputType="textVisiblePassword"
+        android:textColor="@color/black"
+        android:drawableLeft="@drawable/buscar_negro"
+        android:backgroundTint="@android:color/holo_red_light" />
 
     <ListView
         android:id="@+id/listTrip"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="100dp"
-
-
+        android:layout_height="300dp"
+        android:layout_marginTop="120dp"
         android:layout_alignParentLeft="true"
+        android:background="@android:color/holo_red_light"
+        android:layout_below="@+id/inputSearch"
+        android:backgroundTint="@android:color/holo_red_light"
+        android:cacheColorHint="@android:color/holo_red_light" />
 
-        android:background="@color/white" />
 
 
+    <TextView
+        android:id="@+id/mensaje_id"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="380dp"
+        android:padding="15dp"
+        android:layout_gravity="center"
 
+        android:textSize="20dip"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        />
+    <TextView
+        android:id="@+id/mensaje_id2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="460dp"
+        android:padding="15dp"
+        android:layout_gravity="center"
+
+        android:textSize="20dip"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        />
 
 </android.support.design.widget.CoordinatorLayout>

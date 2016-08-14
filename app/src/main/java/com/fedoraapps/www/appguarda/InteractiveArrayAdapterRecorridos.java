@@ -9,19 +9,19 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.fedoraapps.www.appguarda.Shares.DataViaje;
+import com.fedoraapps.www.appguarda.Shares.DataViajeConvertor;
 
 import java.util.List;
 
 /**
  * Created by maxi on 01/06/2016.
  */
-public class InteractiveArrayAdapterRecorridos extends ArrayAdapter<DataViaje> {
+public class InteractiveArrayAdapterRecorridos extends ArrayAdapter<DataViajeConvertor> {
 
-    private final List<DataViaje> lista;
+    private final List<DataViajeConvertor> lista;
     private final Activity context;
 
-    public InteractiveArrayAdapterRecorridos(Activity context, List<DataViaje> lista){
+    public InteractiveArrayAdapterRecorridos(Activity context, List<DataViajeConvertor> lista){
         super(context,R.layout.vista_lista_viajes, lista);
         this.context = context;
         this.lista = lista;
@@ -47,11 +47,14 @@ public class InteractiveArrayAdapterRecorridos extends ArrayAdapter<DataViaje> {
 
                 @Override
                 public void onClick(View v) {
-                    DataViaje recorrido =(DataViaje) v.getTag();
+                    DataViajeConvertor recorrido =(DataViajeConvertor) v.getTag();
                     Intent i = new Intent(context,MenuPrincipal.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     i.putExtra("codigo", recorrido.getRecorrido().getId());
                     i.putExtra("codigoViaje", recorrido.getId());
                     getContext().getApplicationContext().startActivity(i);
+                    //GUARDO EN MEMORIA EL RECORRIDO SELECCIONADO
+                    Farcade farcade = new Farcade();
+                    farcade.setRecorridoSeleccionado(recorrido);
                 }
             });
 
@@ -67,7 +70,7 @@ public class InteractiveArrayAdapterRecorridos extends ArrayAdapter<DataViaje> {
 
         ViewHolder holder = (ViewHolder) view.getTag();
         holder.titulo.setText(lista.get(position).getRecorrido().getNombre().toString());
-       holder.subTitulo.setText("Horario Salida:"+" "+ String.valueOf(lista.get(position).getHorario().getNombre()));
+        holder.subTitulo.setText("Horario Salida:"+" "+ String.valueOf(lista.get(position).getHorario().getNombre()));
       //  holder.nroCoche.setText("Numero Coche:"+" "+lista.get(position));
         return view;
     }

@@ -1,9 +1,8 @@
 package com.fedoraapps.www.appguarda;
 
 import android.app.AlertDialog;
-import com.google.maps.android.SphericalUtil;
+
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -15,9 +14,10 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.fedoraapps.www.appguarda.Api.ViajeApi;
-import com.fedoraapps.www.appguarda.Shares.DataViaje;
+import com.fedoraapps.www.appguarda.Shares.DataViajeConvertor;
 import com.google.gson.JsonObject;
 
 import java.text.SimpleDateFormat;
@@ -29,11 +29,14 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Main extends AppCompatActivity implements View.OnClickListener{
+
+public class Main extends AppCompatActivity implements View.OnClickListener {
     ListView listTrip;
-    ArrayAdapter<DataViaje> adapter;
-    List<DataViaje> ListResponse;
+    ArrayAdapter<DataViajeConvertor> adapter;
+    List<DataViajeConvertor> ListResponse;
     EditText filtro;
+    public TextView mensaje1;
+    TextView mensaje2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,50 +44,55 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         //Asociar Elementos XML
-        listTrip =(ListView)findViewById(R.id.listTrip);
-        filtro = (EditText)findViewById(R.id.inputSearch);
+        listTrip = (ListView) findViewById(R.id.listTrip);
+        filtro = (EditText) findViewById(R.id.inputSearch);
         filtro.setOnClickListener(this);
         listTrip.setTextFilterEnabled(true);
         JsonObject filtroviaje = new JsonObject();
 
-        filtroviaje.addProperty( "fechaSalida",new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+        filtroviaje.addProperty("fechaSalida", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 
-
-        System.out.println("************"+filtroviaje+"*********************");
-
-        Call<List<DataViaje>> call = ViajeApi.createService().getAll(filtroviaje);
-        call.enqueue(new Callback<List<DataViaje>>() {
+        Call<List<DataViajeConvertor>> call = ViajeApi.createService().getAll(filtroviaje);
+        call.enqueue(new Callback<List<DataViajeConvertor>>() {
             @Override
-            public void onResponse(Call<List<DataViaje>> call, Response<List<DataViaje>> response) {
+            public void onResponse(Call<List<DataViajeConvertor>> call, Response<List<DataViajeConvertor>> response) {
                 ListResponse = response.body();
-             //   System.out.println("LISTADO DE VIAJES-------->"+ListResponse.size()+"<---------LISTADO DE VIAJES");
-                if(ListResponse != null){
-                        adapter = new InteractiveArrayAdapterRecorridos(Main.this, ListResponse);
-                        listTrip.setAdapter(adapter);
-                    for (DataViaje t : ListResponse) {
-                        adapter.notifyDataSetChanged();}
-                }else{ListaVaciaDialog().show();}
+                if (ListResponse != null) {
+                    adapter = new InteractiveArrayAdapterRecorridos(Main.this, ListResponse);
+                    listTrip.setAdapter(adapter);
+                    for (DataViajeConvertor t : ListResponse) {
+                        adapter.notifyDataSetChanged();
+                    }
+                } else {
+                    ListaVaciaDialog().show();
+                }
             }
+
             @Override
-            public void onFailure(Call<List<DataViaje>> call, Throwable t) {
-                System.out.println("******FALLO EL SERVICIO******"+t.getCause()+" "+call.request().toString());}
+            public void onFailure(Call<List<DataViajeConvertor>> call, Throwable t) {
+                System.out.println("******FALLO EL SERVICIO******" + t.getCause() + " " + call.request().toString());
+            }
         });
         //CALL LOGIN
-       Intent i = new Intent(Main.this,Login.class);
-        startActivity(i);
+        //  Intent i = new Intent(Main.this,Login.class);
+        //    startActivity(i);
 
         if (filtro.getText() != null) {
             //FILTRO DE BUSQUEDA
             filtro.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-                    if(arg0!=null || arg0!=" "){
+                    if (arg0 != null || arg0 != " ") {
                         Main.this.adapter.getFilter().filter(arg0);
                     }
                 }
+
                 @Override
-                public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {}
+                public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+                }
+
                 @Override
                 public void afterTextChanged(Editable arg0) {
                     adapter.getFilter().filter(arg0);
@@ -115,30 +123,35 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
 
         return super.onOptionsItemSelected(item);
     }
-    private List<DataViaje> getModel() {
-        List<DataViaje> list = new ArrayList<DataViaje>();
-          for (DataViaje t : ListResponse) {
-                list.add(t);
-            }
-            return list;
+
+    private List<DataViajeConvertor> getModel() {
+        List<DataViajeConvertor> list = new ArrayList<DataViajeConvertor>();
+        for (DataViajeConvertor t : ListResponse) {
+            list.add(t);
         }
+        return list;
+    }
 
     private String getModelEmpty() {
         return "No existen recorridos cargados";
     }
+
     @Override
-    public void onClick(View v) {}
-    private AlertDialog ListaVaciaDialog()
-    {
+    public void onClick(View v) {
+    }
+
+    private AlertDialog ListaVaciaDialog() {
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Atencion!");
         alertDialogBuilder.setMessage("No existen Viajes cargados");
-        alertDialogBuilder.setIcon(R.drawable.icono_alerta);;
+        alertDialogBuilder.setIcon(R.drawable.icono_alerta);
+        ;
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
         DialogInterface.OnClickListener listenerOk = new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialog, int which) {}
+            public void onClick(DialogInterface dialog, int which) {
+            }
         };
         // Creamos un nuevo OnClickListener para el boton Cancelar
         DialogInterface.OnClickListener listenerCancelar = new DialogInterface.OnClickListener() {
@@ -154,3 +167,6 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         return alertDialogBuilder.create();
     }
 }
+
+
+

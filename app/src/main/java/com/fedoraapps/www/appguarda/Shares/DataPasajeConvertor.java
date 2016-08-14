@@ -8,7 +8,7 @@ import java.util.Date;
 public class DataPasajeConvertor {
 
     private String id;
-    private DataViaje viaje;
+    private DataViajeConvertor viaje;
     private DataPrecio precio;
     private DataPuntoRecorridoConverter origen;
     private DataPuntoRecorridoConverter destino;
@@ -27,8 +27,8 @@ public class DataPasajeConvertor {
 
     //PARA TRAER LOS PASAJES
 
-    public DataPasajeConvertor(String id, int codigoPasaje, DataViaje via, DataPrecio prec, DataPuntoRecorridoConverter orig,
-                               DataPuntoRecorridoConverter des,	Date fecVen, DataUsuario comp, String ciPer,
+    public DataPasajeConvertor(String id, int codigoPasaje, DataViajeConvertor via, DataPrecio prec, DataPuntoRecorridoConverter orig,
+                               DataPuntoRecorridoConverter des, Date fecVen, DataUsuario comp, String ciPer,
                                DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
         this.id = id;
         this.codigoPasaje = codigoPasaje;
@@ -47,8 +47,8 @@ public class DataPasajeConvertor {
 
     //PARA COMPRAR PASAJE
 
-    public DataPasajeConvertor(DataViaje via, DataPrecio prec, DataPuntoRecorridoConverter orig,
-                               DataPuntoRecorridoConverter des,	Date fecVen, DataUsuario comp, String ciPer,
+    public DataPasajeConvertor(DataViajeConvertor via, DataPrecio prec, DataPuntoRecorridoConverter orig,
+                               DataPuntoRecorridoConverter des, Date fecVen, DataUsuario comp, String ciPer,
                                DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
         this.viaje = via;
         this.precio = prec;
@@ -81,11 +81,11 @@ public class DataPasajeConvertor {
         return this.id;
     }
 
-    public void setViaje(DataViaje val){
+    public void setViaje(DataViajeConvertor val){
         this.viaje = val;
     }
 
-    public DataViaje getViaje(){
+    public DataViajeConvertor getViaje(){
         return this.viaje;
     }
 

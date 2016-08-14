@@ -1,5 +1,8 @@
 package com.fedoraapps.www.appguarda.Shares;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.fedoraapps.www.appguarda.Model.PuntosDeRecorrido;
 
 import java.util.ArrayList;
@@ -8,7 +11,9 @@ import java.util.List;
 /**
  * Created by maxi on 11/07/16.
  */
-public class DataRecorridoConvertor {
+public class DataRecorridoConvertor  {
+
+
     private String id;
 
     private String nombre;
@@ -18,20 +23,21 @@ public class DataRecorridoConvertor {
     private String idDestino;
     private List<DataPrecio> precios;
     private Boolean eliminado;
+    private String tipoHorario;
 
 
 
     public DataRecorridoConvertor() {}
 
-    public DataRecorridoConvertor(String id, String nom, List<DataPuntoRecorridoConverter> punRec, List<DataGrupoHorario> hor, List<DataPrecio> prec, Boolean elim) {
+    public DataRecorridoConvertor(String id, String nom, List<DataPuntoRecorridoConverter> punRec, List<DataGrupoHorario> hor, List<DataPrecio> prec, Boolean elim, String tip) {
         this.id = id;
         this.nombre = nom;
         this.puntosDeRecorrido = punRec;
         this.horarios = hor;
         this.precios = prec;
         this.eliminado = elim;
+        this.tipoHorario = tip;
     }
-
 
 
     public void setId(String val){
@@ -97,4 +103,13 @@ public class DataRecorridoConvertor {
     public void setIdDestino(String val){
         this.idDestino = val;
     }
+
+    public void setTipoHorario(String val){
+        this.tipoHorario = val;
+    }
+
+    public String genTipoHorario(){
+        return this.tipoHorario;
+    }
+
 }

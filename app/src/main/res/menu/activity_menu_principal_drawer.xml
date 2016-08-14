@@ -10,16 +10,6 @@
             android:id="@+id/ventaOnline"
             android:icon="@drawable/venta_online_icono"
             android:title="Venta Online" />
-        <item
-            android:id="@+id/procesarPasajesEscaner"
-            android:icon="@drawable/procesar_pasajes_iconos"
-            android:title="Procesar Pasajes con Escaner" />
-        <item
-            android:id="@+id/procesarPasajesManual"
-            android:icon="@drawable/buscar_negro"
-            android:title="Procesar Pasajes por Codigo" />
-
-
     </group>
 
     <item android:title="Communicate">

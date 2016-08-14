@@ -59,6 +59,7 @@ public class ProcesarPasajesVendidosEscaner extends AppCompatActivity implements
 
             if (scanningResult != null) {
                 //OBTENGO EL CODIGO DEL PASAJE
+                System.out.println("ESCANER RESULTADO------->"+" "+scanningResult.toString());
                 final String scanContent = scanningResult.getContents();
                 //OBTENGO EL FORMATE DEL CODIGO DE BARRAS COMO INFORMACION ADICIONAL
                 String scanFormat = scanningResult.getFormatName();

@@ -11,7 +11,7 @@ public class DataUsuario extends DataPersona{
     private String redSocialUsada;
     private String idRedSocial;
     private DataCuponera cuponera;
-    private List<DataEncomienda> encomiendas;
+    private List<DataEncomiendaConvertor> encomiendas;
     private List<DataNotificacion> notificaciones;
 
 
@@ -19,7 +19,7 @@ public class DataUsuario extends DataPersona{
     public DataUsuario() {}
 
     public DataUsuario(String id, String nm, String ape, DataEmail mail, List<DataTelefono> tels, Date fecNac, Boolean elim, String clave,
-                       String redSoc, String idRedsoc, DataCuponera cup, List<DataEncomienda> enc, List<DataNotificacion> not) {
+                       String redSoc, String idRedsoc, DataCuponera cup, List<DataEncomiendaConvertor> enc, List<DataNotificacion> not) {
         super.setId(id);
         super.setNombrePila(nm);
         super.setApellido(ape);
@@ -59,11 +59,11 @@ public class DataUsuario extends DataPersona{
         return this.cuponera;
     }
 
-    public void setEncomiendas(List<DataEncomienda> val){
+    public void setEncomiendas(List<DataEncomiendaConvertor> val){
         this.encomiendas = val;
     }
 
-    public List<DataEncomienda> getEncomiendas(){
+    public List<DataEncomiendaConvertor> getEncomiendas(){
         return this.encomiendas;
     }
 

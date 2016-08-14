@@ -6,23 +6,25 @@ import java.util.List;
 /**
  * Created by maxi on 10/07/16.
  */
-public class DataViaje {
-
+public class DataViajeConvertor {
     private String id;
-    private DataPuntoRecorridoConverter recorrido;
+    private DataRecorridoConvertor recorrido;
     private DataHorario horario;
+
     private Date fechaSalida;
     private List<DataEmpleado> empleados;
     private DataVehiculo coche;
-    private List<DataEncomienda> encomiendas;
-    private List<DataReserva> reservas;
+    private List<DataEncomiendaConvertor> encomiendas;
+    private List<DataReservaConvertor> reservas;
+    private String idOrigen;
+    private String idDestino;
+    private String tipoHorario;
 
 
 
+    public DataViajeConvertor() {}
 
-    public DataViaje() {}
-
-    public DataViaje(String id, DataPuntoRecorridoConverter rec, DataHorario hor, Date fecSalida, List<DataEmpleado> emp, DataVehiculo coche, List<DataEncomienda> enc, List<DataReserva> res) {
+    public DataViajeConvertor(String id, DataRecorridoConvertor rec, DataHorario hor, Date fecSalida, List<DataEmpleado> emp, DataVehiculo coche, List<DataEncomiendaConvertor> enc, List<DataReservaConvertor> res, String idOr, String idDest, String tipoHor) {
         this.id = id;
         this.recorrido = rec;
         this.horario = hor;
@@ -31,7 +33,11 @@ public class DataViaje {
         this.coche = coche;
         this.encomiendas = enc;
         this.reservas = res;
+        this.idOrigen = idOr;
+        this.idDestino = idDest;
+        this.tipoHorario = tipoHor;
     }
+
 
     public void setId(String val){
         this.id = val;
@@ -41,11 +47,11 @@ public class DataViaje {
         return this.id;
     }
 
-    public void setRecorrido(DataPuntoRecorridoConverter val){
+    public void setRecorrido(DataRecorridoConvertor val){
         this.recorrido = val;
     }
 
-    public DataPuntoRecorridoConverter getRecorrido(){
+    public DataRecorridoConvertor getRecorrido(){
         return this.recorrido;
     }
 
@@ -81,19 +87,43 @@ public class DataViaje {
         return this.coche;
     }
 
-    public void setEncomiendas(List<DataEncomienda> val){
+    public void setEncomiendas(List<DataEncomiendaConvertor> val){
         this.encomiendas = val;
     }
 
-    public List<DataEncomienda> getEncomiendas(){
+    public List<DataEncomiendaConvertor> getEncomiendas(){
         return this.encomiendas;
     }
 
-    public void setReservas(List<DataReserva> val){
+    public void setReservas(List<DataReservaConvertor> val){
         this.reservas = val;
     }
 
-    public List<DataReserva> getReservas(){
+    public List<DataReservaConvertor> getReservas(){
         return this.reservas;
+    }
+
+    public String genIdOrigen(){
+        return this.idOrigen;
+    }
+
+    public void setIdOrigen(String val){
+        this.idOrigen = val;
+    }
+
+    public String genIdDestino(){
+        return this.idDestino;
+    }
+
+    public void setIdDestino(String val){
+        this.idDestino = val;
+    }
+
+    public void setTipoHorario(String val){
+        this.tipoHorario = val;
+    }
+
+    public String genTipoHorario(){
+        return this.tipoHorario;
     }
 }

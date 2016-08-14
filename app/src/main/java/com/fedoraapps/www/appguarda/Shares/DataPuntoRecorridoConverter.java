@@ -9,13 +9,13 @@ public class DataPuntoRecorridoConverter {
     private String id;
     private String nombre;
     private String ubicacionMapa;
-    private Boolean eliminado;
+
     private List<DataTelefono> telefonosContacto;
     private List<DataEmail> mailsDeContacto;
     private Boolean aceptaEncomiendas;
     private String tipo;
 
-    private boolean eliminada;
+    private boolean eliminado;
     private boolean selected;
 
     public DataPuntoRecorridoConverter(){}

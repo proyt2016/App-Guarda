@@ -218,7 +218,7 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
                                             dest.setTipo(punto.getTipo());
                                         }
 
-                                        DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, ori, dest, null, null, null, null, true, true, false);
+                                        DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, puntoOrigen, dest, null, null, null, null, true, true, false);
 
                                         Call<DataPasajeConvertor> call3 = PasajeApi.createService().venderPasaje(pasaje);
                                         call3.enqueue(new Callback<DataPasajeConvertor>() {

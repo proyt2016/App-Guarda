@@ -24,7 +24,7 @@ public class PasajeApi {
     public static PasajeApiInterface createService() {
         if (pasajeService == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.1.191:8080")
+                    .baseUrl("http://192.168.0.109:8080")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build())
                     .build();

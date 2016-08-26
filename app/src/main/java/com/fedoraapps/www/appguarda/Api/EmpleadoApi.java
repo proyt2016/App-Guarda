@@ -1,7 +1,7 @@
 package com.fedoraapps.www.appguarda.Api;
 
-import com.fedoraapps.www.appguarda.Model.Usuario;
-import com.fedoraapps.www.appguarda.Shares.DataUsuario;
+import com.fedoraapps.www.appguarda.Shares.DataEmpleado;
+
 import com.google.gson.JsonObject;
 
 import okhttp3.OkHttpClient;
@@ -23,7 +23,7 @@ public class EmpleadoApi {
     public static UsuarioApiInterface createService() {
         if (usuarioService == null) {
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.0.109:8080")
+                    .baseUrl("http://192.168.1.191:8080")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build())
                     .build();
@@ -37,6 +37,6 @@ public class EmpleadoApi {
     public interface UsuarioApiInterface {
 
         @POST("/lcbsapi/rest/usuarios/loginempleado")
-        Call<Boolean> login(@Body JsonObject caca);
+        Call<DataEmpleado> login(@Body JsonObject caca);
     }
 }

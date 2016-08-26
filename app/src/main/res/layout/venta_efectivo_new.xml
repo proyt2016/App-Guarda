@@ -114,6 +114,8 @@
             android:layout_height="160dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="60dp"
+            android:descendantFocusability="beforeDescendants"
+            android:choiceMode="singleChoice"
             android:background="@android:color/holo_red_light"
             android:backgroundTint="@android:color/holo_red_light"
             android:cacheColorHint="@android:color/holo_red_light"

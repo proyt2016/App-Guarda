@@ -31,26 +31,25 @@
         android:layout_alignTop="@+id/view"
         android:layout_centerHorizontal="true" />
 
-    <LinearLayout
+
+    <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="65dp"
-        android:background="#9eff8c8c">
-
-        <TextView
-            android:id="@+id/txt2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:layout_marginLeft="38dp"
-
-            android:text="PROCESAR PASAJES MANUALMENTE"
-            android:textSize="18dip"
-            android:textStyle="bold"
-            android:textColor="@color/white" />
-
-
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="PROCESAR MANUALMENTE"
+        android:layout_marginTop="75dp"
+        android:id="@+id/textView4"
+        android:gravity="center_horizontal"
+        android:background="#ff6c6c"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true"
+        android:contextClickable="true"
+        android:padding="16dp"
+        android:textStyle="bold"
+        android:textSize="19dp"
+        android:textColor="#ffffff"
+        android:textIsSelectable="true"
+        android:shadowColor="#000000" />
 
 
     <android.support.design.widget.TextInputLayout
@@ -59,31 +58,37 @@
         android:layout_marginTop="170dp"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="8dp"
+
         android:id="@+id/view"></android.support.design.widget.TextInputLayout>
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/confirmarManual"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:background="@color/primary"
-        android:layout_marginBottom="61dp"
+
         android:padding="12dp"
         android:textColor="@color/white"
         android:text="CONFIRMAR"
-        android:layout_alignParentBottom="true"
+        android:layout_marginTop="430dp"
         android:layout_centerHorizontal="true" />
 
     <EditText android:id="@+id/codigoPasaje"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Ingresar codigo del pasaje"
-        android:layout_marginTop="295dp"
-        android:textColorHint="@color/black"
+        android:layout_marginTop="305dp"
+        android:textColor="@color/wallet_primary_text_holo_light"
+        android:textColorLink="@color/wallet_primary_text_holo_light"
+        android:backgroundTint="@color/wallet_primary_text_holo_light"
+        android:textColorHighlight="@color/wallet_primary_text_holo_light"
         android:inputType="number"
-        android:textColorLink="@color/black"
-        android:textColorHighlight="@color/black"
-
+        android:textAlignment="center"
+        android:textColorHint="@color/white"
         android:layout_alignStart="@+id/view"
-        android:layout_alignEnd="@+id/view" />
+        android:layout_alignEnd="@+id/view"
+        android:drawableTint="@color/abc_background_cache_hint_selector_material_dark"
+        android:foregroundTint="#010101"
+        android:elegantTextHeight="false" />
 
 
 </RelativeLayout>

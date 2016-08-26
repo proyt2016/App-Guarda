@@ -1,11 +1,5 @@
 package com.fedoraapps.www.appguarda.Shares;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import com.fedoraapps.www.appguarda.Model.PuntosDeRecorrido;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,6 +33,9 @@ public class DataRecorridoConvertor  {
         this.tipoHorario = tip;
     }
 
+    public  String toString(){
+        return this.nombre;
+    }
 
     public void setId(String val){
         this.id = val;

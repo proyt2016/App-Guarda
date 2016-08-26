@@ -1,8 +1,6 @@
 package com.fedoraapps.www.appguarda.Api;
 
-import com.fedoraapps.www.appguarda.Model.Precio;
 
-import java.util.List;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -32,7 +30,7 @@ public class PrecioApi {
     }
 
     public interface PrecioApiInterface {
-        @GET("/Precio")
-        Call<List<Precio>> getAll();
+       /* @GET("/Precio")
+        Call<List<Precio>> getAll();*/
     }
 }

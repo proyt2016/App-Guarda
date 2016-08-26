@@ -16,17 +16,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.Spinner;
-import android.widget.TextView;
-
+import com.fedoraapps.www.appguarda.Shares.DataPtoRecWrapper;
 import com.google.android.gms.maps.model.LatLng;
 
 import com.fedoraapps.www.appguarda.Api.PasajeApi;
 import com.fedoraapps.www.appguarda.Api.PuntosRecorridoApi;
-import com.fedoraapps.www.appguarda.Model.Pasaje;
-import com.fedoraapps.www.appguarda.Model.Precio;
+
 import com.fedoraapps.www.appguarda.Shares.DataEmpleado;
 import com.fedoraapps.www.appguarda.Shares.DataPasajeConvertor;
 import com.fedoraapps.www.appguarda.Shares.DataPrecio;
@@ -51,34 +49,21 @@ import static com.google.maps.android.SphericalUtil.computeDistanceBetween;
  * Created by maxi on 05/06/2016.
  */
 public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnClickListener {
+
     Farcade controller = new Farcade();
-    String idPunto = null;
-    CheckBox chek;
     Spinner origen;
     DataRecorridoConvertor reco;
-    Spinner destino;
-    private int codigoPasaje;
-    private List<DataRecorridoConvertor> recorrido;
     Double distancia;
-    String idPto;
     Button generar;
     String valOfSpinner;
-    String valOfSpinner2;
     List<DataPuntoRecorridoConverter> puntosCercanos = new ArrayList<>();
     DataPuntoRecorridoConverter puntoOrigen;
-    DataPuntoRecorridoConverter puntoDestino;
-    private List<DataPasajeConvertor> PasajesVendidos = new ArrayList<>();
     static String codRecorrido;
-    private TextView gps;
-    int ultimoIdPasaje;
-    int idPrecio;
-    int montoPrecio;
-    private Pasaje pasaje;
     static String codViaje;
-    ArrayAdapter<DataPuntoRecorridoConverter> adapter;
+    ArrayAdapter<DataPtoRecWrapper> adapter;
     private ListView listaPuntos;
     ArrayAdapter<DataPuntoRecorridoConverter> paradas;
-    private List<Precio> listadoPrecios = new ArrayList<>();
+    private List<DataPtoRecWrapper> temp = new ArrayList<DataPtoRecWrapper>();
 
 
     @Override
@@ -93,17 +78,14 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
         listaPuntos = (ListView) findViewById(R.id.listaPuntos);
         //     destino = (Spinner) findViewById(R.id.spinner2);
         generar = (Button) findViewById(R.id.button);
+        generar.setOnClickListener(this);
 
-        listaPuntos.setItemsCanFocus(true);
-        listaPuntos.animate().start();
         listaPuntos.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         listaPuntos.setDividerHeight(3);
 
         System.out.println("DESTINO SELECCIONADO ID !!!----!!!"+Farcade.recorridoSeleccionado.getRecorrido().getId());
 
 
-
-        generar.setOnClickListener(this);
         /* Uso de la clase LocationManager para obtener la localizacion del GPS */
         LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Localizacion Local = new Localizacion();
@@ -132,7 +114,13 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
             public void onResponse(Call<DataRecorridoConvertor> call, Response<DataRecorridoConvertor> response) {
 
                 DataRecorridoConvertor recos= response.body();
-                adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesEfectivo.this, recos.getPuntosDeRecorrido());
+
+                for(DataPuntoRecorridoConverter iter : recos.getPuntosDeRecorrido()){
+
+                    temp.add(new DataPtoRecWrapper(iter));
+
+                }
+                adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesEfectivo.this, temp);
                 listaPuntos.setAdapter(adapter);
 
             }
@@ -185,7 +173,10 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
 
                                         controller.setDestinoSeleccionado(null);
                                         final DataPasajeConvertor pe = new DataPasajeConvertor();
-                                        adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesEfectivo.this, recorrido.getPuntosDeRecorrido());
+                                        for(DataPtoRecWrapper d : temp){
+                                            d.setChecked(false);
+                                        }
+                                        adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesEfectivo.this, temp);
                                         listaPuntos.setAdapter(adapter);
                                         dialogoTryOrigenDestino().show();
                                     }
@@ -207,25 +198,19 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
 
                                         DataPuntoRecorridoConverter ori = new DataPuntoRecorridoConverter();
 
-                                        ori.setId(puntoOrigen.getId());
-                                        ori.setTipo(puntoOrigen.getTipo());
+                                    ;
 
                                         DataPuntoRecorridoConverter punto = controller.getDestinoSeleccionado();
-                                        DataPuntoRecorridoConverter dest = new DataPuntoRecorridoConverter();
 
-                                        if (punto != null) {
-                                            dest.setId(punto.getId());
-                                            dest.setTipo(punto.getTipo());
-                                        }
 
-                                        DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, puntoOrigen, dest, null, null, null, null, true, true, false);
+                                        DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, puntoOrigen, punto, null, null, null, null, true, true, false);
 
                                         Call<DataPasajeConvertor> call3 = PasajeApi.createService().venderPasaje(pasaje);
                                         call3.enqueue(new Callback<DataPasajeConvertor>() {
 
                                             @Override
                                             public void onResponse(Call<DataPasajeConvertor> call, Response<DataPasajeConvertor> response) {
-                                                DataPasajeConvertor p = response.body();
+                                                final DataPasajeConvertor p = response.body();
                                                 System.out.println("PASAJE---->" + p + "<----PASAJE");
 
                                                 if (p != null) {
@@ -239,10 +224,13 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
                                                             DataRecorridoConvertor recorrido = response.body();
 
                                                             controller.setDestinoSeleccionado(null);
-                                                            final DataPasajeConvertor pe = new DataPasajeConvertor();
-                                                            adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesEfectivo.this, recorrido.getPuntosDeRecorrido());
+
+                                                            for(DataPtoRecWrapper d : temp){
+                                                                d.setChecked(false);
+                                                            }
+                                                            adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesEfectivo.this, temp);
                                                             listaPuntos.setAdapter(adapter);
-                                                            dialogoPasajeVendido(pe).show();
+                                                            dialogoPasajeVendido(p).show();
                                                         }
                                                             @Override
                                                             public void onFailure(Call<DataRecorridoConvertor> call, Throwable t) {
@@ -262,7 +250,10 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
 
                                                             controller.setDestinoSeleccionado(null);
                                                             final DataPasajeConvertor pe = new DataPasajeConvertor();
-                                                            adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesEfectivo.this, recorrido.getPuntosDeRecorrido());
+                                                            for(DataPtoRecWrapper d : temp){
+                                                                d.setChecked(false);
+                                                            }
+                                                            adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesEfectivo.this, temp);
                                                             listaPuntos.setAdapter(adapter);
                                                             dialogoPasajeNoVendido(pe).show();
                                                         }
@@ -293,7 +284,10 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
 
                                                     controller.setDestinoSeleccionado(null);
                                                     final DataPasajeConvertor pe = new DataPasajeConvertor();
-                                                    adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesEfectivo.this, recorrido.getPuntosDeRecorrido());
+                                                    for(DataPtoRecWrapper d : temp){
+                                                        d.setChecked(false);
+                                                    }
+                                                    adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesEfectivo.this, temp);
                                                     listaPuntos.setAdapter(adapter);
                                                     dialogoListaSeleccionVacia().show();
                                                 }
@@ -327,7 +321,10 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
 
                                 controller.setDestinoSeleccionado(null);
 //                                final DataPasajeConvertor pe = new DataPasajeConvertor();
-                                adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesEfectivo.this, recorrido.getPuntosDeRecorrido());
+                                for(DataPtoRecWrapper d : temp){
+                                    d.setChecked(false);
+                                }
+                                adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesEfectivo.this,temp);
                                 listaPuntos.setAdapter(adapter);
                                 spinnerNull().show();
                             }
@@ -353,7 +350,7 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Pasaje Vendido");
-        alertDialogBuilder.setMessage("Pasaje con destino:");//+" "+pasaje.getDestino().getNombre()+"\n"+"Precio:"+" "+pasaje.getPrecio().getMonto());
+        alertDialogBuilder.setMessage("Pasaje con destino:"+" "+pasaje.getDestino().getNombre()+"\n");//+"Precio:"+" "+pasaje.getPrecio().getMonto());
         alertDialogBuilder.setIcon(R.drawable.icono_cash_black);;
 
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
@@ -656,13 +653,6 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
 
-        // Este metodo se ejecuta cada vez que se detecta un cambio en el
-        // status del proveedor de localizacion (GPS)
-        // Los diferentes Status son:
-        // OUT_OF_SERVICE -> Si el proveedor esta fuera de servicio
-        // TEMPORARILY_UNAVAILABLE -> Temporalmente no disponible pero se
-        // espera que este disponible en breve
-        // AVAILABLE -> Disponible
         }
 
     }/* Fin de la clase localizacion */

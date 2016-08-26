@@ -7,10 +7,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Filter;
 import android.widget.TextView;
 
+import com.fedoraapps.www.appguarda.Shares.DataPtoRecWrapper;
 import com.fedoraapps.www.appguarda.Shares.DataViajeConvertor;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,6 +23,7 @@ public class InteractiveArrayAdapterRecorridos extends ArrayAdapter<DataViajeCon
 
     private final List<DataViajeConvertor> lista;
     private final Activity context;
+    private Filter filter;
 
     public InteractiveArrayAdapterRecorridos(Activity context, List<DataViajeConvertor> lista){
         super(context,R.layout.vista_lista_viajes, lista);
@@ -32,6 +36,24 @@ public class InteractiveArrayAdapterRecorridos extends ArrayAdapter<DataViajeCon
       // protected TextView nroCoche;
         protected Button boton;
     }
+
+    @Override
+    public int getCount() {
+        return lista.size();
+    }
+
+    @Override
+    public DataViajeConvertor getItem(int position) {
+        return lista.get(position);
+    }
+
+    @Override
+    public long getItemId(int position) {
+        return lista.indexOf(position);
+
+    }
+
+
     public View getView(int position, View convertView, ViewGroup parent) {
         View view = null;
 
@@ -75,12 +97,68 @@ public class InteractiveArrayAdapterRecorridos extends ArrayAdapter<DataViajeCon
         return view;
     }
 
+    @Override
+    public Filter getFilter() {
+        if (filter == null)
+            filter = new AppFilter<DataViajeConvertor>(lista);
+        return filter;
+    }
 
+    private class AppFilter<T> extends Filter {
 
+        private ArrayList<T> sourceObjects;
 
-
-
+        public AppFilter(List<T> objects) {
+            sourceObjects = new ArrayList<T>();
+            synchronized (this) {
+                sourceObjects.addAll(objects);
+            }
         }
+
+        @Override
+        protected FilterResults performFiltering(CharSequence chars) {
+            String filterSeq = chars.toString().toLowerCase();
+            FilterResults result = new FilterResults();
+            if (filterSeq != null && filterSeq.length() > 0) {
+                ArrayList<T> filter = new ArrayList<T>();
+
+                for (T object : sourceObjects) {
+                    // the filtering itself:
+                    if (object.toString().toLowerCase().contains(filterSeq))
+                        filter.add(object);
+                }
+                result.count = filter.size();
+                result.values = filter;
+            } else {
+                // add all objects
+                synchronized (this) {
+                    result.values = sourceObjects;
+                    result.count = sourceObjects.size();
+                }
+            }
+            return result;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint,
+                                      FilterResults results) {
+            // NOTE: this function is *always* called from the UI thread.
+            ArrayList<T> filtered = (ArrayList<T>) results.values;
+            notifyDataSetChanged();
+            clear();
+            for (int i = 0, l = filtered.size(); i < l; i++)
+                add((DataViajeConvertor) filtered.get(i));
+            notifyDataSetInvalidated();
+        }
+    }
+
+
+
+
+
+
+}
 
 
 

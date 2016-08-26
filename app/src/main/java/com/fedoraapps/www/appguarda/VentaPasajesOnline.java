@@ -27,14 +27,11 @@ import android.widget.TextView;
 
 import com.fedoraapps.www.appguarda.Api.PasajeApi;
 import com.fedoraapps.www.appguarda.Api.PuntosRecorridoApi;
-import com.fedoraapps.www.appguarda.Api.ViajeApi;
-import com.fedoraapps.www.appguarda.Model.PagoOnline;
-import com.fedoraapps.www.appguarda.Model.Pasaje;
-import com.fedoraapps.www.appguarda.Model.Precio;
-import com.fedoraapps.www.appguarda.Model.PuntosDeRecorrido;
+
 import com.fedoraapps.www.appguarda.Shares.DataEmpleado;
 import com.fedoraapps.www.appguarda.Shares.DataPasajeConvertor;
 import com.fedoraapps.www.appguarda.Shares.DataPrecio;
+import com.fedoraapps.www.appguarda.Shares.DataPtoRecWrapper;
 import com.fedoraapps.www.appguarda.Shares.DataPuntoRecorridoConverter;
 import com.fedoraapps.www.appguarda.Shares.DataRecorridoConvertor;
 import com.fedoraapps.www.appguarda.Shares.DataUsuario;
@@ -57,33 +54,20 @@ import static com.google.maps.android.SphericalUtil.computeDistanceBetween;
 
 public class VentaPasajesOnline extends AppCompatActivity implements View.OnClickListener {
     Farcade controller = new Farcade();
-    String idPunto = null;
-    CheckBox chek;
     Spinner origen;
     DataRecorridoConvertor reco;
-    Spinner destino;
-    private int codigoPasaje;
-    private List<DataRecorridoConvertor> recorrido;
     Double distancia;
-    String idPto;
     Button generar;
     String valOfSpinner;
-    String valOfSpinner2;
     List<DataPuntoRecorridoConverter> puntosCercanos = new ArrayList<>();
     DataPuntoRecorridoConverter puntoOrigen;
-    DataPuntoRecorridoConverter puntoDestino;
-    private List<DataPasajeConvertor> PasajesVendidos = new ArrayList<>();
     static String codRecorrido;
-    private TextView gps;
-    int ultimoIdPasaje;
-    int idPrecio;
-    int montoPrecio;
-    private Pasaje pasaje;
     static String codViaje;
-    ArrayAdapter<DataPuntoRecorridoConverter> adapter;
+    ArrayAdapter<DataPtoRecWrapper> adapter;
     private ListView listaPuntos;
     ArrayAdapter<DataPuntoRecorridoConverter> paradas;
-    private List<Precio> listadoPrecios = new ArrayList<>();
+
+    List<DataPtoRecWrapper> temp = new ArrayList<DataPtoRecWrapper>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -133,7 +117,11 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
             public void onResponse(Call<DataRecorridoConvertor> call, Response<DataRecorridoConvertor> response) {
 
                 DataRecorridoConvertor recos = response.body();
-                adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesOnline.this, recos.getPuntosDeRecorrido());
+
+                for(DataPuntoRecorridoConverter iter : recos.getPuntosDeRecorrido()){
+                    temp.add(new DataPtoRecWrapper(iter));
+                }
+                adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesOnline.this, temp );
                 listaPuntos.setAdapter(adapter);
 
             }
@@ -184,7 +172,10 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
 
                                         controller.setDestinoSeleccionado(null);
                                         final DataPasajeConvertor pe = new DataPasajeConvertor();
-                                        adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesOnline.this, recorrido.getPuntosDeRecorrido());
+                                        for(DataPtoRecWrapper d : temp){
+                                            d.setChecked(false);
+                                        }
+                                        adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesOnline.this, temp);
                                         listaPuntos.setAdapter(adapter);
                                         dialogoTryOrigenDestino().show();
                                     }
@@ -218,7 +209,7 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
                                     dest.setTipo(punto.getTipo());
                                 }
 
-                                DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, ori, dest, null, null, null, null, true, true, false);
+                                DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, ori, dest, null, null, null, null, false, false, false);
 
                                 Call<DataPasajeConvertor> call3 = PasajeApi.createService().venderPasaje(pasaje);
                                 call3.enqueue(new Callback<DataPasajeConvertor>() {
@@ -242,13 +233,17 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
 
                                                     controller.setDestinoSeleccionado(null);
                                                     final DataPasajeConvertor pe = new DataPasajeConvertor();
-                                                    adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesOnline.this, recorrido.getPuntosDeRecorrido());
+                                                    for(DataPtoRecWrapper d : temp){
+                                                        d.setChecked(false);
+                                                    }
+                                                    adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesOnline.this, temp);
                                                     listaPuntos.setAdapter(adapter);
-                                                    dialogoPasajeVendido(pe).show();
+
 
                                                     IntentIntegrator integrator = new IntentIntegrator(VentaPasajesOnline.this);
                                                     integrator.shareText(String.valueOf(p.getCodigoPasaje()), "TEXT_TYPE");
                                                     System.out.println(integrator.getTitle());
+                                                    dialogoPasajeVendido(pe).show();
                                                 }
 
                                                 @Override
@@ -269,7 +264,10 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
 
                                                     controller.setDestinoSeleccionado(null);
                                                     final DataPasajeConvertor pe = new DataPasajeConvertor();
-                                                    adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesOnline.this, recorrido.getPuntosDeRecorrido());
+                                                    for(DataPtoRecWrapper d : temp){
+                                                        d.setChecked(false);
+                                                    }
+                                                    adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesOnline.this,temp );
                                                     listaPuntos.setAdapter(adapter);
                                                     dialogoPasajeNoVendido(pe).show();
                                                 }
@@ -301,7 +299,10 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
 
                                         controller.setDestinoSeleccionado(null);
                                         final DataPasajeConvertor pe = new DataPasajeConvertor();
-                                        adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesOnline.this, recorrido.getPuntosDeRecorrido());
+                                        for(DataPtoRecWrapper d : temp){
+                                            d.setChecked(false);
+                                        }
+                                        adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesOnline.this, temp);
                                         listaPuntos.setAdapter(adapter);
                                         dialogoListaSeleccionVacia().show();
                                     }
@@ -336,7 +337,10 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
 
                                 controller.setDestinoSeleccionado(null);
 //                                final DataPasajeConvertor pe = new DataPasajeConvertor();
-                                adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesOnline.this, recorrido.getPuntosDeRecorrido());
+                                for(DataPtoRecWrapper d : temp){
+                                    d.setChecked(false);
+                                }
+                                adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesOnline.this, temp);
                                 listaPuntos.setAdapter(adapter);
                                 spinnerNull().show();
                             }

@@ -29,7 +29,7 @@ android:background="@android:color/holo_red_light"
     </android.support.design.widget.AppBarLayout>
 
     <EditText
-        android:id="@+id/inputSearch"
+        android:id="@+id/filtro"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
@@ -37,20 +37,21 @@ android:background="@android:color/holo_red_light"
         android:textSize="15dp"
         android:background="@android:color/holo_red_light"
         android:textColorLink="@color/black"
-
         android:textColorHint="@color/aluminum"
-
         android:inputType="textVisiblePassword"
         android:textColor="@color/black"
         android:drawableLeft="@drawable/buscar_negro"
         android:backgroundTint="@android:color/holo_red_light" />
 
+
+
     <ListView
         android:id="@+id/listTrip"
         android:layout_width="fill_parent"
-        android:layout_height="300dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="120dp"
         android:layout_alignParentLeft="true"
+        android:textFilterEnabled="true"
         android:background="@android:color/holo_red_light"
         android:layout_below="@+id/inputSearch"
         android:backgroundTint="@android:color/holo_red_light"
@@ -58,29 +59,6 @@ android:background="@android:color/holo_red_light"
 
 
 
-    <TextView
-        android:id="@+id/mensaje_id"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="380dp"
-        android:padding="15dp"
-        android:layout_gravity="center"
 
-        android:textSize="20dip"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        />
-    <TextView
-        android:id="@+id/mensaje_id2"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="460dp"
-        android:padding="15dp"
-        android:layout_gravity="center"
-
-        android:textSize="20dip"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        />
 
 </android.support.design.widget.CoordinatorLayout>

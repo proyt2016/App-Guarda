@@ -6,15 +6,15 @@
         android:layout_width="match_parent"
         android:layout_height="40dp">
 
-
-        <CheckBox
+    <!--
+      <CheckBox
             android:id="@+id/radio"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginTop="5dp"
             android:layout_marginLeft="20dp"
-            android:focusableInTouchMode="true"
-            android:focusable="true"
+            android:focusableInTouchMode="false"
+
             android:clickable="true"
 
 
@@ -22,7 +22,15 @@
             android:textStyle="bold"
 
             android:checked="false">
-        </CheckBox>
+        </CheckBox>-->
+
+        <RadioButton
+            android:id="@+id/radio"
+            android:checked="false"
+            android:focusable="false"
+            android:clickable="false"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content" />
 
 
         <TextView

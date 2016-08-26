@@ -16,7 +16,6 @@ public class DataPuntoRecorridoConverter {
     private String tipo;
 
     private boolean eliminado;
-    private String check;
 
     public DataPuntoRecorridoConverter(){}
 
@@ -51,14 +50,6 @@ public class DataPuntoRecorridoConverter {
 
     public String toString(){
         return this.nombre;
-    }
-
-    public void setSelected(String selected){
-        this.check = selected;
-    }
-
-    public String isSelected() {
-        return check == null ? "bosta": check;
     }
 
     public void setId(String val){

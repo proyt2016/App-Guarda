@@ -5,18 +5,24 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.fedoraapps.www.appguarda.Api.ViajeApi;
+import com.fedoraapps.www.appguarda.Shares.DataRecorridoConvertor;
 import com.fedoraapps.www.appguarda.Shares.DataViajeConvertor;
 import com.google.gson.JsonObject;
 
@@ -30,13 +36,18 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class Main extends AppCompatActivity implements View.OnClickListener {
+public class Main extends AppCompatActivity implements View.OnClickListener{
+
     ListView listTrip;
     ArrayAdapter<DataViajeConvertor> adapter;
     List<DataViajeConvertor> ListResponse;
+    //SearchView filtro;
     EditText filtro;
     public TextView mensaje1;
     TextView mensaje2;
+
+    private ArrayList<DataRecorridoConvertor> array_sort = new ArrayList<DataRecorridoConvertor>();
+    int textlength = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +58,12 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
 
         //Asociar Elementos XML
         listTrip = (ListView) findViewById(R.id.listTrip);
-        filtro = (EditText) findViewById(R.id.inputSearch);
-        filtro.setOnClickListener(this);
+        filtro = (EditText) findViewById(R.id.filtro);
+        filtro.addTextChangedListener(filterTextWatcher);
+
         listTrip.setTextFilterEnabled(true);
+
+
         JsonObject filtroviaje = new JsonObject();
 
         filtroviaje.addProperty("fechaSalida", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
@@ -61,6 +75,7 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
                 ListResponse = response.body();
                 if (ListResponse != null) {
                     adapter = new InteractiveArrayAdapterRecorridos(Main.this, ListResponse);
+
                     listTrip.setAdapter(adapter);
                     for (DataViajeConvertor t : ListResponse) {
                         adapter.notifyDataSetChanged();
@@ -75,18 +90,19 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
                 System.out.println("******FALLO EL SERVICIO******" + t.getCause() + " " + call.request().toString());
             }
         });
+
+
         //CALL LOGIN
         //  Intent i = new Intent(Main.this,Login.class);
         //    startActivity(i);
 
-        if (filtro.getText() != null) {
             //FILTRO DE BUSQUEDA
-            filtro.addTextChangedListener(new TextWatcher() {
+         /* filtro.addTextChangedListener(new TextWatcher() {
                 @Override
                 public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-                    if (arg0 != null || arg0 != " ") {
+
                         Main.this.adapter.getFilter().filter(arg0);
-                    }
+
                 }
 
                 @Override
@@ -95,12 +111,12 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
 
                 @Override
                 public void afterTextChanged(Editable arg0) {
-                    adapter.getFilter().filter(arg0);
+
                 }
-            });
+            });*/
         }
 
-    }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -131,6 +147,32 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
         }
         return list;
     }
+
+    private TextWatcher filterTextWatcher = new TextWatcher() {
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            // TODO Auto-generated method stub
+
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count,
+                                      int after) {
+            // TODO Auto-generated method stub
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before,
+                                  int count) {
+            if (adapter != null) {
+                adapter.getFilter().filter(s);
+            } else {
+                Log.d("filter", "no filter availible");
+            }
+        }
+    };
 
     private String getModelEmpty() {
         return "No existen recorridos cargados";
@@ -166,6 +208,9 @@ public class Main extends AppCompatActivity implements View.OnClickListener {
         // alertDialogBuilder.setNegativeButton(R.string.Cancelar, listenerCancelar);
         return alertDialogBuilder.create();
     }
+
+
+
 }
 
 

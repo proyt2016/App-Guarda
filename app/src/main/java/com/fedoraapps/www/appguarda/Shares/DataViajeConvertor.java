@@ -10,10 +10,9 @@ public class DataViajeConvertor {
     private String id;
     private DataRecorridoConvertor recorrido;
     private DataHorario horario;
-
     private Date fechaSalida;
     private List<DataEmpleado> empleados;
-    private DataVehiculo coche;
+    private List<DataVehiculo> Listacoche;
     private List<DataEncomiendaConvertor> encomiendas;
     private List<DataReservaConvertor> reservas;
     private String idOrigen;
@@ -24,13 +23,13 @@ public class DataViajeConvertor {
 
     public DataViajeConvertor() {}
 
-    public DataViajeConvertor(String id, DataRecorridoConvertor rec, DataHorario hor, Date fecSalida, List<DataEmpleado> emp, DataVehiculo coche, List<DataEncomiendaConvertor> enc, List<DataReservaConvertor> res, String idOr, String idDest, String tipoHor) {
+    public DataViajeConvertor(String id, DataRecorridoConvertor rec, DataHorario hor, Date fecSalida, List<DataEmpleado> emp, List<DataVehiculo> coche, List<DataEncomiendaConvertor> enc, List<DataReservaConvertor> res, String idOr, String idDest, String tipoHor) {
         this.id = id;
         this.recorrido = rec;
         this.horario = hor;
         this.fechaSalida = fecSalida;
         this.empleados = emp;
-        this.coche = coche;
+        this.Listacoche = coche;
         this.encomiendas = enc;
         this.reservas = res;
         this.idOrigen = idOr;
@@ -38,6 +37,9 @@ public class DataViajeConvertor {
         this.tipoHorario = tipoHor;
     }
 
+    public String toString(){
+        return this.getRecorrido().getNombre();
+    }
 
     public void setId(String val){
         this.id = val;
@@ -79,13 +81,27 @@ public class DataViajeConvertor {
         return this.empleados;
     }
 
-    public void setCoche(DataVehiculo val){
-        this.coche = val;
+
+    public List<DataVehiculo> getListacoche() {
+        return Listacoche;
     }
 
-    public DataVehiculo getCoche(){
-        return this.coche;
+    public void setListacoche(List<DataVehiculo> listacoche) {
+        Listacoche = listacoche;
     }
+
+    public String getIdOrigen() {
+        return idOrigen;
+    }
+
+    public String getIdDestino() {
+        return idDestino;
+    }
+
+    public String getTipoHorario() {
+        return tipoHorario;
+    }
+
 
     public void setEncomiendas(List<DataEncomiendaConvertor> val){
         this.encomiendas = val;

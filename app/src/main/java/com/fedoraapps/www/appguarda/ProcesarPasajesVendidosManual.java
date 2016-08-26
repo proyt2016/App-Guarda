@@ -239,12 +239,5 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
 
         return alertDialogBuilder.create();
     }
-    public DataPasajeConvertor existePasaje(String codPasaje){
-        for(DataPasajeConvertor p: PasajesVendidos){
-            if( p.getId().equals(codPasaje)){
-                return p;
-            }
 
-        }return null;
-    }
 }

@@ -141,7 +141,7 @@ public class ProcesarPasajesVendidosEscaner extends AppCompatActivity implements
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Atencion");
-        alertDialogBuilder.setMessage("El pasaje  ya fue utilizado, Te quiere cagar!");
+        alertDialogBuilder.setMessage("El pasaje ya fue utilizado");
         alertDialogBuilder.setIcon(R.drawable.icono_alerta);;
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
         DialogInterface.OnClickListener listenerOk = new DialogInterface.OnClickListener() {

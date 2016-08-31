@@ -35,7 +35,8 @@
         <activity
             android:name=".VentaPasajesEfectivo"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_venta_efectivo_new"
+            android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".ProcesarPasajesVendidosEscaner"
             android:screenOrientation="portrait"
@@ -47,7 +48,8 @@
         <activity
             android:name=".VentaPasajesOnline"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_vista_venta_online"
+            android:theme="@style/Theme.AppCompat" />
         <activity
             android:name=".MenuPrincipal"
             android:label="@string/title_activity_menu_principal"

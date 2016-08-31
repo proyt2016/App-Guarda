@@ -17,21 +17,20 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.RadioButton;
 import android.widget.Spinner;
-import com.fedoraapps.www.appguarda.Shares.DataPtoRecWrapper;
-import com.google.android.gms.maps.model.LatLng;
+
 
 import com.fedoraapps.www.appguarda.Api.PasajeApi;
 import com.fedoraapps.www.appguarda.Api.PuntosRecorridoApi;
-
 import com.fedoraapps.www.appguarda.Shares.DataEmpleado;
 import com.fedoraapps.www.appguarda.Shares.DataPasajeConvertor;
 import com.fedoraapps.www.appguarda.Shares.DataPrecio;
+import com.fedoraapps.www.appguarda.Shares.DataPtoRecWrapper;
 import com.fedoraapps.www.appguarda.Shares.DataPuntoRecorridoConverter;
 import com.fedoraapps.www.appguarda.Shares.DataRecorridoConvertor;
 import com.fedoraapps.www.appguarda.Shares.DataUsuario;
 import com.fedoraapps.www.appguarda.Shares.DataViajeConvertor;
+import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
 import java.util.ArrayList;

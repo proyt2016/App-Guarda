@@ -8,7 +8,6 @@ import java.util.List;
  */
 public class DataEncomiendaConvertor {
 
-
     private String id;
     private DataPuntoRecorridoConverter origen;
     private DataPuntoRecorridoConverter destino;
@@ -20,23 +19,27 @@ public class DataEncomiendaConvertor {
     private DataTelefono telReceptor;
     private String direccionReceptor;
     private DataReglaCobroEncomienda reglaCobro;
-    private float monto;
-    private boolean pagaReceptor;
+    private Float monto;
+    private Float precio;
+    private Boolean pagaReceptor;
     private DataViajeConvertor viajeAsignado;
     private List<DataHistorialEstadosEncomienda> estados;
     private DataEstadosEncomienda estadoActual;
+    private Integer codigoEncomienda;
+
+    private DataVehiculo cocheAsignado;
 
     private Date fechaIngreso;
 
     private Date fechaEntrega;
-    private boolean retiraEnSucursal;
-    private boolean eliminada;
+    private Boolean retiraEnSucursal;
+    private Boolean eliminada;
 
 
 
     public DataEncomiendaConvertor() {}
 
-    public DataEncomiendaConvertor(String id, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, float mont, boolean pagaRec, DataViajeConvertor viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, boolean retiraSuc, boolean elim) {
+    public DataEncomiendaConvertor(String id, DataPuntoRecorridoConverter orig, DataPuntoRecorridoConverter dest, DataUsuario emi, String ciEm, DataTelefono telEm, DataUsuario rec, String ciRec, DataTelefono telRec, String dirRec, DataReglaCobroEncomienda regCob, Float mont, Float prec, Boolean pagaRec, DataViajeConvertor viajeAs, List<DataHistorialEstadosEncomienda> estds, DataEstadosEncomienda estAc, Date fecIng, Date fecEn, Boolean retiraSuc, Boolean elim, DataVehiculo codCoche, Integer codEnco) {
         this.id = id;
         this.origen = orig;
         this.destino = dest;
@@ -49,6 +52,7 @@ public class DataEncomiendaConvertor {
         this.direccionReceptor = dirRec;
         this.reglaCobro = regCob;
         this.monto = mont;
+        this.precio = prec;
         this.pagaReceptor = pagaRec;
         this.viajeAsignado = viajeAs;
         this.estados = estds;
@@ -57,9 +61,26 @@ public class DataEncomiendaConvertor {
         this.fechaEntrega = fecEn;
         this.retiraEnSucursal = retiraSuc;
         this.eliminada = elim;
+        this.codigoEncomienda = codEnco;
+        this.cocheAsignado = codCoche;
     }
 
 
+
+    public void setCodigoEncomienda(Integer codEnco){
+        this.codigoEncomienda = codEnco;
+    }
+
+    public Integer getCodigoEncomienda(){
+        return this.codigoEncomienda;
+    }
+    public void setCocheAsignado(DataVehiculo val){
+        this.cocheAsignado = val;
+    }
+
+    public DataVehiculo getCocheAsignado(){
+        return this.cocheAsignado;
+    }
 
     public void setId(String val){
         this.id = val;
@@ -149,19 +170,27 @@ public class DataEncomiendaConvertor {
         return this.reglaCobro;
     }
 
-    public void setMonto(float val){
+    public void setMonto(Float val){
         this.monto = val;
     }
 
-    public float getMonto(){
+    public Float getMonto(){
         return this.monto;
     }
 
-    public void setPagaReceptor(boolean val){
+    public void setPrecio(Float val){
+        this.precio = val;
+    }
+
+    public Float getPrecio(){
+        return this.precio;
+    }
+
+    public void setPagaReceptor(Boolean val){
         this.pagaReceptor = val;
     }
 
-    public boolean getPagaReceptor(){
+    public Boolean getPagaReceptor(){
         return this.pagaReceptor;
     }
 
@@ -205,19 +234,21 @@ public class DataEncomiendaConvertor {
         return this.fechaEntrega;
     }
 
-    public void setRetiraEnSucursal(boolean val){
+    public void setRetiraEnSucursal(Boolean val){
         this.retiraEnSucursal = val;
     }
 
-    public boolean getRetiraEnSucursal(){
+    public Boolean getRetiraEnSucursal(){
         return this.retiraEnSucursal;
     }
 
-    public void setEliminada(boolean val){
+    public void setEliminada(Boolean val){
         this.eliminada = val;
     }
 
-    public boolean getEliminada(){
+    public Boolean getEliminada(){
         return this.eliminada;
     }
+
 }
+

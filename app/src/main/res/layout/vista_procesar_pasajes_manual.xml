@@ -59,7 +59,10 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="8dp"
 
-        android:id="@+id/view"></android.support.design.widget.TextInputLayout>
+        android:id="@+id/view">
+
+
+    </android.support.design.widget.TextInputLayout>
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/confirmarManual"
         android:layout_width="300dp"
@@ -88,7 +91,7 @@
         android:layout_alignEnd="@+id/view"
         android:drawableTint="@color/abc_background_cache_hint_selector_material_dark"
         android:foregroundTint="#010101"
-        android:elegantTextHeight="false" />
+        android:elegantTextHeight="true" />
 
 
 </RelativeLayout>

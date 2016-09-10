@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -17,6 +18,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -48,6 +50,9 @@ public class MenuPrincipal extends AppCompatActivity
     private TextView titulo;
     private int codigoPasaje;
     private String codRecorrido;
+    private ImageView logo;
+    private TextView mailEmpresa;
+    private TextView nombreEmpresa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,8 +66,16 @@ public class MenuPrincipal extends AppCompatActivity
         scanBtn = (Button)findViewById(R.id.scan_button);
         Manual = (Button)findViewById(R.id.manual);
 
+        nombreEmpresa = (TextView) findViewById(R.id.nombreempresa);
+        mailEmpresa = (TextView)findViewById(R.id.mailempresa);
+
+
+
         Manual.setOnClickListener(this);
         scanBtn.setOnClickListener(this);
+
+        //AGREGAR LOGOOOOOOOOOOOOOO
+        logo = (ImageView)findViewById(R.id.imageview);
 
         pantalla = (DrawerLayout)findViewById(R.id.drawer_layout);
         pantalla2 = (RelativeLayout)findViewById(R.id.contentmenu);
@@ -100,10 +113,15 @@ public class MenuPrincipal extends AppCompatActivity
             else{
                 barraMenu.setBackgroundColor(Color.parseColor("#ffff4444"));
             }
-            if(Farcade.configuracionEmpresa.getColorLetras()!=null){
-                titulo.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorLetras()));}
+            if(Farcade.configuracionEmpresa.getColorTitulo()!=null){
+                titulo.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));
+                nombreEmpresa.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));
+                mailEmpresa.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));
+            }
             else{
                 titulo.setTextColor(Color.parseColor("#ffffffff"));
+                nombreEmpresa.setTextColor(Color.parseColor("#000000"));
+                mailEmpresa.setTextColor(Color.parseColor("#ffffffff"));
             }
             if(Farcade.configuracionEmpresa.getColorLetras()!=null){
                 textoButtonManual.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorLetras()));}
@@ -115,6 +133,21 @@ public class MenuPrincipal extends AppCompatActivity
             else{
                 textoButtonEscaner.setTextColor(Color.parseColor("#ffffffff"));
             }
+            if(Farcade.configuracionEmpresa.getEmails()!=null){
+                mailEmpresa.setText(Farcade.configuracionEmpresa.getEmails().get(0).getEmail());
+            }else{
+                mailEmpresa.setText("tecnologo2016@gmail.com");
+            }
+            if(Farcade.configuracionEmpresa.getNombre()!=null){
+                nombreEmpresa.setText(Farcade.configuracionEmpresa.getNombre());
+            }else{
+                nombreEmpresa.setText("LAC BUS");
+            }
+            if(Farcade.configuracionEmpresa.getIconoEmpresa()!=null){
+                logo.setImageURI(Uri.parse(Farcade.configuracionEmpresa.getIconoEmpresa()));
+            }else{
+                logo.setImageResource(R.drawable.bondi_blanco);
+            }
 
              //titulo.setBackgroundColor(R.drawable.abc_list_selector_background_transition_holo_dark);
         }else{
@@ -125,15 +158,13 @@ public class MenuPrincipal extends AppCompatActivity
             titulo.setTextColor(Color.parseColor("#ffffffff"));
             textoButtonManual.setTextColor(Color.parseColor("#ffffffff"));
             textoButtonEscaner.setTextColor(Color.parseColor("#ffffffff"));
-
-
-
+            nombreEmpresa.setTextColor(Color.parseColor("#000000"));
+            mailEmpresa.setTextColor(Color.parseColor("#ffffffff"));
+            logo.setImageResource(R.drawable.bondi_blanco);
+            mailEmpresa.setText("tecnologo2016@gmail.com");
+            nombreEmpresa.setText("LAC BUS");
         }
-
-
     }
-
-
     public void onClick(View v) {
         if (v.getId() == R.id.scan_button) {
             //LLAMO AL SCAN SI ESTA INSTALADO ABRE LA CAM SINO MOTIVA A INSTALAR BARCODE SCAN

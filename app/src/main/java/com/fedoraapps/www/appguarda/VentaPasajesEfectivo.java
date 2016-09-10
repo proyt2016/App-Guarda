@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -17,8 +18,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
-
+import android.widget.TextView;
 
 import com.fedoraapps.www.appguarda.Api.PasajeApi;
 import com.fedoraapps.www.appguarda.Api.PuntosRecorridoApi;
@@ -28,11 +30,12 @@ import com.fedoraapps.www.appguarda.Shares.DataPrecio;
 import com.fedoraapps.www.appguarda.Shares.DataPtoRecWrapper;
 import com.fedoraapps.www.appguarda.Shares.DataPuntoRecorridoConverter;
 import com.fedoraapps.www.appguarda.Shares.DataRecorridoConvertor;
-import com.fedoraapps.www.appguarda.Shares.DataUsuario;
 import com.fedoraapps.www.appguarda.Shares.DataViajeConvertor;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,7 +55,9 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
     Farcade controller = new Farcade();
     Spinner origen;
     DataRecorridoConvertor reco;
+    DataEmpleado emp = new DataEmpleado();
     Double distancia;
+    Date dt;
     Button generar;
     String valOfSpinner;
     List<DataPuntoRecorridoConverter> puntosCercanos = new ArrayList<>();
@@ -63,6 +68,9 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
     private ListView listaPuntos;
     ArrayAdapter<DataPuntoRecorridoConverter> paradas;
     private List<DataPtoRecWrapper> temp = new ArrayList<DataPtoRecWrapper>();
+    TextView tituloOrigen;
+    TextView tituloDestino;
+    RelativeLayout fondoDePantalla;
 
 
     @Override
@@ -81,6 +89,53 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
 
         listaPuntos.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         listaPuntos.setDividerHeight(3);
+
+        fondoDePantalla = (RelativeLayout) findViewById(R.id.ventaefectivolayout);
+
+        tituloDestino = (TextView)findViewById(R.id.titulodestino);
+        tituloOrigen = (TextView)findViewById(R.id.tituloorigen);
+
+
+        if(Farcade.configuracionEmpresa.getId()!=null){
+            if(Farcade.configuracionEmpresa.getColorFondosDePantalla()!=null){
+                fondoDePantalla.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondosDePantalla()));}
+            else{
+                fondoDePantalla.setBackgroundColor(Color.parseColor("#ffff4444"));
+            }
+            if(Farcade.configuracionEmpresa.getColorBoton()!=null){
+                generar.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorBoton()));}
+            else{
+                generar.setBackgroundColor(Color.parseColor("#5a595b"));
+            }
+            if(Farcade.configuracionEmpresa.getColorLetras()!=null){
+                generar.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorLetras()));}
+            else{
+                generar.setTextColor(Color.parseColor("#ffffffff"));
+            }
+            if(Farcade.configuracionEmpresa.getColorFondoLista()!=null){
+                listaPuntos.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista()));}
+            else{
+                listaPuntos.setBackgroundColor(Color.parseColor("#ffff4444"));
+            }
+            if(Farcade.configuracionEmpresa.getColorTitulo()!=null){
+                tituloOrigen.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));}
+            else{
+                tituloOrigen.setTextColor(Color.parseColor("#ffffffff"));
+            }
+            if(Farcade.configuracionEmpresa.getColorTitulo()!=null){
+                tituloDestino.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));}
+            else{
+                tituloDestino.setTextColor(Color.parseColor("#ffffffff"));
+            }
+        }else{
+            //NO EXISTE CONFIGURACION
+            fondoDePantalla.setBackgroundColor(Color.parseColor("#ffff4444"));
+            generar.setBackgroundColor(Color.parseColor("#5a595b"));
+            generar.setBackgroundColor(Color.parseColor("#ffffffff"));
+            listaPuntos.setBackgroundColor(Color.parseColor("#ffff4444"));
+            tituloOrigen.setTextColor(Color.parseColor("#ffffffff"));
+            tituloDestino.setTextColor(Color.parseColor("#ffffffff"));
+        }
 
         System.out.println("DESTINO SELECCIONADO ID !!!----!!!"+Farcade.recorridoSeleccionado.getRecorrido().getId());
 
@@ -187,10 +242,10 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
 
 
                             } else {
-                                        DataUsuario usuario = new DataUsuario();
-                                        DataEmpleado empleado = new DataEmpleado();
-                                        Date fechaVenc = new Date();
-                                        String ciUsuario = "4444";
+
+
+
+                                String ciUsuario = "4444";
                                         DataPrecio precio = new DataPrecio();
                                         DataViajeConvertor VIAJE = new DataViajeConvertor();
                                         VIAJE.setId(controller.getRecorridoSeleccionado().getId());
@@ -201,8 +256,25 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
 
                                         DataPuntoRecorridoConverter punto = controller.getDestinoSeleccionado();
 
+                                        if(Farcade.empleado!=null){
+                                           emp = Farcade.empleado;
+                                        }
+                                Date FechaCompra = new Date();
+                                SimpleDateFormat sm = new SimpleDateFormat("mm-dd-yyyy");
+                                // myDate is the java.util.Date in yyyy-mm-dd format
+                                // Converting it into String using formatter
+                                String strDate = sm.format(FechaCompra);
 
-                                        DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, puntoOrigen, punto, null, null, null, null, true, true, false);
+                                //Converting the String back to java.util.Date
+                                try {
+                                    dt = sm.parse(strDate);
+                                    System.out.println("FECHA ACTUAL"+" "+dt);
+                                } catch (ParseException e) {
+                                    e.printStackTrace();
+                                }
+
+
+                                        DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, puntoOrigen, punto, null, null, null, emp, true, true, false);
 
                                         Call<DataPasajeConvertor> call3 = PasajeApi.createService().venderPasaje(pasaje);
                                         call3.enqueue(new Callback<DataPasajeConvertor>() {
@@ -349,7 +421,8 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Pasaje Vendido");
-        alertDialogBuilder.setMessage("Pasaje con destino:"+" "+pasaje.getDestino().getNombre()+"\n");//+"Precio:"+" "+pasaje.getPrecio().getMonto());
+        alertDialogBuilder.setMessage("Pasaje con destino:"+" "+pasaje.getDestino().getNombre()+"\n");
+                //  +"Monto:"+pasaje.getPrecio().getMonto());//+"Precio:"+" "+pasaje.getPrecio().getMonto());
         alertDialogBuilder.setIcon(R.drawable.icono_cash_black);;
 
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion

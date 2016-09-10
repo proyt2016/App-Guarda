@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_red_light"
+    android:id="@+id/ventaefectivolayout"
     >
 
 
@@ -13,7 +13,7 @@
         android:background="@drawable/abc_list_selector_background_transition_holo_dark">
 
         <TextView
-            android:id="@+id/txt2"
+            android:id="@+id/tituloorigen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -22,7 +22,7 @@
             android:textStyle="bold"
             android:text="SELECCIONE ORIGEN"
             android:textSize="19dip"
-            android:textColor="@color/white"/>
+            />
 
     </LinearLayout>
 
@@ -37,8 +37,8 @@
             android:id="@+id/spinner"
             android:layout_width="130dp"
             android:layout_height="45dp"
-            android:layout_marginLeft="110dp"
-            android:backgroundTint="@color/white"
+            android:layout_marginLeft="118dp"
+            android:backgroundTint="@color/accent"
             android:spinnerMode="dialog"
             android:overlapAnchor="true"
             style="@style/Base.Widget.AppCompat.Spinner.Underlined"
@@ -54,17 +54,16 @@
 
 
         <TextView
-            android:id="@+id/txt3"
+            android:id="@+id/titulodestino"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
             android:layout_marginTop="2dp"
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="75dp"
             android:textStyle="bold"
 
             android:text="SELECCIONE DESTINO"
             android:textSize="19dip"
-            android:textColor="@color/white"
             />
 
 
@@ -80,15 +79,13 @@
 
         <ListView
             android:id="@+id/listaPuntos"
-            android:layout_width="215dp"
+            android:layout_width="250dp"
             android:layout_height="160dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="68dp"
+            android:layout_marginLeft="55dp"
             android:descendantFocusability="beforeDescendants"
             android:choiceMode="singleChoice"
-            android:background="@android:color/holo_red_light"
-            android:backgroundTint="@android:color/holo_red_light"
-            android:cacheColorHint="@android:color/holo_red_light"
+
             android:fadingEdge="none"
 
 
@@ -107,10 +104,8 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:background="@color/primary"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="35dp"
-            android:textColor="@color/white"
             android:text="GENERAR PASAJE"
             android:clickable="true" />
 

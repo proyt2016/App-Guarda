@@ -10,6 +10,9 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        buildConfigField 'String', 'API_KEY', '"e5840276-74f3-4768-be32-be66871c5c9c"'
+
     }
     buildTypes {
         release {

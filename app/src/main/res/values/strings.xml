@@ -11,5 +11,6 @@
     <string name="title_activity_main">Listado de Viajes</string>
     <string name="title_activity_venta_efectivo_new">Venta de Pasajes en Efectivo</string>
     <string name="title_activity_vista_venta_online">Venta de Pasajes Online</string>
+    <string name="title_activity_vista_procesar_pasajes_manual">Procesar Manualmente</string>
 
 </resources>

@@ -2,11 +2,13 @@ package com.fedoraapps.www.appguarda;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 import com.fedoraapps.www.appguarda.Api.PasajeApi;
 import com.fedoraapps.www.appguarda.Shares.DataPasajeConvertor;
@@ -25,6 +27,7 @@ import retrofit2.Response;
 public class ProcesarPasajesVendidosManual extends AppCompatActivity implements View.OnClickListener {
 
     private List<DataPasajeConvertor> PasajesVendidos = new ArrayList<>();
+    private RelativeLayout pantalla;
     private String codViaje;
     private String codRecorrido;
     private int codigoPasaje;
@@ -35,7 +38,13 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vista_procesar_pasajes_manual);
 
+        pantalla = (RelativeLayout) findViewById(R.id.dialogprocesarmanual);
+
+
+
         codViaje = getIntent().getExtras().getString("codigoViaje");
+
+
         codRecorrido = getIntent().getExtras().getString("codigo");
 
         confirmar = (Button)findViewById(R.id.confirmarManual);
@@ -43,6 +52,33 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
 
         confirmar.setOnClickListener(this);
 
+        if(Farcade.configuracionEmpresa.getId()!=null) {
+            if (Farcade.configuracionEmpresa.getColorLetras() != null){
+                confirmar.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorLetras()));}
+            else{
+                confirmar.setTextColor(Color.parseColor("#ffffffff"));
+            }
+            if(Farcade.configuracionEmpresa.getColorBoton()!=null){
+                confirmar.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorBoton()));}
+            else{
+                confirmar.setBackgroundColor(Color.parseColor("#5a595b"));
+            }
+            if(Farcade.configuracionEmpresa.getColorLetras()!=null){
+                inputCodigo.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorLetras()));}
+            else{
+                inputCodigo.setTextColor(Color.parseColor("#ffffffff"));
+            }
+        }else{
+            //no exite configuracion
+            confirmar.setTextColor(Color.parseColor("#ffffffff"));
+            confirmar.setBackgroundColor(Color.parseColor("#5a595b"));
+            inputCodigo.setTextColor(Color.parseColor("#ffffffff"));
+
+
+
+
+
+        }
 
     }
 

@@ -2,6 +2,7 @@ package com.fedoraapps.www.appguarda;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,6 @@ import android.widget.Button;
 import android.widget.Filter;
 import android.widget.TextView;
 
-import com.fedoraapps.www.appguarda.Shares.DataPtoRecWrapper;
 import com.fedoraapps.www.appguarda.Shares.DataViajeConvertor;
 
 import java.util.ArrayList;
@@ -25,6 +25,7 @@ public class InteractiveArrayAdapterRecorridos extends ArrayAdapter<DataViajeCon
     private final Activity context;
     private Filter filter;
 
+
     public InteractiveArrayAdapterRecorridos(Activity context, List<DataViajeConvertor> lista){
         super(context,R.layout.vista_lista_viajes, lista);
         this.context = context;
@@ -33,6 +34,7 @@ public class InteractiveArrayAdapterRecorridos extends ArrayAdapter<DataViajeCon
     static class ViewHolder {
         protected TextView titulo;
         protected TextView subTitulo;
+
       // protected TextView nroCoche;
         protected Button boton;
     }
@@ -64,6 +66,7 @@ public class InteractiveArrayAdapterRecorridos extends ArrayAdapter<DataViajeCon
             viewHolder.titulo = (TextView) view.findViewById(R.id.nroCoche);
             viewHolder.subTitulo = (TextView)view.findViewById(R.id.subTitulo);
 
+
             viewHolder.boton = (Button) view.findViewById(R.id.next);
             viewHolder.boton.setOnClickListener(new View.OnClickListener() {
 
@@ -91,6 +94,35 @@ public class InteractiveArrayAdapterRecorridos extends ArrayAdapter<DataViajeCon
         }
 
         ViewHolder holder = (ViewHolder) view.getTag();
+        //CONFIGURACION DE VISTA SEGUN EMPRESA
+        if(Farcade.configuracionEmpresa.getId()!=null) {
+            if(Farcade.configuracionEmpresa.getColorTextoLista()!=null){
+                holder.titulo.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTextoLista()));}
+            else{
+                holder.titulo.setTextColor(Color.parseColor("#ff000000"));
+            }
+            if(Farcade.configuracionEmpresa.getColorTextoLista()!=null){
+                holder.subTitulo.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTextoLista()));}
+            else{
+                holder.subTitulo.setTextColor(Color.parseColor("#ffffffff"));
+            }
+            if(Farcade.configuracionEmpresa.getColorFondoLista()!=null){
+                holder.titulo.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista()));}
+            else{
+                holder.titulo.setBackgroundColor(Color.parseColor("#ffff4444"));
+            }
+            if(Farcade.configuracionEmpresa.getColorFondoLista()!=null){
+                holder.subTitulo.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista()));}
+            else{
+                holder.subTitulo.setBackgroundColor(Color.parseColor("#ffff4444"));
+            }
+        }else{
+            //NO EXISTE CONFIGURACION
+            holder.titulo.setTextColor(Color.parseColor("#ff000000"));
+            holder.subTitulo.setTextColor(Color.parseColor("#ffffffff"));
+            holder.titulo.setBackgroundColor(Color.parseColor("#ffff4444"));
+            holder.subTitulo.setBackgroundColor(Color.parseColor("#ffff4444"));
+        }
         holder.titulo.setText(lista.get(position).getRecorrido().getNombre().toString());
         holder.subTitulo.setText("Horario Salida:"+" "+ String.valueOf(lista.get(position).getHorario().getNombre()));
       //  holder.nroCoche.setText("Numero Coche:"+" "+lista.get(position));

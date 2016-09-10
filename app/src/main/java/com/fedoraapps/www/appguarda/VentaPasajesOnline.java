@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -20,14 +21,13 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.fedoraapps.www.appguarda.Api.PasajeApi;
 import com.fedoraapps.www.appguarda.Api.PuntosRecorridoApi;
-
 import com.fedoraapps.www.appguarda.Shares.DataEmpleado;
 import com.fedoraapps.www.appguarda.Shares.DataPasajeConvertor;
 import com.fedoraapps.www.appguarda.Shares.DataPrecio;
@@ -55,12 +55,17 @@ import static com.google.maps.android.SphericalUtil.computeDistanceBetween;
 public class VentaPasajesOnline extends AppCompatActivity implements View.OnClickListener {
     Farcade controller = new Farcade();
     Spinner origen;
+    TextView tituloOrigen;
+    TextView tituloDestino;
+    DataEmpleado emp;
     DataRecorridoConvertor reco;
     Double distancia;
     Button generar;
+    RelativeLayout fondoPantalla;
     String valOfSpinner;
     List<DataPuntoRecorridoConverter> puntosCercanos = new ArrayList<>();
     DataPuntoRecorridoConverter puntoOrigen;
+    RelativeLayout fondoListaSpinner;
     static String codRecorrido;
     static String codViaje;
     ArrayAdapter<DataPtoRecWrapper> adapter;
@@ -73,18 +78,73 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vista_venta_online);
+       RelativeLayout e = (RelativeLayout) findViewById(R.layout.vista_venta_online);
+
         codRecorrido = controller.getRecorridoSeleccionado().getRecorrido().getId();
         codViaje = controller.getRecorridoSeleccionado().getId();
 
+
+
         origen = (Spinner) findViewById(R.id.spinner);
         listaPuntos = (ListView) findViewById(R.id.listaPuntos);
-        //     destino = (Spinner) findViewById(R.id.spinner2);
         generar = (Button) findViewById(R.id.button);
+
+        fondoPantalla = (RelativeLayout)findViewById(R.id.ventaonline);
+
+
+
+
+        tituloOrigen = (TextView)findViewById(R.id.origenTitulo);
+        tituloDestino = (TextView)findViewById(R.id.destinoTitulo);
 
         listaPuntos.setItemsCanFocus(true);
         listaPuntos.animate().start();
         listaPuntos.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
         listaPuntos.setDividerHeight(3);
+
+        if(Farcade.configuracionEmpresa.getId()!=null){
+            if(Farcade.configuracionEmpresa.getColorFondosDePantalla()!=null){
+                fondoPantalla.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondosDePantalla()));}
+            else{
+                fondoPantalla.setBackgroundColor(Color.parseColor("#ffff4444"));
+            }
+            if(Farcade.configuracionEmpresa.getColorFondoLista()!=null){
+                listaPuntos.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista()));}
+            else{
+                listaPuntos.setBackgroundColor(Color.parseColor("#ffff4444"));
+            }
+            if(Farcade.configuracionEmpresa.getColorTitulo()!=null){
+                tituloOrigen.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));}
+            else{
+                tituloOrigen.setTextColor(Color.parseColor("#ffffffff"));
+            }
+            if(Farcade.configuracionEmpresa.getColorTitulo()!=null){
+                tituloDestino.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));}
+            else {
+                tituloDestino.setTextColor(Color.parseColor("#ffffffff"));
+            }
+            if(Farcade.configuracionEmpresa.getColorBoton()!=null){
+                generar.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorBoton()));}
+            else{
+                generar.setBackgroundColor(Color.parseColor("#5a595b"));
+            }
+            if(Farcade.configuracionEmpresa.getColorLetras()!=null){
+                generar.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorLetras()));}
+            else{
+                generar.setTextColor(Color.parseColor("#ffffffff"));
+            }
+        }else{
+                //NO EXISTE CONFIGURACION
+                fondoPantalla.setBackgroundColor(Color.parseColor("#ffff4444"));
+                listaPuntos.setBackgroundColor(Color.parseColor("#ffff4444"));
+                tituloOrigen.setTextColor(Color.parseColor("#ffffffff"));
+                tituloDestino.setTextColor(Color.parseColor("#ffffffff"));
+                generar.setBackgroundColor(Color.parseColor("#5a595b"));
+                generar.setTextColor(Color.parseColor("#ffffffff"));
+
+
+        }
+
 
         System.out.println("DESTINO SELECCIONADO ID !!!----!!!" + Farcade.recorridoSeleccionado.getRecorrido().getId());
 
@@ -209,7 +269,11 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
                                     dest.setTipo(punto.getTipo());
                                 }
 
-                                DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, ori, dest, null, null, null, null, false, false, false);
+                                if(Farcade.empleado!=null){
+                                    emp = Farcade.empleado;
+                                }
+
+                                DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, ori, dest, null, null, null, emp, false, false, false);
 
                                 Call<DataPasajeConvertor> call3 = PasajeApi.createService().venderPasaje(pasaje);
                                 call3.enqueue(new Callback<DataPasajeConvertor>() {
@@ -232,7 +296,7 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
                                                     DataRecorridoConvertor recorrido = response.body();
 
                                                     controller.setDestinoSeleccionado(null);
-                                                    final DataPasajeConvertor pe = new DataPasajeConvertor();
+
                                                     for(DataPtoRecWrapper d : temp){
                                                         d.setChecked(false);
                                                     }
@@ -243,7 +307,7 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
                                                     IntentIntegrator integrator = new IntentIntegrator(VentaPasajesOnline.this);
                                                     integrator.shareText(String.valueOf(p.getCodigoPasaje()), "TEXT_TYPE");
                                                     System.out.println(integrator.getTitle());
-                                                    dialogoPasajeVendido(pe).show();
+                                                    dialogoPasajeVendido(p).show();
                                                 }
 
                                                 @Override
@@ -464,7 +528,7 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Pasaje Vendido");
-        alertDialogBuilder.setMessage("Pasaje con destino:");//+" "+pasaje.getDestino().getNombre()+"\n"+"Precio:"+" "+pasaje.getPrecio().getMonto());
+        alertDialogBuilder.setMessage("Pasaje con destino:"+"\n");//+"Precio:"+" "+pasaje.getPrecio().getMonto());
         alertDialogBuilder.setIcon(R.drawable.icono_cash_black);;
 
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion

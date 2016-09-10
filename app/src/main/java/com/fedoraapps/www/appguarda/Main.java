@@ -1,12 +1,14 @@
 package com.fedoraapps.www.appguarda;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
-
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.v7.app.AppCompatActivity;
-
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -15,14 +17,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
-import android.widget.Filter;
-import android.widget.Filterable;
 import android.widget.ListView;
 import android.widget.SearchView;
-import android.widget.TextView;
+import android.widget.Toast;
 
+import com.fedoraapps.www.appguarda.Api.EmpresaApi;
 import com.fedoraapps.www.appguarda.Api.ViajeApi;
-import com.fedoraapps.www.appguarda.Shares.DataRecorridoConvertor;
+import com.fedoraapps.www.appguarda.Shares.DataConfiguracionEmpresa;
 import com.fedoraapps.www.appguarda.Shares.DataViajeConvertor;
 import com.google.gson.JsonObject;
 
@@ -36,40 +37,107 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class Main extends AppCompatActivity implements View.OnClickListener{
+public class Main extends AppCompatActivity implements View.OnClickListener, SearchView.OnQueryTextListener {
 
     ListView listTrip;
     ArrayAdapter<DataViajeConvertor> adapter;
     List<DataViajeConvertor> ListResponse;
-    //SearchView filtro;
-    EditText filtro;
-    public TextView mensaje1;
-    TextView mensaje2;
+    CoordinatorLayout pantalla;
 
-    private ArrayList<DataRecorridoConvertor> array_sort = new ArrayList<DataRecorridoConvertor>();
-    int textlength = 0;
+
+    Farcade farcade = new Farcade();
+    EditText filtro;
+    DataConfiguracionEmpresa d = new DataConfiguracionEmpresa();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         //Asociar Elementos XML
+
+        pantalla = (CoordinatorLayout) findViewById(R.id.main);
+
+
+
         listTrip = (ListView) findViewById(R.id.listTrip);
-        filtro = (EditText) findViewById(R.id.filtro);
+        filtro = (EditText)findViewById(R.id.filtro);
         filtro.addTextChangedListener(filterTextWatcher);
 
-        listTrip.setTextFilterEnabled(true);
 
+        listTrip.setTextFilterEnabled(true);
 
         JsonObject filtroviaje = new JsonObject();
 
         filtroviaje.addProperty("fechaSalida", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 
-        Call<List<DataViajeConvertor>> call = ViajeApi.createService().getAll(filtroviaje);
-        call.enqueue(new Callback<List<DataViajeConvertor>>() {
+        //TRAIGO LA CONFIGURACION DE LA EMPRESA
+
+        Call<DataConfiguracionEmpresa> call3 = EmpresaApi.createService().getConfiguracionEmpresa();
+        call3.enqueue(new Callback<DataConfiguracionEmpresa>() {
+            @TargetApi(Build.VERSION_CODES.M)
+            @Override
+            public void onResponse(Call<DataConfiguracionEmpresa> call, Response<DataConfiguracionEmpresa> response) {
+                if(response.isSuccessful()) {
+                    Farcade.configuracionEmpresa =  response.body();
+                    //GUARDO EN MEMORIA LA CONFIGURACION PARA UTILIZARLA EN EL RESTO DE LA APP
+                    if(Farcade.configuracionEmpresa.getId()!=null) {
+
+
+                        if (Farcade.configuracionEmpresa.getColorFondosDePantalla() != null){
+                            pantalla.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondosDePantalla()));}
+                            else{
+                                pantalla.setBackgroundColor(Color.parseColor("#ffff4444"));
+                        }
+                        if(Farcade.configuracionEmpresa.getColorFondoLista()!=null){
+                            listTrip.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista()));}
+                            else{
+                                listTrip.setBackgroundColor(Color.parseColor("#ffff4444"));
+                        }
+                        // listTrip.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista())));
+                        if(Farcade.configuracionEmpresa.getColorFondosDePantalla()!=null){
+                            filtro.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondosDePantalla()));}
+                            else{
+                                filtro.setBackgroundColor(Color.parseColor("#ffff4444"));
+                        }
+                        if(Farcade.configuracionEmpresa.getColorLetras()!=null){
+                            filtro.setHintTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorLetras()));}
+                            else{
+                                filtro.setHintTextColor(Color.parseColor("#ff4c4c4c"));
+                        }
+
+
+                       // pantallaLista.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondosDePantalla()));
+                    }
+
+
+
+
+
+                    System.out.println("CONFIGURACION!!!!!!!!!!!!!!!!!!!!" + Farcade.configuracionEmpresa.getColorFondosDePantalla());
+                }else {
+                    pantalla.setBackgroundColor(Color.parseColor("#ffff4444"));
+                    Toast.makeText(Main.this,"NO SE PUDO CARGAR LA CONFIGURACION",Toast.LENGTH_LONG).show();
+                }
+
+            }
+            @Override
+            public void onFailure(Call<DataConfiguracionEmpresa> call, Throwable t) {
+                System.out.println("******FALLO EL SERVICIO******" + t.getCause() + " " + call.request().toString());
+            }
+        });
+        Intent i = new Intent(Main.this,Login.class);
+        startActivity(i);
+
+
+
+
+
+
+
+
+
+        Call<List<DataViajeConvertor>> call2 = ViajeApi.createService().getAll(filtroviaje);
+        call2.enqueue(new Callback<List<DataViajeConvertor>>() {
             @Override
             public void onResponse(Call<List<DataViajeConvertor>> call, Response<List<DataViajeConvertor>> response) {
                 ListResponse = response.body();
@@ -80,6 +148,8 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
                     for (DataViajeConvertor t : ListResponse) {
                         adapter.notifyDataSetChanged();
                     }
+
+
                 } else {
                     ListaVaciaDialog().show();
                 }
@@ -92,28 +162,6 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         });
 
 
-        //CALL LOGIN
-        //  Intent i = new Intent(Main.this,Login.class);
-        //    startActivity(i);
-
-            //FILTRO DE BUSQUEDA
-         /* filtro.addTextChangedListener(new TextWatcher() {
-                @Override
-                public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-
-                        Main.this.adapter.getFilter().filter(arg0);
-
-                }
-
-                @Override
-                public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-                }
-
-                @Override
-                public void afterTextChanged(Editable arg0) {
-
-                }
-            });*/
         }
 
 
@@ -122,7 +170,9 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+
+
+         return true;
     }
 
     @Override
@@ -133,9 +183,8 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
+
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -210,7 +259,15 @@ public class Main extends AppCompatActivity implements View.OnClickListener{
     }
 
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
 
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        return false;
+    }
 }
 
 

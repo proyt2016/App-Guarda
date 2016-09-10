@@ -31,20 +31,18 @@
         <activity
             android:name=".Login"
             android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.Dark" />
+            android:theme="@style/Theme.Design.NoActionBar"
+             />
         <activity
             android:name=".VentaPasajesEfectivo"
             android:screenOrientation="portrait"
             android:label="@string/title_activity_venta_efectivo_new"
             android:theme="@style/Theme.AppCompat" />
         <activity
-            android:name=".ProcesarPasajesVendidosEscaner"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
         android:name=".ProcesarPasajesVendidosManual"
             android:screenOrientation="portrait"
-        android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/title_activity_vista_procesar_pasajes_manual"
+        android:theme="@style/Theme.AppCompat.Dialog" />
         <activity
             android:name=".VentaPasajesOnline"
             android:screenOrientation="portrait"

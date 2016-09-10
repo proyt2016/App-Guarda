@@ -3,23 +3,22 @@ package com.fedoraapps.www.appguarda;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
-
-import android.support.design.widget.Snackbar;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.ActionBar;
-import android.view.KeyEvent;
-import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.ContextThemeWrapper;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fedoraapps.www.appguarda.Api.PasajeApi;
@@ -41,6 +40,12 @@ public class MenuPrincipal extends AppCompatActivity
     private List<DataPasajeConvertor> PasajesVendidos = new ArrayList<>();
     private String codViaje;
     private Button Manual;
+    private TextView textoButtonEscaner;
+    private TextView textoButtonManual;
+    private DrawerLayout pantalla;
+    private NavigationView barraMenu;
+    private RelativeLayout pantalla2;
+    private TextView titulo;
     private int codigoPasaje;
     private String codRecorrido;
     @Override
@@ -49,6 +54,26 @@ public class MenuPrincipal extends AppCompatActivity
         setContentView(R.layout.activity_menu_principal);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        codViaje = getIntent().getExtras().getString("codigoViaje");
+        codRecorrido = getIntent().getExtras().getString("codigo");
+
+        scanBtn = (Button)findViewById(R.id.scan_button);
+        Manual = (Button)findViewById(R.id.manual);
+
+        Manual.setOnClickListener(this);
+        scanBtn.setOnClickListener(this);
+
+        pantalla = (DrawerLayout)findViewById(R.id.drawer_layout);
+        pantalla2 = (RelativeLayout)findViewById(R.id.contentmenu);
+
+        barraMenu = (NavigationView)findViewById(R.id.nav_view);
+
+        titulo = (TextView)findViewById(R.id.titulomenuprincipal);
+
+        textoButtonEscaner = (TextView)findViewById(R.id.textoescaner);
+
+        textoButtonManual = (TextView)findViewById(R.id.textomanual);
 
 
         //CONEXION CON MENU
@@ -60,13 +85,55 @@ public class MenuPrincipal extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        codViaje = getIntent().getExtras().getString("codigoViaje");
-        codRecorrido = getIntent().getExtras().getString("codigo");
-        scanBtn = (Button)findViewById(R.id.scan_button);
-        Manual = (Button)findViewById(R.id.manual);
-        Manual.setOnClickListener(this);
-        scanBtn.setOnClickListener(this);
+        if(Farcade.configuracionEmpresa.getId()!=null) {
+            if(Farcade.configuracionEmpresa.getColorFondosDePantalla()!=null){
+                pantalla.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondosDePantalla()));
+            }else {
+                pantalla.setBackgroundColor(Color.parseColor("#ffff4444"));
+            }
+            if(Farcade.configuracionEmpresa.getColorFondosDePantalla()!=null){
+                pantalla2.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondosDePantalla()));}
+            else{
+                pantalla2.setBackgroundColor(Color.parseColor("#ffff4444"));}
+            if (Farcade.configuracionEmpresa.getColorFondosDePantalla() != null) {
+                barraMenu.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondosDePantalla()));}
+            else{
+                barraMenu.setBackgroundColor(Color.parseColor("#ffff4444"));
+            }
+            if(Farcade.configuracionEmpresa.getColorLetras()!=null){
+                titulo.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorLetras()));}
+            else{
+                titulo.setTextColor(Color.parseColor("#ffffffff"));
+            }
+            if(Farcade.configuracionEmpresa.getColorLetras()!=null){
+                textoButtonManual.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorLetras()));}
+            else{
+                textoButtonManual.setTextColor(Color.parseColor("#ffffffff"));
+            }
+            if(Farcade.configuracionEmpresa.getColorLetras()!=null){
+                textoButtonEscaner.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorLetras()));}
+            else{
+                textoButtonEscaner.setTextColor(Color.parseColor("#ffffffff"));
+            }
+
+             //titulo.setBackgroundColor(R.drawable.abc_list_selector_background_transition_holo_dark);
+        }else{
+                //NO EXISTE CONFIGURACION
+            pantalla.setBackgroundColor(Color.parseColor("#ffff4444"));
+            pantalla2.setBackgroundColor(Color.parseColor("#ffff4444"));
+            barraMenu.setBackgroundColor(Color.parseColor("#ffff4444"));
+            titulo.setTextColor(Color.parseColor("#ffffffff"));
+            textoButtonManual.setTextColor(Color.parseColor("#ffffffff"));
+            textoButtonEscaner.setTextColor(Color.parseColor("#ffffffff"));
+
+
+
+        }
+
+
     }
+
+
     public void onClick(View v) {
         if (v.getId() == R.id.scan_button) {
             //LLAMO AL SCAN SI ESTA INSTALADO ABRE LA CAM SINO MOTIVA A INSTALAR BARCODE SCAN
@@ -95,7 +162,7 @@ public class MenuPrincipal extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_principal, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
@@ -107,9 +174,10 @@ public class MenuPrincipal extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
+
 
         return super.onOptionsItemSelected(item);
     }
@@ -137,14 +205,13 @@ public class MenuPrincipal extends AppCompatActivity
             i.putExtra("codigo",codRecorrido);
             i.putExtra("codigoViaje",codViaje);
             startActivity(i);
-        }/*else if (id == R.id.procesarPasajesEscaner) {
-            codRecorrido = getIntent().getExtras().getString("codigo");
-            codViaje = getIntent().getExtras().getString("codigoViaje");
-            Intent i = new Intent(MenuPrincipal.this,ProcesarPasajesVendidosEscaner.class);
+        }else if (id == R.id.datosEmpleado) {
+
+         /*   Intent i = new Intent(MenuPrincipal.this,ProcesarPasajesVendidosEscaner.class);
             i.putExtra("codigo",codRecorrido);
             i.putExtra("codigoViaje",codViaje);
-            startActivity(i);
-        }
+            startActivity(i);*/
+        }/*
         else if (id == R.id.procesarPasajesManual) {
             codRecorrido = getIntent().getExtras().getString("codigo");
             codViaje = getIntent().getExtras().getString("codigoViaje");
@@ -217,10 +284,12 @@ public class MenuPrincipal extends AppCompatActivity
     private AlertDialog dialogNoExistePasaje()
     {
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Atencion");
-        alertDialogBuilder.setMessage("No Existe pasaje vendido");
-        alertDialogBuilder.setIcon(R.drawable.icono_alerta);;
+        //AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        ContextThemeWrapper ctw = new ContextThemeWrapper( this, R.style.DialogBlack);
+        AlertDialog.Builder Dialog = new AlertDialog.Builder(ctw);
+        Dialog.setTitle("Atencion");
+        Dialog.setMessage("No Existe pasaje vendido");
+        Dialog.setIcon(R.drawable.icono_alerta);;
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
         DialogInterface.OnClickListener listenerOk = new DialogInterface.OnClickListener() {
             @Override
@@ -237,17 +306,20 @@ public class MenuPrincipal extends AppCompatActivity
             }
         };
         // Asignamos los botones positivo y negativo a sus respectivos listeners
-        alertDialogBuilder.setPositiveButton(R.string.ACEPTAR, listenerOk);
+        Dialog.setPositiveButton(R.string.ACEPTAR, listenerOk);
         // alertDialogBuilder.setNegativeButton(R.string.Cancelar, listenerCancelar);
-        return alertDialogBuilder.create();
+        return Dialog.create();
     }
     private AlertDialog dialogPasajeUsado()
     {
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Atencion");
-        alertDialogBuilder.setMessage("El pasaje  ya fue utilizado, Te quiere cagar!");
-        alertDialogBuilder.setIcon(R.drawable.icono_alerta);;
+       // AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        ContextThemeWrapper ctw = new ContextThemeWrapper( this, R.style.DialogBlack);
+        AlertDialog.Builder Dialog = new AlertDialog.Builder(ctw);
+
+        Dialog.setTitle("Atencion");
+        Dialog.setMessage("El pasaje  ya fue utilizado, Te quiere cagar!");
+        Dialog.setIcon(R.drawable.icono_alerta);;
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
         DialogInterface.OnClickListener listenerOk = new DialogInterface.OnClickListener() {
             @Override
@@ -264,17 +336,20 @@ public class MenuPrincipal extends AppCompatActivity
             }
         };
         // Asignamos los botones positivo y negativo a sus respectivos listeners
-        alertDialogBuilder.setPositiveButton(R.string.ACEPTAR, listenerOk);
+        Dialog.setPositiveButton(R.string.ACEPTAR, listenerOk);
         // alertDialogBuilder.setNegativeButton(R.string.Cancelar, listenerCancelar);
-        return alertDialogBuilder.create();
+        return Dialog.create();
     }
     private AlertDialog dialogCodigoIncorrectoTipeo()
     {
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Atencion");
-        alertDialogBuilder.setMessage("Debe ingresar un codigo valido, unicamente letras");
-        alertDialogBuilder.setIcon(R.drawable.icono_alerta);;
+       // AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        ContextThemeWrapper ctw = new ContextThemeWrapper( this, R.style.DialogBlack);
+        AlertDialog.Builder Dialog = new AlertDialog.Builder(ctw);
+        Dialog.setTitle("Atencion");
+
+        Dialog.setMessage("Debe ingresar un codigo valido, unicamente letras");
+        Dialog.setIcon(R.drawable.icono_alerta);;
 
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
         DialogInterface.OnClickListener listenerOk = new DialogInterface.OnClickListener() {
@@ -290,19 +365,21 @@ public class MenuPrincipal extends AppCompatActivity
             }
         };
         // Asignamos los botones positivo y negativo a sus respectivos listeners
-        alertDialogBuilder.setPositiveButton(R.string.ACEPTAR, listenerOk);
+        Dialog.setPositiveButton(R.string.ACEPTAR, listenerOk);
         // alertDialogBuilder.setNegativeButton(R.string.Cancelar, listenerCancelar);
-        return alertDialogBuilder.create();
+        return Dialog.create();
     }
     private AlertDialog crearDialogoConexion(DataPasajeConvertor pasaje)
     {
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Pasaje Vendido");
-        alertDialogBuilder.setMessage("Numero de Pasaje:"+" "+pasaje.getId()+"\n"
+       // AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        ContextThemeWrapper ctw = new ContextThemeWrapper( this, R.style.DialogBlack);
+        AlertDialog.Builder Dialog = new AlertDialog.Builder(ctw);
+        Dialog.setTitle("Pasaje Vendido");
+        Dialog.setMessage("Numero de Pasaje:"+" "+pasaje.getId()+"\n"
                 +"Monto:"+" "+/*pasaje.getMonto()+*/"\n"
                 + "Con destino a"+" "+pasaje.getDestino().getNombre());
-        alertDialogBuilder.setIcon(R.drawable.icono_cash_black);;
+        Dialog.setIcon(R.drawable.icono_cash_black);;
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
         DialogInterface.OnClickListener listenerOk = new DialogInterface.OnClickListener() {
             @Override
@@ -318,9 +395,9 @@ public class MenuPrincipal extends AppCompatActivity
             }
         };
         // Asignamos los botones positivo y negativo a sus respectivos listeners
-        alertDialogBuilder.setPositiveButton(R.string.ACEPTAR, listenerOk);
+        Dialog.setPositiveButton(R.string.ACEPTAR, listenerOk);
         // alertDialogBuilder.setNegativeButton(R.string.Cancelar, listenerCancelar);
-        return alertDialogBuilder.create();
+        return Dialog.create();
     }
     public DataPasajeConvertor existePasaje(String codPasaje){
         for(DataPasajeConvertor p: PasajesVendidos){

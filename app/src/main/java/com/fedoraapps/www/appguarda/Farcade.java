@@ -1,5 +1,7 @@
 package com.fedoraapps.www.appguarda;
 
+import com.fedoraapps.www.appguarda.Shares.DataConfiguracionEmpresa;
+import com.fedoraapps.www.appguarda.Shares.DataEmpleado;
 import com.fedoraapps.www.appguarda.Shares.DataPuntoRecorridoConverter;
 import com.fedoraapps.www.appguarda.Shares.DataViajeConvertor;
 
@@ -8,20 +10,37 @@ import com.fedoraapps.www.appguarda.Shares.DataViajeConvertor;
  */
 public class Farcade {
 
-    static public DataPuntoRecorridoConverter DestinoSeleccionado = new DataPuntoRecorridoConverter();
+    static DataPuntoRecorridoConverter DestinoSeleccionado = new DataPuntoRecorridoConverter();
     static DataViajeConvertor recorridoSeleccionado = new DataViajeConvertor();
+    static DataConfiguracionEmpresa configuracionEmpresa = new DataConfiguracionEmpresa();
+    static DataEmpleado empleado = new DataEmpleado();
 
+    public void setEmpleado(DataEmpleado emp){
+        this.empleado = emp;
+    }
 
-    public void setRecorridoSeleccionado(DataViajeConvertor reco){
+    public DataEmpleado getEmpleado(){
+        return this.empleado;
+    }
+
+    public  void SaveConfiguracionEmpresa(DataConfiguracionEmpresa empresa){
+        this.configuracionEmpresa = empresa;
+    }
+
+    public   DataConfiguracionEmpresa genConfiguracionEmpresa(){
+       return this.configuracionEmpresa;
+    }
+
+    public  void setRecorridoSeleccionado(DataViajeConvertor reco){
         this.recorridoSeleccionado = reco;
     }
 
-    public DataViajeConvertor getRecorridoSeleccionado(){
-        return this.recorridoSeleccionado;
+    public  DataViajeConvertor getRecorridoSeleccionado(){
+        return recorridoSeleccionado;
     }
 
 
-    public DataPuntoRecorridoConverter getDestinoSeleccionado(){
+    public  DataPuntoRecorridoConverter getDestinoSeleccionado(){
       return this.DestinoSeleccionado;
     }
 

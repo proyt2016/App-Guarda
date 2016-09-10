@@ -2,13 +2,13 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="com.fedoraapps.www.appguarda.Main"
-android:background="@android:color/holo_red_light"
-    android:backgroundTint="@android:color/holo_red_light">
-    <android.support.design.widget.AppBarLayout
+   >
+  <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -21,27 +21,29 @@ android:background="@android:color/holo_red_light"
             android:layout_marginLeft="0dp"
             android:text="Listado de viajes"
             android:textSize="20dip"
-            android:textColor="@color/white"
+            android:textColor="@color/accent"
 
             android:textStyle="bold"
             />
 
+
     </android.support.design.widget.AppBarLayout>
 
     <EditText
+
         android:id="@+id/filtro"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="70dp"
+        android:layout_marginLeft="15dp"
         android:hint="Buscar por Recorrido"
         android:textSize="15dp"
-        android:background="@android:color/holo_red_light"
-        android:textColorLink="@color/black"
-        android:textColorHint="@color/aluminum"
+        android:textColorLink="@color/accent"
         android:inputType="textVisiblePassword"
-        android:textColor="@color/black"
-        android:drawableLeft="@drawable/buscar_negro"
-        android:backgroundTint="@android:color/holo_red_light" />
+        android:textColor="@color/accent"
+        android:drawableLeft="@drawable/buscar_negro"/>
+
+        <!--android:backgroundTint="@android:color/holo_red_light"-->
 
 
 
@@ -52,10 +54,11 @@ android:background="@android:color/holo_red_light"
         android:layout_marginTop="120dp"
         android:layout_alignParentLeft="true"
         android:textFilterEnabled="true"
-        android:background="@android:color/holo_red_light"
+
         android:layout_below="@+id/inputSearch"
-        android:backgroundTint="@android:color/holo_red_light"
-        android:cacheColorHint="@android:color/holo_red_light" />
+        android:focusable="true"
+        android:clickable="true"
+       />
 
 
 

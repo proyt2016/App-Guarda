@@ -2,8 +2,9 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_red_light">
-    <android.support.design.widget.AppBarLayout
+    android:id="@+id/dialogprocesarmanual"
+   >
+     <!--   <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:theme="@style/AppTheme.AppBarOverlay">
@@ -21,18 +22,20 @@
             android:textStyle="bold"
             />
 
-    </android.support.design.widget.AppBarLayout>
+    </android.support.design.widget.AppBarLayout>-->
 
     <Button android:id="@+id/manual"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+
         android:layout_marginLeft="145dp"
         android:background="@drawable/buscar_negro"
-        android:layout_alignTop="@+id/view"
+
         android:layout_centerHorizontal="true" />
 
 
-    <TextView
+    <!--<TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
@@ -49,49 +52,35 @@
         android:textSize="19dp"
         android:textColor="#ffffff"
         android:textIsSelectable="true"
-        android:shadowColor="#000000" />
+        android:shadowColor="#000000" />-->
 
 
     <android.support.design.widget.TextInputLayout
-        android:layout_width="250dp"
+        android:layout_width="170dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="170dp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="8dp"
-
-        android:id="@+id/view">
-
-
+        android:layout_marginLeft="60dp"
+        android:textAlignment="center"
+        android:backgroundTint="@color/accent"
+        android:layout_marginTop="125dp"
+        android:layout_marginBottom="8dp">
+        <EditText android:id="@+id/codigoPasaje"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:drawableLeft="@drawable/buscar"
+            android:backgroundTint="@color/accent"
+            android:hint="Ingresar Codigo"/>
     </android.support.design.widget.TextInputLayout>
+
     <android.support.v7.widget.AppCompatButton
         android:id="@+id/confirmarManual"
-        android:layout_width="300dp"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:background="@color/primary"
-
+        android:layout_marginTop="240dp"
+        android:layout_marginBottom="24dp"
         android:padding="12dp"
-        android:textColor="@color/white"
-        android:text="CONFIRMAR"
-        android:layout_marginTop="430dp"
-        android:layout_centerHorizontal="true" />
+        android:text="CONFIRMAR"/>
 
-    <EditText android:id="@+id/codigoPasaje"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Ingresar codigo del pasaje"
-        android:layout_marginTop="305dp"
-        android:textColor="@color/wallet_primary_text_holo_light"
-        android:textColorLink="@color/wallet_primary_text_holo_light"
-        android:backgroundTint="@color/wallet_primary_text_holo_light"
-        android:textColorHighlight="@color/wallet_primary_text_holo_light"
-        android:inputType="number"
-        android:textAlignment="center"
-        android:textColorHint="@color/white"
-        android:layout_alignStart="@+id/view"
-        android:layout_alignEnd="@+id/view"
-        android:drawableTint="@color/abc_background_cache_hint_selector_material_dark"
-        android:foregroundTint="#010101"
-        android:elegantTextHeight="true" />
 
 
 </RelativeLayout>

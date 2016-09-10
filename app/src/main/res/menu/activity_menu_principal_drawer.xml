@@ -5,11 +5,17 @@
         <item
             android:id="@+id/ventaEfectivo"
             android:icon="@drawable/cash_multiple"
-            android:title="Venta en Efectivo" />
+            android:title="Venta en Efectivo"
+            />
         <item
             android:id="@+id/ventaOnline"
-            android:icon="@drawable/venta_online_icono"
+            android:icon="@drawable/qr_code"
             android:title="Venta Online" />
+
+        <item
+            android:id="@+id/datosEmpleado"
+            android:icon="@drawable/user_icon"
+            android:title="Datos Empleado" />
     </group>
 
     <item android:title="Communicate">

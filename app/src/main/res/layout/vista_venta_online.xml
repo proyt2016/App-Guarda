@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_red_light"
+    android:id="@+id/ventaonline"
+
 
     >
 
@@ -43,7 +44,7 @@
         android:background="@drawable/abc_list_selector_background_transition_holo_dark">
 
         <TextView
-            android:id="@+id/txt2"
+            android:id="@+id/origenTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -52,7 +53,7 @@
             android:textStyle="bold"
             android:text="SELECCIONE ORIGEN"
             android:textSize="19dip"
-            android:textColor="@color/white"/>
+            />
 
     </LinearLayout>
 
@@ -60,15 +61,15 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:id="@+id/linearLayout"
+        android:id="@+id/layout_spinner"
         android:layout_marginTop="85dp">
 
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="130dp"
             android:layout_height="45dp"
-            android:layout_marginLeft="110dp"
-            android:backgroundTint="@color/white"
+            android:layout_marginLeft="118dp"
+            android:backgroundTint="@color/accent"
             android:spinnerMode="dialog"
             android:overlapAnchor="true"
             style="@style/Base.Widget.AppCompat.Spinner.Underlined"
@@ -84,7 +85,7 @@
 
 
         <TextView
-            android:id="@+id/txt3"
+            android:id="@+id/destinoTitulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="10dp"
@@ -94,7 +95,7 @@
 
             android:text="SELECCIONE DESTINO"
             android:textSize="19dip"
-            android:textColor="@color/white"
+
             />
 
 
@@ -113,10 +114,8 @@
             android:layout_width="250dp"
             android:layout_height="160dp"
             android:layout_marginTop="10dp"
-            android:layout_marginLeft="60dp"
-            android:background="@android:color/holo_red_light"
-            android:backgroundTint="@android:color/holo_red_light"
-            android:cacheColorHint="@android:color/holo_red_light"
+            android:layout_marginLeft="55dp"
+
             android:fadingEdge="none"
 
 
@@ -135,10 +134,8 @@
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:background="@color/primary"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="35dp"
-            android:textColor="@color/white"
             android:text="GENERAR PASAJE"
             android:clickable="true" />
 

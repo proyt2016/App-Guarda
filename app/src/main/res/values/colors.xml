@@ -5,6 +5,10 @@
     <color name="primary_darker">#cc1d1d</color>
     <color name="accent">#FFFFFF</color>
 
+        <color name="rojo">#ff0000</color>
+        <color name="verde">#00ff00</color>
+        <color name="azul">#0000ff</color>
+
     <color name="black">#ffffff</color>
     <color name="jet">#222222</color>
     <color name="oil">#333333</color>
@@ -13,5 +17,5 @@
     <color name="aluminum">#999999</color>
     <color name="base">#AAAAAA</color>
     <color name="iron">#CCCCCC</color>
-    <color name="white">#ffffff</color>
+    <color name="white">#99f01e1e</color>
 </resources>

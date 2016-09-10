@@ -16,6 +16,7 @@ public class AddHeaderInterceptor implements Interceptor{
 
         Request.Builder builder = chain.request().newBuilder();
         builder.addHeader("lcbs-tenant", TenantProvider.GetTenant());
+        System.out.println("TENANT IDDD ---------------"+TenantProvider.GetTenant().toString());
 
         return chain.proceed(builder.build());
     }

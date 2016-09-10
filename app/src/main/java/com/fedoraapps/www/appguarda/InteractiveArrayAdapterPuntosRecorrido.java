@@ -1,22 +1,20 @@
 package com.fedoraapps.www.appguarda;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fedoraapps.www.appguarda.Shares.DataPtoRecWrapper;
-import com.fedoraapps.www.appguarda.Shares.DataPuntoRecorridoConverter;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,6 +42,8 @@ public class InteractiveArrayAdapterPuntosRecorrido extends ArrayAdapter<DataPto
         protected TextView text;
         protected RadioButton radioBtn;
         protected Button button;
+        protected RelativeLayout layoutPadre;
+        protected LinearLayout layout;
     }
 
 
@@ -56,13 +56,11 @@ public class InteractiveArrayAdapterPuntosRecorrido extends ArrayAdapter<DataPto
             final LayoutInflater inflator = context.getLayoutInflater();
             view = inflator.inflate(R.layout.vista_puntos_recorrido_checklist, null);
             final ViewHolder viewHolder = new ViewHolder();
+            viewHolder.layoutPadre = (RelativeLayout) view.findViewById(R.id.layoutpadre);
+            viewHolder.layout = (LinearLayout) view.findViewById(R.id.layoutinterno);
             viewHolder.text = (TextView) view.findViewById(R.id.label);
             viewHolder.radioBtn = (RadioButton) view.findViewById(R.id.radio);
-
-
-
-
-                view.setTag(viewHolder);
+            view.setTag(viewHolder);
             viewHolder.radioBtn.setChecked(lista.get(position).getChecked());
             viewHolder.radioBtn.setTag(lista.get(position));
            // viewHolder.text.setTag(lista.get(position));
@@ -103,11 +101,39 @@ public class InteractiveArrayAdapterPuntosRecorrido extends ArrayAdapter<DataPto
             }
         }
 
-
-
-
         holder.text.setText(lista.get(position).toString());
         //\holder.radioBtn.setChecked(lista.get(position).getChecked());
+
+        if(Farcade.configuracionEmpresa.getId()!=null){
+            if(Farcade.configuracionEmpresa.getColorTextoLista()!=null){
+                holder.text.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTextoLista()));}
+            else{
+                holder.text.setTextColor(Color.parseColor("#ffffffff"));
+            }
+            if(Farcade.configuracionEmpresa.getColorFondoLista()!=null){
+                holder.text.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista()));}
+            else{
+                holder.text.setBackgroundColor(Color.parseColor("#ffff4444"));
+            }
+            if(Farcade.configuracionEmpresa.getColorFondoLista()!=null){
+                holder.layout.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista()));}
+            else{
+                holder.layout.setBackgroundColor(Color.parseColor("#ffff4444"));
+            }
+            if(Farcade.configuracionEmpresa.getColorFondoLista()!=null){
+                holder.layoutPadre.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista()));}
+            else{
+                holder.layoutPadre.setBackgroundColor(Color.parseColor("#ffff4444"));
+            }
+
+        }else{
+            //NO EXISTE CONFIGURACION
+            holder.text.setTextColor(Color.parseColor("#ffffffff"));
+            holder.text.setBackgroundColor(Color.parseColor("#ffff4444"));
+            holder.layout.setBackgroundColor(Color.parseColor("#ffff4444"));
+            holder.layoutPadre.setBackgroundColor(Color.parseColor("#ffff4444"));
+
+        }
 
         return view;
 

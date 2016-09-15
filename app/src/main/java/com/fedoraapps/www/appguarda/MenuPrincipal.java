@@ -134,7 +134,11 @@ public class MenuPrincipal extends AppCompatActivity
                 textoButtonEscaner.setTextColor(Color.parseColor("#ffffffff"));
             }
             if(Farcade.configuracionEmpresa.getEmails()!=null){
+                if(!Farcade.configuracionEmpresa.getEmails().isEmpty()){
                 mailEmpresa.setText(Farcade.configuracionEmpresa.getEmails().get(0).getEmail());
+                }else{
+                    mailEmpresa.setText("tecnologo2016@gmail.com");
+                }
             }else{
                 mailEmpresa.setText("tecnologo2016@gmail.com");
             }

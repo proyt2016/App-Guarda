@@ -252,7 +252,7 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
 
                                         DataPuntoRecorridoConverter ori = new DataPuntoRecorridoConverter();
 
-                                    ;
+
 
                                         DataPuntoRecorridoConverter punto = controller.getDestinoSeleccionado();
 
@@ -281,10 +281,10 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
 
                                             @Override
                                             public void onResponse(Call<DataPasajeConvertor> call, Response<DataPasajeConvertor> response) {
-                                                final DataPasajeConvertor p = response.body();
-                                                System.out.println("PASAJE---->" + p + "<----PASAJE");
+                                                final DataPasajeConvertor pasajeConvertor = response.body();
+                                                System.out.println("PASAJE---->" + pasajeConvertor + "<----PASAJE");
 
-                                                if (p != null) {
+                                                if (pasajeConvertor != null) {
 
 
                                                     Call<DataRecorridoConvertor> call4= PuntosRecorridoApi.createService().getRecorrido(Farcade.recorridoSeleccionado.getRecorrido().getId());
@@ -301,7 +301,7 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
                                                             }
                                                             adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesEfectivo.this, temp);
                                                             listaPuntos.setAdapter(adapter);
-                                                            dialogoPasajeVendido(p).show();
+                                                            dialogoPasajeVendido(pasajeConvertor).show();
                                                         }
                                                             @Override
                                                             public void onFailure(Call<DataRecorridoConvertor> call, Throwable t) {
@@ -421,7 +421,7 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Pasaje Vendido");
-        alertDialogBuilder.setMessage("Pasaje con destino:"+" "+pasaje.getDestino().getNombre()+"\n");
+        alertDialogBuilder.setMessage("Pasaje con destino:"+" "+pasaje.getDestino().toString()+"\n");
                 //  +"Monto:"+pasaje.getPrecio().getMonto());//+"Precio:"+" "+pasaje.getPrecio().getMonto());
         alertDialogBuilder.setIcon(R.drawable.icono_cash_black);;
 

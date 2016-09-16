@@ -3,6 +3,7 @@ package com.fedoraapps.www.appguarda;
 import com.fedoraapps.www.appguarda.Shares.DataConfiguracionEmpresa;
 import com.fedoraapps.www.appguarda.Shares.DataEmpleado;
 import com.fedoraapps.www.appguarda.Shares.DataPuntoRecorridoConverter;
+import com.fedoraapps.www.appguarda.Shares.DataTerminal;
 import com.fedoraapps.www.appguarda.Shares.DataViajeConvertor;
 
 /**
@@ -14,6 +15,16 @@ public class Farcade {
     static DataViajeConvertor recorridoSeleccionado = new DataViajeConvertor();
     static DataConfiguracionEmpresa configuracionEmpresa = new DataConfiguracionEmpresa();
     static DataEmpleado empleado = new DataEmpleado();
+    static DataTerminal terminalSeleccionada = new DataTerminal();
+
+
+    public void setTerminalSeleccionada(DataTerminal emp){
+        this.terminalSeleccionada = emp;
+    }
+
+    public DataTerminal getTerminalSeleccionada(){
+        return this.terminalSeleccionada;
+    }
 
     public void setEmpleado(DataEmpleado emp){
         this.empleado = emp;

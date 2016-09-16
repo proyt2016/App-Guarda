@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -19,6 +18,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,7 +51,8 @@ public class MenuPrincipal extends AppCompatActivity
     private int codigoPasaje;
     private String codRecorrido;
     private ImageView logo;
-    private TextView mailEmpresa;
+    private LinearLayout MenuDesplegable;
+    private TextView emailEmpresa;
     private TextView nombreEmpresa;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,8 +68,8 @@ public class MenuPrincipal extends AppCompatActivity
         Manual = (Button)findViewById(R.id.manual);
 
         nombreEmpresa = (TextView) findViewById(R.id.nombreempresa);
-        mailEmpresa = (TextView)findViewById(R.id.mailempresa);
-
+        emailEmpresa = (TextView)findViewById(R.id.mailempresa);
+        MenuDesplegable = (LinearLayout)findViewById(R.id.menudesplegableheader);
 
 
         Manual.setOnClickListener(this);
@@ -116,15 +117,23 @@ public class MenuPrincipal extends AppCompatActivity
             if(Farcade.configuracionEmpresa.getColorTitulo()!=null){
                 titulo.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));
                 nombreEmpresa.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));
-                mailEmpresa.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));
+                emailEmpresa.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));
             }
             else{
+
                 titulo.setTextColor(Color.parseColor("#ffffffff"));
-                nombreEmpresa.setTextColor(Color.parseColor("#000000"));
-                mailEmpresa.setTextColor(Color.parseColor("#ffffffff"));
+                nombreEmpresa.setTextColor(Color.parseColor("#FFFFFF"));
+                emailEmpresa.setTextColor(Color.parseColor("#FFFFFF"));
+        /*        if(Farcade.configuracionEmpresa.getNombre()!=null)
+//                nombreEmpresa.setTextColor(Color.parseColor("#ffffffff"));
+                if(Farcade.configuracionEmpresa.getEmails()!=null)
+                    if(!Farcade.configuracionEmpresa.getEmails().isEmpty())
+                mailEmpresa.setTextColor(Color.parseColor("#ffffffff"));*/
             }
             if(Farcade.configuracionEmpresa.getColorLetras()!=null){
-                textoButtonManual.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorLetras()));}
+                textoButtonManual.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorLetras()));
+                nombreEmpresa.setTextColor(Color.parseColor("#000000"));
+                emailEmpresa.setTextColor(Color.parseColor("#000000"));}
             else{
                 textoButtonManual.setTextColor(Color.parseColor("#ffffffff"));
             }
@@ -133,27 +142,23 @@ public class MenuPrincipal extends AppCompatActivity
             else{
                 textoButtonEscaner.setTextColor(Color.parseColor("#ffffffff"));
             }
-            if(Farcade.configuracionEmpresa.getEmails()!=null){
-                if(!Farcade.configuracionEmpresa.getEmails().isEmpty()){
-                mailEmpresa.setText(Farcade.configuracionEmpresa.getEmails().get(0).getEmail());
-                }else{
-                    mailEmpresa.setText("tecnologo2016@gmail.com");
-                }
-            }else{
-                mailEmpresa.setText("tecnologo2016@gmail.com");
-            }
             if(Farcade.configuracionEmpresa.getNombre()!=null){
                 nombreEmpresa.setText(Farcade.configuracionEmpresa.getNombre());
             }else{
                 nombreEmpresa.setText("LAC BUS");
             }
-            if(Farcade.configuracionEmpresa.getIconoEmpresa()!=null){
-                logo.setImageURI(Uri.parse(Farcade.configuracionEmpresa.getIconoEmpresa()));
-            }else{
-                logo.setImageResource(R.drawable.bondi_blanco);
+            if(Farcade.configuracionEmpresa.getEmails()!=null) {
+                if (!Farcade.configuracionEmpresa.getEmails().isEmpty()) {
+                    emailEmpresa.setText(Farcade.configuracionEmpresa.getEmails().get(0).getEmail());
+                } else {
+                    emailEmpresa.setText("tecnologo2016@gmail.com");
+                }
+            }else {
+                emailEmpresa.setText("tecnologo2016@gmail.com");
             }
 
-             //titulo.setBackgroundColor(R.drawable.abc_list_selector_background_transition_holo_dark);
+
+            //titulo.setBackgroundColor(R.drawable.abc_list_selector_background_transition_holo_dark);
         }else{
                 //NO EXISTE CONFIGURACION
             pantalla.setBackgroundColor(Color.parseColor("#ffff4444"));
@@ -163,9 +168,9 @@ public class MenuPrincipal extends AppCompatActivity
             textoButtonManual.setTextColor(Color.parseColor("#ffffffff"));
             textoButtonEscaner.setTextColor(Color.parseColor("#ffffffff"));
             nombreEmpresa.setTextColor(Color.parseColor("#000000"));
-            mailEmpresa.setTextColor(Color.parseColor("#ffffffff"));
+            emailEmpresa.setTextColor(Color.parseColor("#ffffffff"));
             logo.setImageResource(R.drawable.bondi_blanco);
-            mailEmpresa.setText("tecnologo2016@gmail.com");
+            emailEmpresa.setText("tecnologo2016@gmail.com");
             nombreEmpresa.setText("LAC BUS");
         }
     }
@@ -240,19 +245,14 @@ public class MenuPrincipal extends AppCompatActivity
             i.putExtra("codigo",codRecorrido);
             i.putExtra("codigoViaje",codViaje);
             startActivity(i);
-        }else if (id == R.id.datosEmpleado) {
-
-         /*   Intent i = new Intent(MenuPrincipal.this,ProcesarPasajesVendidosEscaner.class);
-            i.putExtra("codigo",codRecorrido);
-            i.putExtra("codigoViaje",codViaje);
-            startActivity(i);*/
-        }/*
-        else if (id == R.id.procesarPasajesManual) {
-            codRecorrido = getIntent().getExtras().getString("codigo");
-            codViaje = getIntent().getExtras().getString("codigoViaje");
-            Intent i = new Intent(MenuPrincipal.this,ProcesarPasajesVendidosManual.class);
-            i.putExtra("codigo",codRecorrido);
-            i.putExtra("codigoViaje",codViaje);
+        } else if (id == R.id.datosEmpleado) {
+            Intent i = new Intent(MenuPrincipal.this, DialogInformacion.class);
+            i.putExtra("flag",1 );
+            startActivity(i);
+        }
+       /* else if (id == R.id.datosTerminal) {
+           Intent i = new Intent(MenuPrincipal.this, DialogInformacion.class);
+            i.putExtra("flag",2 );
             startActivity(i);
         }*/
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

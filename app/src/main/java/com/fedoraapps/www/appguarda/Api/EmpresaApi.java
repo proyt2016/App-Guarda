@@ -2,6 +2,7 @@ package com.fedoraapps.www.appguarda.Api;
 
 import com.fedoraapps.www.appguarda.AddHeaderInterceptor;
 import com.fedoraapps.www.appguarda.Shares.DataConfiguracionEmpresa;
+import com.fedoraapps.www.appguarda.TenantProvider;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
@@ -19,10 +20,13 @@ public class EmpresaApi {
 
     public static EmpresaApiInterface createService() {
         if (empresaService == null) {
+            TenantProvider tenantConfig = new TenantProvider();
+            String apiUrl = tenantConfig.GetApiUrl();
+
             //AGREGO ID EN EL HEADER DEL REQUEST
             httpClient.addInterceptor(new AddHeaderInterceptor());
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.43.158:8080")
+                    .baseUrl(apiUrl)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build())
                     .build();

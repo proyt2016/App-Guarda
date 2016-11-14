@@ -34,9 +34,9 @@ import com.fedoraapps.www.appguarda.Shares.DataViajeConvertor;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -57,7 +57,7 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
     DataRecorridoConvertor reco;
     DataEmpleado emp = new DataEmpleado();
     Double distancia;
-    Date dt;
+    Calendar dt;
     Button generar;
     String valOfSpinner;
     List<DataPuntoRecorridoConverter> puntosCercanos = new ArrayList<>();
@@ -242,39 +242,21 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
 
 
                             } else {
-
-
-
-                                String ciUsuario = "4444";
-                                        DataPrecio precio = new DataPrecio();
-                                        DataViajeConvertor VIAJE = new DataViajeConvertor();
-                                        VIAJE.setId(controller.getRecorridoSeleccionado().getId());
-
-                                        DataPuntoRecorridoConverter ori = new DataPuntoRecorridoConverter();
-
-
-
-                                        DataPuntoRecorridoConverter punto = controller.getDestinoSeleccionado();
-
-                                        if(Farcade.empleado!=null){
-                                           emp = Farcade.empleado;
-                                        }
                                 Date FechaCompra = new Date();
-                                SimpleDateFormat sm = new SimpleDateFormat("mm-dd-yyyy");
-                                // myDate is the java.util.Date in yyyy-mm-dd format
-                                // Converting it into String using formatter
-                                String strDate = sm.format(FechaCompra);
+                                String ciUsuario = "4444";
+                                DataPrecio precio = new DataPrecio();
+                                DataViajeConvertor VIAJE = new DataViajeConvertor();
+                                VIAJE.setId(controller.getRecorridoSeleccionado().getId());
+                                DataPuntoRecorridoConverter ori = new DataPuntoRecorridoConverter();
+                                DataPuntoRecorridoConverter punto = controller.getDestinoSeleccionado();
+                                    if(Farcade.empleado!=null){
+                                        emp = Farcade.empleado;
+                                    }
+                                    //SimpleDateFormat sm = new SimpleDateFormat("mm-dd-yyyy");
+                                    SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
+                                   // String strDate = sm.format(FechaCompra);
 
-                                //Converting the String back to java.util.Date
-                                try {
-                                    dt = sm.parse(strDate);
-                                    System.out.println("FECHA ACTUAL"+" "+dt);
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-
-
-                                        DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, puntoOrigen, punto, null, null, null, emp, true, true, false);
+                                    DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, puntoOrigen, punto, null, null, null, emp, true, true, false);
 
                                         Call<DataPasajeConvertor> call3 = PasajeApi.createService().venderPasaje(pasaje);
                                         call3.enqueue(new Callback<DataPasajeConvertor>() {
@@ -634,18 +616,24 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
              LatLng ubicacionPunto = new LatLng(Double.parseDouble(pto.getUbicacionMapa().split(",")[0]), Double.parseDouble(pto.getUbicacionMapa().split(",")[1]));
              LatLng miUbicacion = new LatLng(loc.getLatitude(),loc.getLongitude());
              final Double distComp = computeDistanceBetween(ubicacionPunto, miUbicacion);
-             System.out.println("DISTANCIA***************************"+" "+distComp);
-                 if (distancia == null) {
-                     distancia = distComp;
+             System.out.println("DISTANCIA-COMPRENDIDA***************************"+" "+distComp);
+            System.out.println("DISTANCIA***************************"+" "+distancia);
+            System.out.println("DISTANCIA***************************"+" "+pto.getNombre());
+             if (distancia == null) {
+                 distancia = distComp;
+                    puntosCercanos.add(pto);
+                    paradas = new InteractiveArrayAdapterSpinner(VentaPasajesEfectivo.this, puntosCercanos);
+                    origen.setAdapter(paradas);
+             }
+             if (distComp < distancia) {
+                 if(!puntosCercanos.contains(pto)) {
+                     puntosCercanos.add(pto);
+                     paradas = new InteractiveArrayAdapterSpinner(VentaPasajesEfectivo.this, puntosCercanos);
+                     origen.setAdapter(paradas);
                  }
-                     if (distComp < distancia) {
-                         if(!puntosCercanos.contains(pto)) {
-                             puntosCercanos.add(pto);
-                             paradas = new InteractiveArrayAdapterSpinner(VentaPasajesEfectivo.this, puntosCercanos);
-                             origen.setAdapter(paradas);}
-                                }
-                            }
-                        }
+            }
+        }
+    }
 
 
 
@@ -654,9 +642,6 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
         puntosCercanos.clear();
         puntosCercanos.addAll(listaSinRepetidos);
         */
-
-
-
 
     public void setLocation(Location loc) {
         //Obtener la direccion de la calle a partir de la latitud y la longitud

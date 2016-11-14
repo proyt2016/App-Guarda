@@ -11,7 +11,9 @@ android {
         versionCode 1
         versionName "1.0"
 
-        buildConfigField 'String', 'API_KEY', '"02e78137-604d-4291-bd5e-27be4ce8b385"'
+        buildConfigField 'String', 'API_KEY', '"3c886b37-7ae2-4d71-b9d5-9e963084b5bb"'
+        buildConfigField 'String', 'API_URL', '"http://10.0.22.112:8080"'
+
 
     }
     buildTypes {

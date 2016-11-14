@@ -2,40 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/ventaonline"
-
-
-    >
-
-   <!-- <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@android:color/holo_red_light"
-        android:orientation="horizontal">
-
-
-
-        <android.support.design.widget.AppBarLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:theme="@style/AppTheme.AppBarOverlay">
-            <TextView
-                android:id="@+id/txt"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:padding="15dp"
-                android:layout_gravity="center"
-                android:layout_marginLeft="0dp"
-                android:text="Venta de Pasajes Online"
-                android:textSize="20dip"
-                android:textColor="@color/white"
-
-                android:textStyle="bold"
-                />
-
-        </android.support.design.widget.AppBarLayout>
-
-    </LinearLayout>-->
+    android:id="@+id/ventaonline">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -74,7 +41,7 @@
             android:overlapAnchor="true"
             style="@style/Base.Widget.AppCompat.Spinner.Underlined"
             />
-        <!-- style="@style/Base.Widget.AppCompat.Spinner.Underlined"-->
+
     </LinearLayout>
 
     <LinearLayout
@@ -82,7 +49,6 @@
         android:layout_height="50dp"
         android:layout_marginTop="160dp"
         android:background="@drawable/abc_list_selector_background_transition_holo_dark">
-
 
         <TextView
             android:id="@+id/destinoTitulo"
@@ -92,22 +58,15 @@
             android:layout_marginTop="2dp"
             android:layout_marginLeft="70dp"
             android:textStyle="bold"
-
             android:text="SELECCIONE DESTINO"
-            android:textSize="19dip"
-
-            />
-
+            android:textSize="19dip"/>
 
     </LinearLayout>
-
-
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:layout_marginTop="225dp"
-        >
+        android:layout_marginTop="225dp">
 
         <ListView
             android:id="@+id/listaPuntos"
@@ -115,12 +74,7 @@
             android:layout_height="160dp"
             android:layout_marginTop="10dp"
             android:layout_marginLeft="55dp"
-
-            android:fadingEdge="none"
-
-
-            />
-
+            android:fadingEdge="none"/>
 
     </LinearLayout>
 
@@ -139,9 +93,6 @@
             android:text="GENERAR PASAJE"
             android:clickable="true" />
 
-
     </LinearLayout>
-
-
 
 </RelativeLayout>

@@ -2,6 +2,7 @@ package com.fedoraapps.www.appguarda.Api;
 
 import com.fedoraapps.www.appguarda.AddHeaderInterceptor;
 import com.fedoraapps.www.appguarda.Shares.DataEmpleado;
+import com.fedoraapps.www.appguarda.TenantProvider;
 import com.google.gson.JsonObject;
 
 import okhttp3.OkHttpClient;
@@ -20,9 +21,12 @@ public class EmpleadoApi {
 
     public static UsuarioApiInterface createService() {
         if (usuarioService == null) {
+            TenantProvider tenantConfig = new TenantProvider();
+            String apiUrl = tenantConfig.GetApiUrl();
+
             httpClient.addInterceptor(new AddHeaderInterceptor());
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.43.158:8080")
+                    .baseUrl(apiUrl)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build())
                     .build();

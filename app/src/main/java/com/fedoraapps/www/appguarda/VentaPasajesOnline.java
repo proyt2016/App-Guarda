@@ -285,18 +285,11 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
 
                                         if (p != null) {
 
-
-
-
                                             Call<DataRecorridoConvertor> call4 = PuntosRecorridoApi.createService().getRecorrido(Farcade.recorridoSeleccionado.getRecorrido().getId());
                                             call4.enqueue(new Callback<DataRecorridoConvertor>() {
                                                 @Override
                                                 public void onResponse(Call<DataRecorridoConvertor> call, Response<DataRecorridoConvertor> response) {
-
                                                     DataRecorridoConvertor recorrido = response.body();
-
-                                                    controller.setDestinoSeleccionado(null);
-
                                                     for(DataPtoRecWrapper d : temp){
                                                         d.setChecked(false);
                                                     }
@@ -308,6 +301,7 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
                                                     integrator.shareText(String.valueOf(p.getCodigoPasaje()), "TEXT_TYPE");
                                                     System.out.println(integrator.getTitle());
                                                     dialogoPasajeVendido(p).show();
+                                                    controller.setDestinoSeleccionado(null);
                                                 }
 
                                                 @Override
@@ -528,7 +522,7 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Pasaje Vendido");
-        alertDialogBuilder.setMessage("Pasaje con destino:"+"\n");//+"Precio:"+" "+pasaje.getPrecio().getMonto());
+        alertDialogBuilder.setMessage("Pasaje con destino:" +" "+Farcade.DestinoSeleccionado.getNombre() +"\n");//+"Precio:"+" "+pasaje.getPrecio().getMonto());
         alertDialogBuilder.setIcon(R.drawable.icono_cash_black);;
 
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
@@ -630,6 +624,9 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
             System.out.println("DISTANCIA***************************" + " " + distComp);
             if (distancia == null) {
                 distancia = distComp;
+                puntosCercanos.add(pto);
+                paradas = new InteractiveArrayAdapterSpinner(VentaPasajesOnline.this, puntosCercanos);
+                origen.setAdapter(paradas);
             }
             if (distComp < distancia) {
                 if (!puntosCercanos.contains(pto)) {

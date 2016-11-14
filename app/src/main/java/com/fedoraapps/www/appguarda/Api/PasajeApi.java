@@ -2,6 +2,7 @@ package com.fedoraapps.www.appguarda.Api;
 
 import com.fedoraapps.www.appguarda.AddHeaderInterceptor;
 import com.fedoraapps.www.appguarda.Shares.DataPasajeConvertor;
+import com.fedoraapps.www.appguarda.TenantProvider;
 
 import java.util.List;
 
@@ -24,9 +25,12 @@ public class PasajeApi {
 
     public static PasajeApiInterface createService() {
         if (pasajeService == null) {
+            TenantProvider tenantConfig = new TenantProvider();
+            String apiUrl = tenantConfig.GetApiUrl();
+
             httpClient.addInterceptor(new AddHeaderInterceptor());
             Retrofit retrofit = new Retrofit.Builder()
-                    .baseUrl("http://192.168.43.158:8080")
+                    .baseUrl(apiUrl)
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(httpClient.build())
                     .build();

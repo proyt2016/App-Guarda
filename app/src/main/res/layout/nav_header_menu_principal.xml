@@ -13,6 +13,7 @@
 
     <ImageView
         android:id="@+id/imageview"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
@@ -22,11 +23,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:id="@+id/nombreempresa"
+        android:id="@+id/empresa"
+        android:text="AppGuarda"
+        android:textColor="#FF000000"
+
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
     <TextView
-        android:id="@+id/mailempresa"
+        android:id="@+id/mail"
+        android:text="tecnologo2016@gmail.com"
+        android:textColor="@color/wallet_bright_foreground_disabled_holo_light"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
  />

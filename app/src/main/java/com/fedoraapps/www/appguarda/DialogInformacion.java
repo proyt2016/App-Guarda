@@ -1,7 +1,6 @@
 package com.fedoraapps.www.appguarda;
 
 import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -37,7 +36,7 @@ public class DialogInformacion extends AppCompatActivity implements View.OnClick
         campo3 = (TextView) findViewById(R.id.txt3);
         campo4 = (TextView) findViewById(R.id.txt4);
         campo5 = (TextView) findViewById(R.id.txt5);
-        logo = (ImageView)findViewById(R.id.logo);
+       // logo = (ImageView)findViewById(R.id.logo);
 
         if(Farcade.configuracionEmpresa.getId()!=null){
             if(Farcade.configuracionEmpresa.getColorLetras()!=null){
@@ -48,9 +47,9 @@ public class DialogInformacion extends AppCompatActivity implements View.OnClick
                 campo5.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorLetras()));                          }else{
             }
             if(Farcade.configuracionEmpresa.getIconoEmpresa()!=null){
-                logo.setImageURI(Uri.parse(Farcade.configuracionEmpresa.getIconoEmpresa()));
+           //     logo.setImageURI(Uri.parse(Farcade.configuracionEmpresa.getIconoEmpresa()));
             }else{
-                logo.setImageResource(R.drawable.icono_bondi);
+            //    logo.setImageResource(R.drawable.icono_bondi);
             }
         }
 
@@ -62,26 +61,26 @@ public class DialogInformacion extends AppCompatActivity implements View.OnClick
             if(Farcade.empleado.getNombrePila()!=null){
             campo1.setText("Nombre:"+" "+Farcade.empleado.getNombrePila());}
             else{
-                campo1.setText("Nombre:"+" "+"No se pudo cargar el Nombre");
+                campo1.setText("Nombre:"+" "+"Sin datos");
             }
             if(Farcade.empleado.getApellido()!=null){
                 campo2.setText("Apellido:"+" "+Farcade.empleado.getApellido());
             }else{
-                campo2.setText("Apellido:"+" "+"No se pudo cargar el Apellido");
+                campo2.setText("Apellido:"+" "+"Sin datos");
             }
             if(Farcade.empleado.getEmail()!=null){
                 campo3.setText("E-mail:"+" "+Farcade.empleado.getEmail().getEmail());
             }else{
-                campo3.setText("E-mail:"+" "+"No se pudo cargar el E-mail");
+                campo3.setText("E-mail:"+" "+"Sin datos");
             }
             if(Farcade.empleado.getTelefonosContacto()!=null){
                 if(!Farcade.empleado.getTelefonosContacto().isEmpty()){
                 campo4.setText("Telefono:"+" "+Farcade.empleado.getTelefonosContacto().get(0).getTelefono());}
                 else{
-                    campo4.setText("Telefono:"+" "+"No es posible cargar el Telefono");
+                    campo4.setText("Telefono:"+" "+"Sin datos");
                 }
             }else{
-                campo4.setText("Telefono:"+" "+"No es posible cargar el Telefono");
+                campo4.setText("Telefono:"+" "+"Sin datos");
             }
             if(Farcade.configuracionEmpresa.getNombre()!=null){
                 campo5.setText(Farcade.configuracionEmpresa.getNombre());
@@ -98,25 +97,25 @@ public class DialogInformacion extends AppCompatActivity implements View.OnClick
             if(Farcade.terminalSeleccionada.getNombre()!=null){
                 campo1.setText("Nombre:"+" "+Farcade.terminalSeleccionada.getNombre());}
             else{
-                campo1.setText("Nombre:"+" "+"No se pudo cargar el Nombre");
+                campo1.setText("Nombre:"+" "+"Sin datos");
             }
             if(Farcade.terminalSeleccionada.getMailsDeContacto()!=null){
                 if(!Farcade.terminalSeleccionada.getMailsDeContacto().isEmpty()){
                 campo2.setText("E-mail:"+" "+Farcade.terminalSeleccionada.getMailsDeContacto().get(0).getEmail());}
                 else{
-                    campo2.setText("E-mail:"+" "+"No se pudo cargar el E-mail");
+                    campo2.setText("E-mail:"+" "+"Sin datos");
                 }
             }else{
-                campo2.setText("E-mail:"+" "+"No se pudo cargar el E-mail");
+                campo2.setText("E-mail:"+" "+"Sin datos");
             }
             if(Farcade.terminalSeleccionada.getTelefonosContacto()!=null){
                 if(!Farcade.terminalSeleccionada.getTelefonosContacto().isEmpty()){
                     campo3.setText("Telefono:"+" "+Farcade.terminalSeleccionada.getTelefonosContacto().get(0).getTelefono());}
                 else{
-                    campo3.setText("Telefono:"+" "+"No se pudo cargar el Telefono");
+                    campo3.setText("Telefono:"+" "+"Sin datos");
                 }
             }else{
-                campo3.setText("Telefono:"+" "+"No se pudo cargar el Telefono");
+                campo3.setText("Telefono:"+" "+"Sin datos");
             }
             if(Farcade.terminalSeleccionada.getAceptaEncomiendas()!=null){
                 if(Farcade.terminalSeleccionada.getAceptaEncomiendas() == true){
@@ -126,7 +125,7 @@ public class DialogInformacion extends AppCompatActivity implements View.OnClick
                 }
 
             }else{
-                campo4.setText("Acepta Encomiendas:"+" "+"Informacion no Disponible");
+                campo4.setText("Acepta Encomiendas:"+" "+"Sin datos");
 
 
             }

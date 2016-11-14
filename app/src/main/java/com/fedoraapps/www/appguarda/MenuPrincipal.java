@@ -67,8 +67,8 @@ public class MenuPrincipal extends AppCompatActivity
         scanBtn = (Button)findViewById(R.id.scan_button);
         Manual = (Button)findViewById(R.id.manual);
 
-        nombreEmpresa = (TextView) findViewById(R.id.nombreempresa);
-        emailEmpresa = (TextView)findViewById(R.id.mailempresa);
+        nombreEmpresa = (TextView) findViewById(R.id.empresa);
+        emailEmpresa = (TextView)findViewById(R.id.mail);
         MenuDesplegable = (LinearLayout)findViewById(R.id.menudesplegableheader);
 
 
@@ -116,14 +116,14 @@ public class MenuPrincipal extends AppCompatActivity
             }
             if(Farcade.configuracionEmpresa.getColorTitulo()!=null){
                 titulo.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));
-                nombreEmpresa.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));
-                emailEmpresa.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));
+             //   nombreEmpresa.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));
+            //    emailEmpresa.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));
             }
             else{
 
                 titulo.setTextColor(Color.parseColor("#ffffffff"));
-                nombreEmpresa.setTextColor(Color.parseColor("#FFFFFF"));
-                emailEmpresa.setTextColor(Color.parseColor("#FFFFFF"));
+         //       nombreEmpresa.setTextColor(Color.parseColor("#FF000000"));
+          //      emailEmpresa.setTextColor(Color.parseColor("#FFFFFF"));
         /*        if(Farcade.configuracionEmpresa.getNombre()!=null)
 //                nombreEmpresa.setTextColor(Color.parseColor("#ffffffff"));
                 if(Farcade.configuracionEmpresa.getEmails()!=null)
@@ -132,8 +132,9 @@ public class MenuPrincipal extends AppCompatActivity
             }
             if(Farcade.configuracionEmpresa.getColorLetras()!=null){
                 textoButtonManual.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorLetras()));
-                nombreEmpresa.setTextColor(Color.parseColor("#000000"));
-                emailEmpresa.setTextColor(Color.parseColor("#000000"));}
+               // nombreEmpresa.setTextColor(Color.parseColor("#FF000000"));
+              //  emailEmpresa.setTextColor(Color.parseColor("#FF000000"));
+                }
             else{
                 textoButtonManual.setTextColor(Color.parseColor("#ffffffff"));
             }
@@ -142,7 +143,7 @@ public class MenuPrincipal extends AppCompatActivity
             else{
                 textoButtonEscaner.setTextColor(Color.parseColor("#ffffffff"));
             }
-            if(Farcade.configuracionEmpresa.getNombre()!=null){
+          /*  if(Farcade.configuracionEmpresa.getNombre()!=null){
                 nombreEmpresa.setText(Farcade.configuracionEmpresa.getNombre());
             }else{
                 nombreEmpresa.setText("LAC BUS");
@@ -155,7 +156,7 @@ public class MenuPrincipal extends AppCompatActivity
                 }
             }else {
                 emailEmpresa.setText("tecnologo2016@gmail.com");
-            }
+            }*/
 
 
             //titulo.setBackgroundColor(R.drawable.abc_list_selector_background_transition_holo_dark);
@@ -167,9 +168,9 @@ public class MenuPrincipal extends AppCompatActivity
             titulo.setTextColor(Color.parseColor("#ffffffff"));
             textoButtonManual.setTextColor(Color.parseColor("#ffffffff"));
             textoButtonEscaner.setTextColor(Color.parseColor("#ffffffff"));
-            nombreEmpresa.setTextColor(Color.parseColor("#000000"));
-            emailEmpresa.setTextColor(Color.parseColor("#ffffffff"));
-            logo.setImageResource(R.drawable.bondi_blanco);
+           // nombreEmpresa.setTextColor(Color.parseColor("#FF000000"));
+          //  emailEmpresa.setTextColor(Color.parseColor("#FF000000"));
+//            logo.setImageResource(R.drawable.icono_bondi);
             emailEmpresa.setText("tecnologo2016@gmail.com");
             nombreEmpresa.setText("LAC BUS");
         }

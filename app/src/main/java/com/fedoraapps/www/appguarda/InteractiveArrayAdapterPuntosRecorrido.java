@@ -145,22 +145,3 @@ public class InteractiveArrayAdapterPuntosRecorrido extends ArrayAdapter<DataPto
 
 }
 
-// viewHolder.button = (Button) view.findViewById(R.id.detalle);
-           /* viewHolder.button.setOnClickListener(new View.OnClickListener() {
-
-                @Override
-                public void onClick(View v) {
-                    DataPuntoRecorridoConverter e =(DataPuntoRecorridoConverter) v.getTag();
-
-                    /* Intent i = new Intent(context,MenuDetalleEncomienda.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    i.putExtra("codigoEncomienda",e.getId());
-                    getContext().getApplicationContext().startActivity(i);
-                }
-            });*/
-
-                    /*Integer aux = 0;
-                    for(DataPtoRecWrapper aaa : lista){
-                        if(aux != position)
-                            aaa.setChecked(false);
-                        aux++;
-                    }*/

@@ -69,6 +69,7 @@
             android:inputType="number"
             android:drawableLeft="@drawable/buscar"
             android:backgroundTint="@color/accent"
+            android:maxLength="4"
             android:hint="Ingresar Codigo"/>
     </android.support.design.widget.TextInputLayout>
 

@@ -73,13 +73,7 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
             confirmar.setTextColor(Color.parseColor("#ffffffff"));
             confirmar.setBackgroundColor(Color.parseColor("#5a595b"));
             inputCodigo.setTextColor(Color.parseColor("#ffffffff"));
-
-
-
-
-
         }
-
     }
 
     @Override

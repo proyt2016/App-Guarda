@@ -1,2 +1,488 @@
 <?xml version="1.0" encoding="utf-8"?>
-<items version="2" />
+<items version="2" >
+
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.firebase/firebase-auth-module/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="35a01d7cb4ff6b5976777bf5827fd8f206fb8757">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-auth-module-9.2.1_8bb3027b5b349be05eb7e6fd7a29b8d5a8846b85/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/.gradle/caches/modules-2/files-2.1/com.google.code.gson/gson/2.6.2/f1bc476cc167b18e66c297df599b2377131a8947/gson-2.6.2.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="f1bc476cc167b18e66c297df599b2377131a8947">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/gson-2.6.2_178d210ba0192dc4db5ee3ed234c377daa7fb0a4/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wearable/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="dd1907a2e855eeb2be8aa3486f3d4d4f1c8b22af">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-wearable-9.2.1_75d6d3afbec5704b99ee98bfc19898a44058b7a9/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-plus/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="def5530cb13311617fc8f962e2a90225bb6904e2">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-plus-9.2.1_ed4f6e2c76c042fdfe167813e1d5d716cea59bbd/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Android/Sdk/extras/android/m2repository/com/android/support/support-annotations/23.4.0/support-annotations-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ffbe55fdb2bb456b1485831706a9eac3300bb6b8">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-23.4.0_244e126ec29d51b203ef2402b2e60f9e63fd1e86/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.firebase/firebase-common/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="3627eacd7f7cafb5e8ae683992e7b2f9b7dcab1a">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-common-9.2.1_33295d74f6317221f0c0423da669bdcee7502e13/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/.gradle/caches/modules-2/files-2.1/com.google.zxing/core/3.2.1/2287494d4f5f9f3a9a2bb6980e3f32053721b315/core-3.2.1.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="2287494d4f5f9f3a9a2bb6980e3f32053721b315">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/core-3.2.1_3302eebef5fb5b75c276f4de0a04d2b91c1f1700/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="6d2f508d1a9fa0fbe1653595e484800c08afb42c">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-ads-9.2.1_2c1b647d7be6fdb2a6340281784110a5d04bfa6b/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast-framework/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="9f2282b9fc24f24c69665032dede1bc7201cf006">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-cast-framework-9.2.1_0df429e9f2c17b104da633f61259eb803312944f/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gass/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="081ced8ab77e606b6743c27cfe93dc450447b046">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-gass-9.2.1_cd1fdac2bd79fd333767f2cfa570e7f803a89a7f/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-wallet/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="8aada8a0e9e9b3ecdda5e80f17c6a51a468e302a">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-wallet-9.2.1_2724966f49c9f48d911b84f47a313b11082b15ba/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth-base/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="48917c60ea81213ea39cbd7123996a5401106dc3">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-auth-base-9.2.1_9f0cbcc2f20517f637bafcd6fcfb7f7e0e320f18/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-drive/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="89ab748a6c0ab6ac1d3671f2356d6181e8108bc5">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-drive-9.2.1_3fb5318b8bb0e7d37882130a09e5df3741621eb6/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/23.0.0/jars/libs/internal_impl-23.0.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="03d38bb042efe3e5ce27ba66b729a9523c36d8fe">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.0.0_5abc46ba729d0349fc3f0b467399c22a61e87fcc/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-base/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="421b36cf4f0d3bbd75e8f28647fccf36674ef049">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-base-9.2.1_576e9f4cc5b14e63b8dff9eb0725f2406325491a/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="67bd36ee9340ec7c254108936ad16b24bed160cc">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-23.4.0_38a07cd3f7f14555f80e15fcf9dda1e4a6d009df/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-vision/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="3a42c5696fa39930d39770f7e5552a9c965fbe09">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-vision-9.2.1_22a863dc1dd44950b41d852b81fc29ef0230afe2/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/converter-gson/2.0.2/f8d87f15b94b8d74e7ccf61d7eedb558811cdb30/converter-gson-2.0.2.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="f8d87f15b94b8d74e7ccf61d7eedb558811cdb30">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/converter-gson-2.0.2_ad2b570282567f2722c2645ea826b76d17fd4881/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.4.0/jars/libs/internal_impl-23.4.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ea3c07504d2c8f4b13aa17c45c1b68ed9c1c3674">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-23.4.0_023f7455dda0d29a3a45777c6d9547ab09374079/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-auth/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="e1bec33f1ec5367e25676638b430b9d585f3dbec">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-auth-9.2.1_e5d750d2234c02429ccc71fee5a2299e6436c9a4/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/.gradle/caches/modules-2/files-2.1/com.google.zxing/android-integration/3.2.1/87a3d7da33a6c633fb1ff30023dbf0d05e8ea74c/android-integration-3.2.1.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="87a3d7da33a6c633fb1ff30023dbf0d05e8ea74c">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/android-integration-3.2.1_7e2b4bc0963d975ad131041461431337f51f3a67/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-nearby/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="0765979e802b1669c90dc36076559461d5eb6ad1">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-nearby-9.2.1_bcd294b6883f137c85dae12f524e2f135a644585/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.firebase/firebase-iid/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="d41b5d21cc9dd7d210f0ae82ac509ba7f091d611">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-iid-9.2.1_54b85e9bde47b828150b57eb792bf033792d3121/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.firebase/firebase-messaging/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ac78f93fc89c497a65f9d9a352cd405996d2f65a">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-messaging-9.2.1_83d0875b79c639161fada25e94d8b7ced6756760/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="b87d98373e26df2548248a496a5a92e15ef1363f">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_db5c739b5343d00dab10da578395cb6bbcc6f7be/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.android.support/design/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="5326d9a850d491714fef8cbfaa9ea3416f0bf0d2">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-design-23.4.0_1af8124e8a56831624196d178ee68a9ea5c8a045/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.6.0/98476622f10715998eacf9240d6b479f12c66143/okio-1.6.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="98476622f10715998eacf9240d6b479f12c66143">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/okio-1.6.0_7f8c882c2b4231b4b1cbc054346b0aec61f032fa/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-contextmanager/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ccc963cafe59ce185c49f47baff7eedcb8589bdf">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-contextmanager-9.2.1_689aed9d1040e69df8986ad03b74af9b37e3a8a1/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-safetynet/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="4b515e6e269bfe848f5b43ac09bce54d6617d4fd">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-safetynet-9.2.1_715165f3dc7e20c98b7f5750d45a9824f4984c5b/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tagmanager-api/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="77e2e4803396fa79009ace04d9be84184aafcc31">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tagmanager-api-9.2.1_104318027db8d505d443adf776332834968cfc30/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.android.support/support-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="c2c594cace5d83a3227b2b6e658ecbfd586d3ed9">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-vector-drawable-23.4.0_4a376c7c681417df61932c3473798cd1152ece3e/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="6a0f2d219f82db499ac03d5a985c4eb3e83fc422">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-analytics-9.2.1_d283f1cdfd447eae764c8b26f66779fd3a53f3b9/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-fitness/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="d064f813cd835f17853e39221b247cf6a997a2db">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-fitness-9.2.1_077d01bc5485c578e3bc26ecf4cf549d8e150cbd/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-basement/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="6b896c1067633db41e9c10a3a5d0919c5c4cfc8c">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-basement-9.2.1_538e9b21c56ff145fef7dcf89af21a8a62130ff3/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tagmanager/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="b24c1a80d8ccaecee7b8b80209b4e273dc22b14d">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tagmanager-9.2.1_7881eef7b7fb04137697feb64003b81215cdfcba/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.android.support/mediarouter-v7/23.0.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="d358b3dd49a7c67844622dcbc9cf4339e13952ce">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-mediarouter-v7-23.0.0_ce64058dc7d3b0da274b7b03ecc2078dd30c7880/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-ads-lite/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="310ef01419435979cc82847cf085799a8d00e7e9">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-ads-lite-9.2.1_ecdb956ce04bf30e5aa96ff3436ae0a1220fa0e5/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="548f06de403a9409f00554b3ee12a9fdea0e236c">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-23.4.0_a1c6b4935d662961d4e885a7bbd36bcda542d13a/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.android.support/animated-vector-drawable/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="de4db3785756bfb0915a9f59a9b3f2fea7407be4">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-animated-vector-drawable-23.4.0_19102e93d1e20a018777bffaf2eb800cd7ffa000/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appindexing/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ee19e33a798d11a5cf309a40155b8223fadcdeea">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-appindexing-9.2.1_b9bbbc5340c665baff72263e53475a26fef3b126/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.2.0/f7873a2ebde246a45c2a8d6f3247108b4c88a879/okhttp-3.2.0.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="f7873a2ebde246a45c2a8d6f3247108b4c88a879">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/okhttp-3.2.0_019de002044e71b7c4802fedf91cfeb2832e4d58/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.firebase/firebase-database/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="f06a0705d7b8b9d18b00d056fe0e07bec75514e6">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-database-9.2.1_bf200de62544e2aad3f8996836a57c81ba87e290/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics-impl/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="1141496362c8876f0da4b645fbaf22c0a3618372">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-analytics-impl-9.2.1_01e350dc7373accc5f373fae3efbf8e9ecce9047/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.firebase/firebase-storage-common/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="36e2b438f9b0d68fb2482c8f389e249e32840cff">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-storage-common-9.2.1_afb927991873ca22e58fe86034d84405c13bda52/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-games/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="4c2b01baa64ba25f8dbdf7f7f828bc5664dab55e">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-games-9.2.1_3670d0708ece597c81eeb157b324ab03302f828c/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-clearcut/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="90eeba67a669f8fb24db0f821ef81703fe7a02bc">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-clearcut-9.2.1_fce602409543354c129c2e92511994c972c76e9c/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="d79dddf2a73fbbc7a8276339e7cc47545bd4c9b2">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_1d23ef6880a3bd6a69be28593dec912f55842af3/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-analytics/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="357a8702c49044417d4856861c8f435e7c74ef09">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-analytics-9.2.1_160d18bfdda79c529b0d3d06b17709a446eeb761/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-places/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="0979debb5b4d955ddc0e80bb192f4f00c2f91750">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-places-9.2.1_8403d01e932c7d4712d097657666cfb55f3676f7/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-identity/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="152cba5ca28fd4a5191a8577a0fa96d61122041e">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-identity-9.2.1_d862e557e44a1f2a777d30cd6e572ec891f57f4c/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.android.support/recyclerview-v7/23.4.0/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ec75036c3c52e451d0cde50a5aedaf5fd32354a0">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-recyclerview-v7-23.4.0_3892905e549390503e50b4a0ca7c43d28f0c2327/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-iid/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="a65d98c9409f271d3209f4cc1f7d8e0391665fa5">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-iid-9.2.1_03d1322eb80a469ab92799ab37e09c7a10cf6970/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.firebase/firebase-config/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="7bb417e9ac8645285342935679e75d371b58b62b">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-config-9.2.1_f5e91e7f3e88143dd0e957c9a2299e1b390693fd/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/.gradle/caches/modules-2/files-2.1/com.jakewharton/butterknife/7.0.1/d5d13ea991eab0252e3710e5df3d6a9d4b21d461/butterknife-7.0.1.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="d5d13ea991eab0252e3710e5df3d6a9d4b21d461">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/butterknife-7.0.1_3855a1d3023f560cb0c39dc80d50202599474b66/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-gcm/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="edf9a22ebf25281619265079aec8f5d433da1a5c">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-gcm-9.2.1_27f01f3d95e5365790740d01c335819dc6f4c443/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-location/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="07c569a77f437c5c71eac8b1b636a50bebb69a93">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-location-9.2.1_33a135ae4e0ce730d2963b0f04b7c04b7491c3ee/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-tasks/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="819c2c3a4fb135e085445d11131d069cf9c32b2a">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-tasks-9.2.1_7ffa6d2a4cbbfe1ac71ed9bbe0129888e5abb845/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.firebase/firebase-auth/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="2506c5893e125e2f9cfc522378e893620c21b109">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-auth-9.2.1_e28ba3d8315fba93e1d2972ec0c1f50992b39167/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.firebase/firebase-crash/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="6c09228ff931eb30b68dd27fe34ed90d978b6892">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-crash-9.2.1_f45ab191cd082a896b5911975cc67f0a3732fdef/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.firebase/firebase-analytics-impl/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="5337354083e89ed67151859ab0b6b80935c60eaf">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-analytics-impl-9.2.1_9eb8555e4f4f9d14f6fb330b2149a6815dae3524/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/.gradle/caches/modules-2/files-2.1/com.squareup.retrofit2/retrofit/2.0.2/43eeae0b9fb087bb3194ba59ab63a38a32fbf3e/retrofit-2.0.2.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="043eeae0b9fb087bb3194ba59ab63a38a32fbf3e">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/retrofit-2.0.2_6cec80a5a61289a8dc1b7629126056db3266536f/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.firebase/firebase-database-connection/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="05d2e01f33fb2097b51fce3f938dc37a75fe2d6b">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-database-connection-9.2.1_f7951afe1aafeecb9e541b3a7d9688cdb0979337/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-cast/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="428c9bac95b2f72921224e289553a04bea61cda5">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-cast-9.2.1_b2cf616a0f6baef595aa13e2a7f041716cc04741/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.firebase/firebase-storage/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="e719de687ac45141de3dd613907860a495580af0">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-storage-9.2.1_251941d4ef0397da9f2211defb36b4029368c460/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-maps/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="bbd51be332bace144b3d16501ec0af379c3c8750">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-maps-9.2.1_49b5009319a6dac001341edebc11f316368e63a0/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.firebase/firebase-auth-common/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="ee409046028e5657a2a69edaa2eba00d6511a74c">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.firebase-firebase-auth-common-9.2.1_9b83cdaadcb6e026009c1bd4618f98bd605936be/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-panorama/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="05a2710d284c03087013a667a324c9e2aba5bc91">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-panorama-9.2.1_6dfeaa476cce88ef36cf3b6183bca2dd7b3ed421/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.maps.android/android-maps-utils/0.4.4/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="6f57b76211a1d7b0c1f18873af59faad95664681">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.maps.android-android-maps-utils-0.4.4_d696704674976fb1eb0e0b720d49f79b2c47b6ca/classes.dex" />
+    </item>
+    <item
+        jar="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/exploded-aar/com.google.android.gms/play-services-appinvite/9.2.1/jars/classes.jar"
+        jumboMode="true"
+        revision="23.0.3"
+        sha1="f3b0ff905873c91ab64addba30cc1e77bed34c4d">
+        <dex dex="/home/maxi/Escritorio/App-Guarda/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.google.android.gms-play-services-appinvite-9.2.1_d3a71da6f85a9b9f7958655ea391f44a060286f6/classes.dex" />
+    </item>
+
+</items>

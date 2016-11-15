@@ -34,6 +34,8 @@ import com.fedoraapps.www.appguarda.Shares.DataViajeConvertor;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -72,12 +74,29 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
     TextView tituloOrigen;
     TextView tituloDestino;
     RelativeLayout fondoDePantalla;
+    Date ja = new Date();
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.venta_efectivo_new);
+        Date FechaCompra = new Date();
+        Date fe = new Date();
+        
+        DateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        String s = f.format(FechaCompra);
+        try {
+         fe  = f.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("FECHAAAAAAAAAAAAAAAAAAA COMPRAAAAAAAAAA------"+" "+fe);
+
+        //System.out.println("----------> FECHAAAA"+new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
+
+
 
         codRecorrido = controller.getRecorridoSeleccionado().getRecorrido().getId();
         codViaje = controller.getRecorridoSeleccionado().getId();
@@ -230,7 +249,13 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
 
 
                             } else {
+
                                 Date FechaCompra = new Date();
+                                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                                String fechaFormat = df.format(FechaCompra);
+
+
+
                                 String ciUsuario = "4444";
                                 DataPrecio precio = new DataPrecio();
                                 DataViajeConvertor VIAJE = new DataViajeConvertor();
@@ -241,10 +266,10 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
                                         emp = Farcade.empleado;
                                     }
                                     //SimpleDateFormat sm = new SimpleDateFormat("mm-dd-yyyy");
-                                    SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
+                                   // SimpleDateFormat dt = new SimpleDateFormat("yyyyy-mm-dd hh:mm:ss");
                                    // String strDate = sm.format(FechaCompra);
 
-                                    DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, puntoOrigen, punto, null, null, null, emp, true, true, false);
+                                    DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, puntoOrigen, punto, fechaFormat, null, null, emp, true, true, false);
 
                                         Call<DataPasajeConvertor> call3 = PasajeApi.createService().venderPasaje(pasaje);
                                         call3.enqueue(new Callback<DataPasajeConvertor>() {

@@ -1,5 +1,8 @@
 package com.fedoraapps.www.appguarda.Shares;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -12,7 +15,7 @@ public class DataPasajeConvertor {
     private DataPrecio precio;
     private DataPuntoRecorridoConverter origen;
     private DataPuntoRecorridoConverter destino;
-    private Date fechaCompra;
+    private String fechaCompra;
     private DataUsuario comprador;
     private String ciPersona;
     private DataEmpleado vendedor;
@@ -28,15 +31,15 @@ public class DataPasajeConvertor {
     //PARA TRAER LOS PASAJES
 
     public DataPasajeConvertor(String id, int codigoPasaje, DataViajeConvertor via, DataPrecio prec, DataPuntoRecorridoConverter orig,
-                               DataPuntoRecorridoConverter des, Date fecVen, DataUsuario comp, String ciPer,
-                               DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
+                               DataPuntoRecorridoConverter des, Date fechCompra, DataUsuario comp, String ciPer,
+                               DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) throws ParseException {
         this.id = id;
         this.codigoPasaje = codigoPasaje;
         this.viaje = via;
         this.precio = prec;
         this.origen = orig;
         this.destino = des;
-        this.fechaCompra = fecVen;
+        this.fechaCompra = this.getFechaCompra(fechCompra);
         this.comprador = comp;
         this.ciPersona = ciPer;
         this.vendedor = vend;
@@ -48,13 +51,13 @@ public class DataPasajeConvertor {
     //PARA COMPRAR PASAJE
 
     public DataPasajeConvertor(DataViajeConvertor via, DataPrecio prec, DataPuntoRecorridoConverter orig,
-                               DataPuntoRecorridoConverter des, Date fecVen, DataUsuario comp, String ciPer,
+                               DataPuntoRecorridoConverter des, String fechCompra, DataUsuario comp, String ciPer,
                                DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
         this.viaje = via;
         this.precio = prec;
         this.origen = orig;
         this.destino = des;
-        this.fechaCompra = fecVen;
+        this.fechaCompra = fechCompra;
         this.comprador = comp;
         this.ciPersona = ciPer;
         this.vendedor = vend;
@@ -113,12 +116,18 @@ public class DataPasajeConvertor {
         return this.destino;
     }
 
-    public void setFechaCompra(Date val){
+    public void setFechaCompra(String val){
         this.fechaCompra = val;
     }
 
-    public Date getFechaCompra(){
-        return this.fechaCompra;
+    public Date genFechaCompra() throws ParseException {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.parse(this.fechaCompra);
+    }
+
+    public String getFechaCompra(Date fecha) throws ParseException {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        return df.format(fecha);
     }
 
     public void setComprador(DataUsuario val){

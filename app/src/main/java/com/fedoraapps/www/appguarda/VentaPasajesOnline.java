@@ -40,6 +40,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.zxing.integration.android.IntentIntegrator;
 
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -255,6 +257,9 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
                                 DataPrecio precio = new DataPrecio();
                                 DataViajeConvertor VIAJE = new DataViajeConvertor();
                                 VIAJE.setId(controller.getRecorridoSeleccionado().getId());
+                                Date FechaCompra = new Date();
+                                DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+                                String fechaFormat = df.format(FechaCompra);
 
                                 DataPuntoRecorridoConverter ori = new DataPuntoRecorridoConverter();
 
@@ -273,7 +278,9 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
                                     emp = Farcade.empleado;
                                 }
 
-                                DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, ori, dest, null, null, null, emp, false, false, false);
+
+
+                                DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, ori, dest,fechaFormat , null, null, emp, false, false, false);
 
                                 Call<DataPasajeConvertor> call3 = PasajeApi.createService().venderPasaje(pasaje);
                                 call3.enqueue(new Callback<DataPasajeConvertor>() {

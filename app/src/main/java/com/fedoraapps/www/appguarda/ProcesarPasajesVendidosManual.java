@@ -31,6 +31,7 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
     private String codViaje;
     private String codRecorrido;
     private int codigoPasaje;
+    int cadenaSinEspacios = 0;
     private EditText inputCodigo;
     private Button confirmar;
 
@@ -79,20 +80,35 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.confirmarManual) {
+            confirmar.setEnabled(false);
 
             if (isEmpty(inputCodigo) == true) {
                 //VALIDO QUE SE HAYA INGRESADO DATOS
                 dialogCodigoIncorrectoTipeo().show();
+                inputCodigo.setText("");
+                confirmar.setEnabled(true);
             }else {
                 //OBTENGO CODIGO DEL PASAJE
-                 codigoPasaje = Integer.parseInt(inputCodigo.getText().toString());
+
+               /* for (int x=0; x < inputCodigo.length(); x++) {
+                    if (inputCodigo.getText().charAt(x) != ' ')
+                        cadenaSinEspacios += inputCodigo.getText().charAt(x);
+                }*/
+
+                 codigoPasaje = Integer.parseInt(inputCodigo.getText().toString().trim());
                 //VERIFICO SI EXISTE PASAJE EN MEMORIA
                 Call<DataPasajeConvertor> call = PasajeApi.createService().getPasajePorCodigo(codigoPasaje);
                 call.enqueue(new Callback<DataPasajeConvertor>() {
                     @Override
                     public void onResponse(Call<DataPasajeConvertor> call, Response<DataPasajeConvertor> response) {
                         final DataPasajeConvertor pasaje = response.body();
-
+                        if(pasaje!=null) {
+                            if (pasaje.getUsado() == null)
+                                pasaje.setUsado(false);
+                            if (pasaje.getEliminado() == null)
+                                pasaje.setEliminado(false);
+                            if (pasaje.getPago() == null)
+                                pasaje.setPago(false);
                             if (pasaje != null && pasaje.getUsado() == false) {
                                 //CAMBIO ESTADO A PASAJE UTILIZADO
                                 Call<Void> call2 = PasajeApi.createService().procesarPasaje(pasaje.getId());
@@ -101,31 +117,68 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
                                     public void onResponse(Call<Void> call, Response<Void> response) {
                                         //MUESTRO EN DIALOG OPERACION EXITOSA
                                         crearDialogoConexion(pasaje).show();
+                                        confirmar.setEnabled(true);
+
+
+                                        inputCodigo.setText("");
+
                                     }
+
                                     @Override
                                     public void onFailure(Call<Void> call, Throwable t) {
-                                        System.out.println("*****FALLO EL SERVICIO*****");}
-                            });
+                                        System.out.println("*****FALLO EL SERVICIO*****");
+                                        inputCodigo.setText("");
+                                        confirmar.setEnabled(true);
 
 
-                        }else {
+
+                                    }
+                                });
+
+
+                            } else {
                                 if (pasaje == null) {
                                     dialogNoExistePasaje().show();
+                                    inputCodigo.setText("");
+                                    confirmar.setEnabled(true);
 
-                                }else {
+
+
+                                } else {
                                     //PASAJE YA FUE UTILIZADO
+                                    if(pasaje.getUsado()!=null)
                                     if (pasaje.getUsado() == true) {
                                         dialogPasajeUsado().show();
+                                        inputCodigo.setText("");
+                                        confirmar.setEnabled(true);
+
+
                                     } else {
                                         //NO EXISTE EL PASAJE SE MUESTRA EL DIALOG CORRESPONDIENTE
                                         dialogNoExistePasaje().show();
+                                        confirmar.setEnabled(true);
+
+                                        inputCodigo.setText("");
+
                                     }
                                 }
                             }
+
+                        }else{
+                            dialogNoExistePasaje().show();
+                            confirmar.setEnabled(true);
+
+                            inputCodigo.setText("");
+
+                        }
                     }
                     @Override
                     public void onFailure(Call<DataPasajeConvertor> call, Throwable t) {
-                        System.out.println("onFailure");}
+                        System.out.println("onFailure");
+                        confirmar.setEnabled(true);
+
+                        inputCodigo.setText("");
+                    }
                 });
             }
         }
@@ -148,6 +201,8 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
+
+                confirmar.setEnabled(true);
 
             }
         };
@@ -173,7 +228,7 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Atencion");
-        alertDialogBuilder.setMessage("El pasaje ya fue utilizado!");
+        alertDialogBuilder.setMessage("El pasaje ya fue utilizado");
         alertDialogBuilder.setIcon(R.drawable.icono_alerta);;
 
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
@@ -181,6 +236,7 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                confirmar.setEnabled(true);
 
             }
         };
@@ -207,8 +263,8 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
     {
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Atencion");
-        alertDialogBuilder.setMessage("Debe ingresar un codigo valido, unicamente letras");
+        alertDialogBuilder.setTitle("Atencion!");
+        alertDialogBuilder.setMessage("Debe ingresar un codigo valido");
         alertDialogBuilder.setIcon(R.drawable.icono_alerta);;
 
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
@@ -216,6 +272,7 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                confirmar.setEnabled(true);
 
             }
         };
@@ -235,14 +292,22 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
 
         return alertDialogBuilder.create();
     }
+    private static boolean isBooleanNull(Boolean cadena){
+        try {
+           Boolean.toString(cadena);
+            return false;
+        } catch (NumberFormatException nfe){
+            return true;
+        }
+    }
     private AlertDialog crearDialogoConexion(DataPasajeConvertor pasaje)
     {
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Pasaje Vendido");
-        alertDialogBuilder.setMessage("Numero de Pasaje:"+" "+pasaje.getCodigoPasaje()+"\n"
+        alertDialogBuilder.setMessage("Codigo:"+" "+pasaje.getCodigoPasaje()+"\n"
                 +"Monto:"+" "+/*pasaje.getPrecio().getMonto()*/"\n"
-                + "Con destino a"+" "+pasaje.getDestino().getNombre());
+                + "Destino"+" "+pasaje.getDestino().getNombre());
         alertDialogBuilder.setIcon(R.drawable.icono_cash_black);;
 
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
@@ -250,6 +315,7 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
 
             @Override
             public void onClick(DialogInterface dialog, int which) {
+                confirmar.setEnabled(true);
 
             }
         };
@@ -269,5 +335,6 @@ public class ProcesarPasajesVendidosManual extends AppCompatActivity implements 
 
         return alertDialogBuilder.create();
     }
+
 
 }

@@ -1,12 +1,14 @@
 package com.fedoraapps.www.appguarda.Api;
 
 
-
 import com.fedoraapps.www.appguarda.TenantProvider;
 
 import okhttp3.OkHttpClient;
+import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.http.GET;
+import retrofit2.http.Path;
 
 /**
  * Created by maxi on 07/06/2016.
@@ -33,7 +35,8 @@ public class PrecioApi {
     }
 
     public interface PrecioApiInterface {
-       /* @GET("/Precio")
-        Call<List<Precio>> getAll();*/
+
+        @GET("/lcbsapi/rest/viajes/getpreciodepasaje/{codigoOrigen}/{codigoDestino}/{codigoRecorrido}")
+        Call<Float> getPrecio(@Path("codigoOrigen") final String codigoOrigen, @Path("codigoDestino") final String codigoDestino, @Path("codigoRecorrido") final String codigoRecorrido);
     }
 }

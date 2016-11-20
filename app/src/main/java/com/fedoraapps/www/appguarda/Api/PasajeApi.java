@@ -54,5 +54,8 @@ public class PasajeApi {
         @POST("/lcbsapi/rest/viajes/procesarpasaje/{idPasaje}")
         Call<Void> procesarPasaje(@Path("idPasaje") String idPasaje);
 
+        @GET("/lcbsapi/rest/viajes/getcantidaddepasaesdisponibles/{idViaje}/{idOrigen}/{idDestino}")
+        Call<Integer> obtenerPasajesDisponibles(@Path("idViaje") String idViaje, @Path("idOrigen") String idOrigen, @Path("idDestino") String idDestino);
+
     }
 }

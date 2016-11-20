@@ -109,19 +109,19 @@ public class InteractiveArrayAdapterRecorridos extends ArrayAdapter<DataViajeCon
             if(Farcade.configuracionEmpresa.getColorFondoLista()!=null){
                 holder.titulo.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista()));}
             else{
-                holder.titulo.setBackgroundColor(Color.parseColor("#ffff4444"));
+                holder.titulo.setBackgroundColor(Color.parseColor("#0b7bff"));
             }
             if(Farcade.configuracionEmpresa.getColorFondoLista()!=null){
                 holder.subTitulo.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista()));}
             else{
-                holder.subTitulo.setBackgroundColor(Color.parseColor("#ffff4444"));
+                holder.subTitulo.setBackgroundColor(Color.parseColor("#0b7bff"));
             }
         }else{
             //NO EXISTE CONFIGURACION
             holder.titulo.setTextColor(Color.parseColor("#ff000000"));
             holder.subTitulo.setTextColor(Color.parseColor("#ffffffff"));
-            holder.titulo.setBackgroundColor(Color.parseColor("#ffff4444"));
-            holder.subTitulo.setBackgroundColor(Color.parseColor("#ffff4444"));
+            holder.titulo.setBackgroundColor(Color.parseColor("#0b7bff"));
+            holder.subTitulo.setBackgroundColor(Color.parseColor("#0b7bff"));
         }
         holder.titulo.setText(lista.get(position).getRecorrido().getNombre().toString());
         holder.subTitulo.setText("Horario Salida:"+" "+ String.valueOf(lista.get(position).getHorario().getNombre()));

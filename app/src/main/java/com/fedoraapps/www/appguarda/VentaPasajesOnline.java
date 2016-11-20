@@ -34,7 +34,6 @@ import com.fedoraapps.www.appguarda.Shares.DataPrecio;
 import com.fedoraapps.www.appguarda.Shares.DataPtoRecWrapper;
 import com.fedoraapps.www.appguarda.Shares.DataPuntoRecorridoConverter;
 import com.fedoraapps.www.appguarda.Shares.DataRecorridoConvertor;
-import com.fedoraapps.www.appguarda.Shares.DataUsuario;
 import com.fedoraapps.www.appguarda.Shares.DataViajeConvertor;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.zxing.integration.android.IntentIntegrator;
@@ -59,9 +58,15 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
     Spinner origen;
     TextView tituloOrigen;
     TextView tituloDestino;
-    DataEmpleado emp;
-    DataRecorridoConvertor reco;
+    DataPuntoRecorridoConverter punto = new DataPuntoRecorridoConverter();
+    DataPuntoRecorridoConverter dest = new DataPuntoRecorridoConverter();
+    DataPuntoRecorridoConverter ori = new DataPuntoRecorridoConverter();
     Double distancia;
+    String fechaFormat = null;
+
+    DataViajeConvertor VIAJE = new DataViajeConvertor();
+    DataRecorridoConvertor reco;
+    DataEmpleado emp = new DataEmpleado();
     Button generar;
     RelativeLayout fondoPantalla;
     String valOfSpinner;
@@ -80,7 +85,6 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.vista_venta_online);
-       RelativeLayout e = (RelativeLayout) findViewById(R.layout.vista_venta_online);
 
         codRecorrido = controller.getRecorridoSeleccionado().getRecorrido().getId();
         codViaje = controller.getRecorridoSeleccionado().getId();
@@ -108,12 +112,12 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
             if(Farcade.configuracionEmpresa.getColorFondosDePantalla()!=null){
                 fondoPantalla.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondosDePantalla()));}
             else{
-                fondoPantalla.setBackgroundColor(Color.parseColor("#ffff4444"));
+                fondoPantalla.setBackgroundColor(Color.parseColor("#0b7bff"));
             }
             if(Farcade.configuracionEmpresa.getColorFondoLista()!=null){
                 listaPuntos.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista()));}
             else{
-                listaPuntos.setBackgroundColor(Color.parseColor("#ffff4444"));
+                listaPuntos.setBackgroundColor(Color.parseColor("#0b7bff"));
             }
             if(Farcade.configuracionEmpresa.getColorTitulo()!=null){
                 tituloOrigen.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));}
@@ -137,8 +141,8 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
             }
         }else{
                 //NO EXISTE CONFIGURACION
-                fondoPantalla.setBackgroundColor(Color.parseColor("#ffff4444"));
-                listaPuntos.setBackgroundColor(Color.parseColor("#ffff4444"));
+                fondoPantalla.setBackgroundColor(Color.parseColor("#0b7bff"));
+                listaPuntos.setBackgroundColor(Color.parseColor("#0b7bff"));
                 tituloOrigen.setTextColor(Color.parseColor("#ffffffff"));
                 tituloDestino.setTextColor(Color.parseColor("#ffffffff"));
                 generar.setBackgroundColor(Color.parseColor("#5a595b"));
@@ -250,24 +254,23 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
 
 
                             } else {
-                                DataUsuario usuario = new DataUsuario();
-                                DataEmpleado empleado = new DataEmpleado();
+                               ;
                                 Date fechaVenc = new Date();
                                 String ciUsuario = "4444";
                                 DataPrecio precio = new DataPrecio();
-                                DataViajeConvertor VIAJE = new DataViajeConvertor();
+                                 VIAJE = new DataViajeConvertor();
                                 VIAJE.setId(controller.getRecorridoSeleccionado().getId());
                                 Date FechaCompra = new Date();
                                 DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-                                String fechaFormat = df.format(FechaCompra);
+                                 fechaFormat = df.format(FechaCompra);
 
-                                DataPuntoRecorridoConverter ori = new DataPuntoRecorridoConverter();
+
 
                                 ori.setId(puntoOrigen.getId());
                                 ori.setTipo(puntoOrigen.getTipo());
 
                                 DataPuntoRecorridoConverter punto = controller.getDestinoSeleccionado();
-                                DataPuntoRecorridoConverter dest = new DataPuntoRecorridoConverter();
+
 
                                 if (punto != null) {
                                     dest.setId(punto.getId());
@@ -278,78 +281,110 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
                                     emp = Farcade.empleado;
                                 }
 
+                                //dfdfdfdfdf
 
-
-                                DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, ori, dest,fechaFormat , null, null, emp, false, false, false);
-
-                                Call<DataPasajeConvertor> call3 = PasajeApi.createService().venderPasaje(pasaje);
-                                call3.enqueue(new Callback<DataPasajeConvertor>() {
-
+                                ///aca
+                                Call<Integer> call4= PasajeApi.createService().obtenerPasajesDisponibles(Farcade.recorridoSeleccionado.getId(),puntoOrigen.getId(),punto.getId());
+                                call4.enqueue(new Callback<Integer>() {
                                     @Override
-                                    public void onResponse(Call<DataPasajeConvertor> call, Response<DataPasajeConvertor> response) {
-                                       final DataPasajeConvertor p = response.body();
-                                        System.out.println("PASAJE---->" + p + "<----PASAJE");
+                                    public void onResponse(Call<Integer> call, Response<Integer> response) {
 
-                                        if (p != null) {
+                                        int i = response.body();
 
-                                            Call<DataRecorridoConvertor> call4 = PuntosRecorridoApi.createService().getRecorrido(Farcade.recorridoSeleccionado.getRecorrido().getId());
-                                            call4.enqueue(new Callback<DataRecorridoConvertor>() {
+                                        System.out.println("CANTIDAD DE PASAJES DISPONIBLES--------"+" "+i);
+
+                                        if(i>1) {
+
+
+
+                                            DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, ori, dest, fechaFormat, null, null, emp, false, false, false);
+
+
+
+
+                                            Call<DataPasajeConvertor> call3 = PasajeApi.createService().venderPasaje(pasaje);
+                                            call3.enqueue(new Callback<DataPasajeConvertor>() {
+
                                                 @Override
-                                                public void onResponse(Call<DataRecorridoConvertor> call, Response<DataRecorridoConvertor> response) {
-                                                    DataRecorridoConvertor recorrido = response.body();
-                                                    for(DataPtoRecWrapper d : temp){
-                                                        d.setChecked(false);
+                                                public void onResponse(Call<DataPasajeConvertor> call, Response<DataPasajeConvertor> response) {
+                                                    final DataPasajeConvertor p = response.body();
+                                                    System.out.println("PASAJE---->" + p + "<----PASAJE");
+
+                                                    if (p != null) {
+
+                                                        Call<DataRecorridoConvertor> call4 = PuntosRecorridoApi.createService().getRecorrido(Farcade.recorridoSeleccionado.getRecorrido().getId());
+                                                        call4.enqueue(new Callback<DataRecorridoConvertor>() {
+                                                            @Override
+                                                            public void onResponse(Call<DataRecorridoConvertor> call, Response<DataRecorridoConvertor> response) {
+                                                                DataRecorridoConvertor recorrido = response.body();
+                                                                for (DataPtoRecWrapper d : temp) {
+                                                                    d.setChecked(false);
+                                                                }
+                                                                adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesOnline.this, temp);
+                                                                listaPuntos.setAdapter(adapter);
+
+
+                                                                IntentIntegrator integrator = new IntentIntegrator(VentaPasajesOnline.this);
+                                                                integrator.shareText(String.valueOf(p.getCodigoPasaje()), "TEXT_TYPE");
+                                                                System.out.println(integrator.getTitle());
+                                                                dialogoPasajeVendido(p).show();
+                                                                controller.setDestinoSeleccionado(null);
+                                                            }
+
+                                                            @Override
+                                                            public void onFailure(Call<DataRecorridoConvertor> call, Throwable t) {
+                                                                System.out.println("*****FALLO EL SERVICIO*****" + t.getCause());
+                                                            }
+                                                        });
+
+                                                    } else {
+
+
+                                                        Call<DataRecorridoConvertor> call4 = PuntosRecorridoApi.createService().getRecorrido(Farcade.recorridoSeleccionado.getRecorrido().getId());
+                                                        call4.enqueue(new Callback<DataRecorridoConvertor>() {
+                                                            @Override
+                                                            public void onResponse(Call<DataRecorridoConvertor> call, Response<DataRecorridoConvertor> response) {
+
+                                                                DataRecorridoConvertor recorrido = response.body();
+
+                                                                controller.setDestinoSeleccionado(null);
+                                                                final DataPasajeConvertor pe = new DataPasajeConvertor();
+                                                                for (DataPtoRecWrapper d : temp) {
+                                                                    d.setChecked(false);
+                                                                }
+                                                                adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesOnline.this, temp);
+                                                                listaPuntos.setAdapter(adapter);
+                                                                dialogoPasajeNoVendido(pe).show();
+                                                            }
+
+                                                            @Override
+                                                            public void onFailure(Call<DataRecorridoConvertor> call, Throwable t) {
+                                                                System.out.println("*****FALLO EL SERVICIO*****" + t.getCause());
+                                                            }
+                                                        });
                                                     }
-                                                    adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesOnline.this, temp);
-                                                    listaPuntos.setAdapter(adapter);
-
-
-                                                    IntentIntegrator integrator = new IntentIntegrator(VentaPasajesOnline.this);
-                                                    integrator.shareText(String.valueOf(p.getCodigoPasaje()), "TEXT_TYPE");
-                                                    System.out.println(integrator.getTitle());
-                                                    dialogoPasajeVendido(p).show();
-                                                    controller.setDestinoSeleccionado(null);
                                                 }
 
                                                 @Override
-                                                public void onFailure(Call<DataRecorridoConvertor> call, Throwable t) {
+                                                public void onFailure(Call<DataPasajeConvertor> call, Throwable t) {
                                                     System.out.println("*****FALLO EL SERVICIO*****" + t.getCause());
                                                 }
                                             });
+                                      }else{
 
-                                        } else {
+                                            SinPasajeDisponible().show();
 
-
-                                            Call<DataRecorridoConvertor> call4 = PuntosRecorridoApi.createService().getRecorrido(Farcade.recorridoSeleccionado.getRecorrido().getId());
-                                            call4.enqueue(new Callback<DataRecorridoConvertor>() {
-                                                @Override
-                                                public void onResponse(Call<DataRecorridoConvertor> call, Response<DataRecorridoConvertor> response) {
-
-                                                    DataRecorridoConvertor recorrido = response.body();
-
-                                                    controller.setDestinoSeleccionado(null);
-                                                    final DataPasajeConvertor pe = new DataPasajeConvertor();
-                                                    for(DataPtoRecWrapper d : temp){
-                                                        d.setChecked(false);
-                                                    }
-                                                    adapter = new InteractiveArrayAdapterPuntosRecorrido(VentaPasajesOnline.this,temp );
-                                                    listaPuntos.setAdapter(adapter);
-                                                    dialogoPasajeNoVendido(pe).show();
-                                                }
-
-                                                @Override
-                                                public void onFailure(Call<DataRecorridoConvertor> call, Throwable t) {
-                                                    System.out.println("*****FALLO EL SERVICIO*****" + t.getCause());
-                                                }
-                                            });
                                         }
                                     }
 
                                     @Override
-                                    public void onFailure(Call<DataPasajeConvertor> call, Throwable t) {
+                                    public void onFailure(Call<Integer> call, Throwable t) {
                                         System.out.println("*****FALLO EL SERVICIO*****" + t.getCause());
                                     }
                                 });
+
+                                //ACAAAA FINAL
+
                             }
                         } else {
 
@@ -462,7 +497,40 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Atencion!");
-        alertDialogBuilder.setMessage("Debe Seleccionar un Destino");//+" "+pasaje.getDestino().getNombre()+"\n"+"Precio:"+" "+pasaje.getPrecio().getMonto());
+        alertDialogBuilder.setMessage("Debe seleccionar un destino");//+" "+pasaje.getDestino().getNombre()+"\n"+"Precio:"+" "+pasaje.getPrecio().getMonto());
+        alertDialogBuilder.setIcon(R.drawable.icono_alerta);;
+
+        // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
+        DialogInterface.OnClickListener listenerOk = new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        };
+
+        // Creamos un nuevo OnClickListener para el boton Cancelar
+        DialogInterface.OnClickListener listenerCancelar = new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        };
+
+        // Asignamos los botones positivo y negativo a sus respectivos listeners
+        alertDialogBuilder.setPositiveButton(R.string.ACEPTAR, listenerOk);
+        // alertDialogBuilder.setNegativeButton(R.string.Cancelar, listenerCancelar);
+
+        return alertDialogBuilder.create();
+    }
+
+    private AlertDialog SinPasajeDisponible()
+    {
+        // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Atencion!");
+        alertDialogBuilder.setMessage("Sin pasajes disponibles");//+" "+pasaje.getDestino().getNombre()+"\n"+"Precio:"+" "+pasaje.getPrecio().getMonto());
         alertDialogBuilder.setIcon(R.drawable.icono_alerta);;
 
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
@@ -529,7 +597,7 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Pasaje Vendido");
-        alertDialogBuilder.setMessage("Pasaje con destino:" +" "+Farcade.DestinoSeleccionado.getNombre() +"\n");//+"Precio:"+" "+pasaje.getPrecio().getMonto());
+        alertDialogBuilder.setMessage("Destino:" +" "+Farcade.DestinoSeleccionado.getNombre() +"\n");//+"Precio:"+" "+pasaje.getPrecio().getMonto());
         alertDialogBuilder.setIcon(R.drawable.icono_cash_black);;
 
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion

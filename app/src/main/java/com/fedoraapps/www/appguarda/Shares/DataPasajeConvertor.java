@@ -12,7 +12,7 @@ public class DataPasajeConvertor {
 
     private String id;
     private DataViajeConvertor viaje;
-    private DataPrecio precio;
+    private Float precio;
     private DataPuntoRecorridoConverter origen;
     private DataPuntoRecorridoConverter destino;
     private String fechaCompra;
@@ -30,7 +30,7 @@ public class DataPasajeConvertor {
 
     //PARA TRAER LOS PASAJES
 
-    public DataPasajeConvertor(String id, int codigoPasaje, DataViajeConvertor via, DataPrecio prec, DataPuntoRecorridoConverter orig,
+    public DataPasajeConvertor(String id, int codigoPasaje, DataViajeConvertor via, Float prec, DataPuntoRecorridoConverter orig,
                                DataPuntoRecorridoConverter des, Date fechCompra, DataUsuario comp, String ciPer,
                                DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) throws ParseException {
         this.id = id;
@@ -50,7 +50,7 @@ public class DataPasajeConvertor {
 
     //PARA COMPRAR PASAJE
 
-    public DataPasajeConvertor(DataViajeConvertor via, DataPrecio prec, DataPuntoRecorridoConverter orig,
+    public DataPasajeConvertor(DataViajeConvertor via, Float prec, DataPuntoRecorridoConverter orig,
                                DataPuntoRecorridoConverter des, String fechCompra, DataUsuario comp, String ciPer,
                                DataEmpleado vend, Boolean usd, Boolean pg, Boolean elim) {
         this.viaje = via;
@@ -72,6 +72,8 @@ public class DataPasajeConvertor {
         this.codigoPasaje = cod;
     }
 
+
+
     public int getCodigoPasaje(){
         return this.codigoPasaje;
     }
@@ -92,11 +94,11 @@ public class DataPasajeConvertor {
         return this.viaje;
     }
 
-    public void setPrecio(DataPrecio val){
+    public void setPrecio(Float val){
         this.precio = val;
     }
 
-    public DataPrecio getPrecio(){
+    public Float getPrecio(){
         return this.precio;
     }
 

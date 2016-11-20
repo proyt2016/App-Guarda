@@ -113,25 +113,25 @@ public class InteractiveArrayAdapterPuntosRecorrido extends ArrayAdapter<DataPto
             if(Farcade.configuracionEmpresa.getColorFondoLista()!=null){
                 holder.text.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista()));}
             else{
-                holder.text.setBackgroundColor(Color.parseColor("#ffff4444"));
+                holder.text.setBackgroundColor(Color.parseColor("#0b7bff"));
             }
             if(Farcade.configuracionEmpresa.getColorFondoLista()!=null){
                 holder.layout.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista()));}
             else{
-                holder.layout.setBackgroundColor(Color.parseColor("#ffff4444"));
+                holder.layout.setBackgroundColor(Color.parseColor("#0b7bff"));
             }
             if(Farcade.configuracionEmpresa.getColorFondoLista()!=null){
                 holder.layoutPadre.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista()));}
             else{
-                holder.layoutPadre.setBackgroundColor(Color.parseColor("#ffff4444"));
+                holder.layoutPadre.setBackgroundColor(Color.parseColor("#0b7bff"));
             }
 
         }else{
             //NO EXISTE CONFIGURACION
             holder.text.setTextColor(Color.parseColor("#ffffffff"));
-            holder.text.setBackgroundColor(Color.parseColor("#ffff4444"));
-            holder.layout.setBackgroundColor(Color.parseColor("#ffff4444"));
-            holder.layoutPadre.setBackgroundColor(Color.parseColor("#ffff4444"));
+            holder.text.setBackgroundColor(Color.parseColor("#0b7bff"));
+            holder.layout.setBackgroundColor(Color.parseColor("#0b7bff"));
+            holder.layoutPadre.setBackgroundColor(Color.parseColor("#0b7bff"));
 
         }
 

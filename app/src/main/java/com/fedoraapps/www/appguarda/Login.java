@@ -80,14 +80,14 @@ public class Login extends AppCompatActivity {
 
                         if(Farcade.configuracionEmpresa.getColorFondosDePantalla()!=null){
                             pantalla.setBackgroundColor((Color.parseColor(d.getColorFondosDePantalla())));
-                            pantalla.setForegroundTintList(ColorStateList.valueOf(Color.parseColor(d.getColorFondosDePantalla())));
+                        //    pantalla.setForegroundTintList(ColorStateList.valueOf(Color.parseColor(d.getColorFondosDePantalla())));
                             layoutInternoLogin.setBackgroundColor(Color.parseColor(d.getColorFondosDePantalla()));
                          //   layoutInternoLogin.setForegroundTintList(ColorStateList.valueOf(Color.parseColor(d.getColorFondosDePantalla())));
                             }
                         else{
-                            pantalla.setBackgroundColor(Color.parseColor("#ffff4444"));
-                            pantalla.setForegroundTintList(ColorStateList.valueOf(Color.parseColor("#ffff4444")));
-                            layoutInternoLogin.setBackgroundColor(Color.parseColor("#ffff4444"));
+                            pantalla.setBackgroundColor(Color.parseColor("#0b7bff"));
+                           // pantalla.setForegroundTintList(ColorStateList.valueOf(Color.parseColor("#ffff4444")));
+                            layoutInternoLogin.setBackgroundColor(Color.parseColor("#0b7bff"));
                            // layoutInternoLogin.setForegroundTintList(ColorStateList.valueOf(Color.parseColor("#ffff4444")));
 
                         }
@@ -109,10 +109,10 @@ public class Login extends AppCompatActivity {
                 }else{
                     //NO EXISTE CONFIGURACION EMPRESA O RESPONSE NULL SE CONF APP POR DEFECTO
                         logoEmpres.setImageResource(R.drawable.bondi_blanco);
-                        pantalla.setBackgroundColor(Color.parseColor("#ffff4444"));
-                        pantalla.setForegroundTintList(ColorStateList.valueOf(Color.parseColor("#ffff4444")));
+                        pantalla.setBackgroundColor(Color.parseColor("#0b7bff"));
+                      //  pantalla.setForegroundTintList(ColorStateList.valueOf(Color.parseColor("#ffff4444")));
                         layoutInternoLogin.setBackgroundColor(Color.parseColor("#ffff4444"));
-                        layoutInternoLogin.setForegroundTintList(ColorStateList.valueOf(Color.parseColor("#ffff4444")));
+                       // layoutInternoLogin.setForegroundTintList(ColorStateList.valueOf(Color.parseColor("#ffff4444")));
                         _userText.setTextColor(ColorStateList.valueOf(Color.parseColor("#ffffffff")));
                         _passwordText.setTextColor(ColorStateList.valueOf(Color.parseColor("#ffffffff")));
                         _loginButton.setBackgroundColor(Color.parseColor("#5a595b"));
@@ -120,9 +120,19 @@ public class Login extends AppCompatActivity {
                     Toast.makeText(Login.this,"NO EXISTE CONFIGURACION",Toast.LENGTH_LONG).show();
                 }
             }
+            @TargetApi(Build.VERSION_CODES.M)
             @Override
             public void onFailure(Call<DataConfiguracionEmpresa> call, Throwable t) {
                 Toast.makeText(Login.this,"FALLO EL WEB-SERVICE",Toast.LENGTH_LONG).show();
+                logoEmpres.setImageResource(R.drawable.bondi_blanco);
+                pantalla.setBackgroundColor(Color.parseColor("#0b7bff"));
+          //      pantalla.setForegroundTintList(ColorStateList.valueOf(Color.parseColor("#ffff4444")));
+                layoutInternoLogin.setBackgroundColor(Color.parseColor("#0b7bff"));
+//                layoutInternoLogin.setForegroundTintList(ColorStateList.valueOf(Color.parseColor("#ffff4444")));
+                _userText.setTextColor(ColorStateList.valueOf(Color.parseColor("#ffffffff")));
+                _passwordText.setTextColor(ColorStateList.valueOf(Color.parseColor("#ffffffff")));
+                _loginButton.setBackgroundColor(Color.parseColor("#5a595b"));
+
             }
         });
 
@@ -146,9 +156,10 @@ public class Login extends AppCompatActivity {
         _loginButton.setEnabled(false);
         if(Farcade.configuracionEmpresa.getId()!=null && Farcade.configuracionEmpresa.getColorFondosDePantalla()!=null) {
 
-            progressDialog = new ProgressDialog(Login.this, R.style.AppTheme_Dark_Dialog);
+            progressDialog = new ProgressDialog(Login.this, R.style.DialogBlack);
 
             progressDialog.setIndeterminate(true);
+
 
             progressDialog.setMessage("Autenticando...");
             progressDialog.show();
@@ -180,18 +191,19 @@ public class Login extends AppCompatActivity {
 
                     if (empleado!=null) {
 
-                        if (empleado.getEmail().getEmail().equals(_userText.getText().toString()) && empleado.getClave().equals(_passwordText.getText().toString())) {
-                            new android.os.Handler().postDelayed(
-                                    new Runnable() {
-                                        public void run() {
-                                            // On complete call either onLoginSuccess or onLoginFailed
-                                            //GUARDO EL EMPLEADO EN MEMORIA
-                                            Farcade.empleado = empleado;
-                                            onLoginSuccess();
-                                            progressDialog.dismiss();
-                                        }
-                                    }, 3000);
-                        } else {
+
+                                new android.os.Handler().postDelayed(
+                                        new Runnable() {
+                                            public void run() {
+                                                // On complete call either onLoginSuccess or onLoginFailed
+                                                //GUARDO EL EMPLEADO EN MEMORIA
+                                                Farcade.empleado = empleado;
+                                                onLoginSuccess();
+                                                progressDialog.dismiss();
+                                            }
+                                        }, 3000);
+
+                        /*} else {
                             if(empleado.getEmail().getEmail() != _userText.getText().toString()){
                                 System.out.println("Usuario ingresado incorrecto");
                                 Toast.makeText(Login.this,"Usuario ingresado incorrecto",Toast.LENGTH_LONG).show();
@@ -201,17 +213,27 @@ public class Login extends AppCompatActivity {
                                 System.out.println("Contrasenia ingresada incorrecta");
                                 Toast.makeText(Login.this,"Contrasenia ingresada incorrecta",Toast.LENGTH_LONG).show();
                             }
-                        }
-                    } else {
-                        onLoginFailed();
-                        System.out.println("No existe Usuario Registrado");
+                        }*/
+                    }else{
 
-                       // Toast.makeText(Login.this,"No existe Usuario Registrado",Toast.LENGTH_LONG).show();
-                        progressDialog.dismiss();
+                        new android.os.Handler().postDelayed(
+                                new Runnable() {
+                                    public void run() {
+                                        // On complete call either onLoginSuccess or onLoginFailed
+                                        //GUARDO EL EMPLEADO EN MEMORIA
+                                        Farcade.empleado = null;
+                                        onLoginFailed();
+                                        progressDialog.dismiss();
+                                        System.out.println("No existe Usuario Registrado");
+                                        Toast.makeText(Login.this,"Usuario y/o contraseña incorrectos",Toast.LENGTH_LONG).show();
+                                    }
+                                }, 3000);
+
                     }
-                }
+                }else{
+                    Toast.makeText(Login.this,"Fallo el servicio, contactar con LACBUS",Toast.LENGTH_LONG).show();
+                    progressDialog.dismiss();}
             }
-
             @Override
             public void onFailure(Call<DataEmpleado> call, Throwable t) {
                 System.out.println("Fallo el Servicio, contactar LacBus");
@@ -233,7 +255,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Error en Usuario/Contrasenia", Toast.LENGTH_LONG).show();
+       // Toast.makeText(getBaseContext(), "Error en Usuario/Contrasenia", Toast.LENGTH_LONG).show();
         _loginButton.setEnabled(true);
     }
 

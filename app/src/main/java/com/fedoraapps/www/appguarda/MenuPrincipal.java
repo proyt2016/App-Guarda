@@ -24,7 +24,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fedoraapps.www.appguarda.Api.PasajeApi;
+import com.fedoraapps.www.appguarda.Api.PrecioApi;
 import com.fedoraapps.www.appguarda.Shares.DataPasajeConvertor;
+import com.fedoraapps.www.appguarda.Shares.DataViajeConvertor;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -42,6 +44,8 @@ public class MenuPrincipal extends AppCompatActivity
     private List<DataPasajeConvertor> PasajesVendidos = new ArrayList<>();
     private String codViaje;
     private Button Manual;
+    private Float precio = null;
+    private DataViajeConvertor viaje = new DataViajeConvertor();
     private TextView textoButtonEscaner;
     private TextView textoButtonManual;
     private DrawerLayout pantalla;
@@ -103,16 +107,16 @@ public class MenuPrincipal extends AppCompatActivity
             if(Farcade.configuracionEmpresa.getColorFondosDePantalla()!=null){
                 pantalla.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondosDePantalla()));
             }else {
-                pantalla.setBackgroundColor(Color.parseColor("#0b7bff"));
+                pantalla.setBackgroundColor(Color.parseColor("#E12929"));
             }
             if(Farcade.configuracionEmpresa.getColorFondosDePantalla()!=null){
                 pantalla2.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondosDePantalla()));}
             else{
-                pantalla2.setBackgroundColor(Color.parseColor("#0b7bff"));}
+                pantalla2.setBackgroundColor(Color.parseColor("#E12929"));}
             if (Farcade.configuracionEmpresa.getColorFondosDePantalla() != null) {
                 barraMenu.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondosDePantalla()));}
             else{
-                barraMenu.setBackgroundColor(Color.parseColor("#0b7bff"));
+                barraMenu.setBackgroundColor(Color.parseColor("#E12929"));
             }
             if(Farcade.configuracionEmpresa.getColorTitulo()!=null){
                 titulo.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));
@@ -162,9 +166,9 @@ public class MenuPrincipal extends AppCompatActivity
             //titulo.setBackgroundColor(R.drawable.abc_list_selector_background_transition_holo_dark);
         }else{
                 //NO EXISTE CONFIGURACION
-            pantalla.setBackgroundColor(Color.parseColor("#0b7bff"));
-            pantalla2.setBackgroundColor(Color.parseColor("#0b7bff"));
-            barraMenu.setBackgroundColor(Color.parseColor("#0b7bff"));
+            pantalla.setBackgroundColor(Color.parseColor("#E12929"));
+            pantalla2.setBackgroundColor(Color.parseColor("#E12929"));
+            barraMenu.setBackgroundColor(Color.parseColor("#E12929"));
             titulo.setTextColor(Color.parseColor("#ffffffff"));
             textoButtonManual.setTextColor(Color.parseColor("#ffffffff"));
             textoButtonEscaner.setTextColor(Color.parseColor("#ffffffff"));
@@ -282,66 +286,79 @@ public class MenuPrincipal extends AppCompatActivity
 
                         if(scanContent.length()<4) {
 
-                            //VERIFICO SI EXISTE PASAJE EN MEMORIA
 
-                            Call<DataPasajeConvertor> call = PasajeApi.createService().getPasajePorCodigo(Integer.parseInt(scanContent));
-                            call.enqueue(new Callback<DataPasajeConvertor>() {
-                                @Override
-                                public void onResponse(Call<DataPasajeConvertor> call, Response<DataPasajeConvertor> response) {
-                                    DataPasajeConvertor pasaje = response.body();
+                                    //VERIFICO SI EXISTE PASAJE EN MEMORIA
+                                    Call<Float> call2 = PrecioApi.createService().getPrecio(viaje.getRecorrido().getIdOrigen(), viaje.getRecorrido().getIdDestino(),viaje.getRecorrido().getId());
+                                    call2.enqueue(new Callback<Float>() {
+                                        public void onResponse(Call<Float> call, Response<Float> response) {
+                                            precio = response.body();
 
-                                    if(pasaje!=null) {
-                                        if (pasaje.getUsado() == null)
-                                            pasaje.setUsado(false);
-                                        if (pasaje.getEliminado() == null)
-                                            pasaje.setEliminado(false);
-                                        if (pasaje.getPago() == null)
-                                            pasaje.setPago(false);
-
-                                        if (pasaje != null && pasaje.getUsado() == false) {
-                                            //CAMBIO ESTADO A PASAJE UTILIZADO
-                                            Call<Void> call2 = PasajeApi.createService().procesarPasaje(pasaje.getId());
-                                            call2.enqueue(new Callback<Void>() {
+                                            Call<DataPasajeConvertor> call5 = PasajeApi.createService().getPasajePorCodigo(Integer.parseInt(scanContent));
+                                            call5.enqueue(new Callback<DataPasajeConvertor>() {
                                                 @Override
-                                                public void onResponse(Call<Void> call, Response<Void> response) {
+                                                public void onResponse(Call<DataPasajeConvertor> call, Response<DataPasajeConvertor> response) {
+                                                    DataPasajeConvertor pasaje = response.body();
+
+                                                    if (pasaje != null) {
+                                                        if (pasaje.getUsado() == null)
+                                                            pasaje.setUsado(false);
+                                                        if (pasaje.getEliminado() == null)
+                                                            pasaje.setEliminado(false);
+                                                        if (pasaje.getPago() == null)
+                                                            pasaje.setPago(false);
+
+                                                        if (pasaje != null && pasaje.getUsado() == false) {
+                                                            //CAMBIO ESTADO A PASAJE UTILIZADO
+                                                            Call<Void> call2 = PasajeApi.createService().procesarPasaje(pasaje.getId());
+                                                            call2.enqueue(new Callback<Void>() {
+                                                                @Override
+                                                                public void onResponse(Call<Void> call, Response<Void> response) {
 
 
+                                                                }
+
+                                                                @Override
+                                                                public void onFailure(Call<Void> call, Throwable t) {
+                                                                    System.out.println("*****FALLO EL SERVICIO*****");
+                                                                }
+                                                            });
+                                                            //MUESTRO EN DIALOG OPERACION EXITOSA
+                                                            crearDialogoConexion(pasaje).show();
+
+                                                        } else {
+                                                            //PASAJE YA FUE UTILIZADO
+                                                            if (pasaje == null) {
+                                                                dialogNoExistePasaje().show();
+
+                                                            } else {
+                                                                //PASAJE YA FUE UTILIZADO
+                                                                if (pasaje.getUsado() != null)
+                                                                    if (pasaje.getUsado() == true) {
+                                                                        dialogPasajeUsado().show();
+                                                                    } else {
+                                                                        //NO EXISTE EL PASAJE SE MUESTRA EL DIALOG CORRESPONDIENTE
+                                                                        dialogNoExistePasaje().show();
+                                                                    }
+                                                            }
+                                                        }
+                                                    } else {
+                                                        noSeProcesoPasaje().show();
+                                                    }
                                                 }
 
                                                 @Override
-                                                public void onFailure(Call<Void> call, Throwable t) {
-                                                    System.out.println("*****FALLO EL SERVICIO*****");
+                                                public void onFailure(Call<DataPasajeConvertor> call, Throwable t) {
+                                                    System.out.println("onFailure");
                                                 }
                                             });
-                                            //MUESTRO EN DIALOG OPERACION EXITOSA
-                                            crearDialogoConexion(pasaje).show();
-
-                                        } else {
-                                            //PASAJE YA FUE UTILIZADO
-                                            if (pasaje == null) {
-                                                dialogNoExistePasaje().show();
-
-                                            } else {
-                                                //PASAJE YA FUE UTILIZADO
-                                                if (pasaje.getUsado() != null)
-                                                    if (pasaje.getUsado() == true) {
-                                                        dialogPasajeUsado().show();
-                                                    } else {
-                                                        //NO EXISTE EL PASAJE SE MUESTRA EL DIALOG CORRESPONDIENTE
-                                                        dialogNoExistePasaje().show();
-                                                    }
-                                            }
                                         }
-                                    }else{
-                                        noSeProcesoPasaje().show();
-                                    }
-                                }
 
-                                @Override
-                                public void onFailure(Call<DataPasajeConvertor> call, Throwable t) {
-                                    System.out.println("onFailure");
-                                }
-                            });
+                                        @Override
+                                        public void onFailure(Call<Float> call, Throwable t) {
+                                            System.out.println("onFailure");
+                                        }
+                                    });
+
                         }else{
                             FormatoCodigoIncorrecto().show();
                         }
@@ -509,7 +526,7 @@ public class MenuPrincipal extends AppCompatActivity
         AlertDialog.Builder Dialog = new AlertDialog.Builder(ctw);
         Dialog.setTitle("Pasaje Vendido");
         Dialog.setMessage("Codigo:"+" "+pasaje.getCodigoPasaje()+"\n"
-                +"Monto:"+" "+/*pasaje.getMonto()+*/"\n"
+                +"Monto:"+" "+"\n"
                 + "Destino"+" "+pasaje.getDestino().getNombre());
         Dialog.setIcon(R.drawable.icono_cash_black);;
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion

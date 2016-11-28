@@ -1,6 +1,7 @@
 package com.fedoraapps.www.appguarda.Api;
 
 
+import com.fedoraapps.www.appguarda.AddHeaderInterceptor;
 import com.fedoraapps.www.appguarda.TenantProvider;
 
 import okhttp3.OkHttpClient;
@@ -22,6 +23,7 @@ public class PrecioApi {
             TenantProvider tenantConfig = new TenantProvider();
             String apiUrl = tenantConfig.GetApiUrl();
 
+            httpClient.addInterceptor(new AddHeaderInterceptor());
             Retrofit retrofit = new Retrofit.Builder()
                     .baseUrl(apiUrl)
                     .addConverterFactory(GsonConverterFactory.create())

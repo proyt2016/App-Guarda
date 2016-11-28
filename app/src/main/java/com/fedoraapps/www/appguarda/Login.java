@@ -85,9 +85,9 @@ public class Login extends AppCompatActivity {
                          //   layoutInternoLogin.setForegroundTintList(ColorStateList.valueOf(Color.parseColor(d.getColorFondosDePantalla())));
                             }
                         else{
-                            pantalla.setBackgroundColor(Color.parseColor("#0b7bff"));
+                            pantalla.setBackgroundColor(Color.parseColor("#E12929"));
                            // pantalla.setForegroundTintList(ColorStateList.valueOf(Color.parseColor("#ffff4444")));
-                            layoutInternoLogin.setBackgroundColor(Color.parseColor("#0b7bff"));
+                            layoutInternoLogin.setBackgroundColor(Color.parseColor("#E12929"));
                            // layoutInternoLogin.setForegroundTintList(ColorStateList.valueOf(Color.parseColor("#ffff4444")));
 
                         }
@@ -109,9 +109,9 @@ public class Login extends AppCompatActivity {
                 }else{
                     //NO EXISTE CONFIGURACION EMPRESA O RESPONSE NULL SE CONF APP POR DEFECTO
                         logoEmpres.setImageResource(R.drawable.bondi_blanco);
-                        pantalla.setBackgroundColor(Color.parseColor("#0b7bff"));
+                        pantalla.setBackgroundColor(Color.parseColor("#E12929"));
                       //  pantalla.setForegroundTintList(ColorStateList.valueOf(Color.parseColor("#ffff4444")));
-                        layoutInternoLogin.setBackgroundColor(Color.parseColor("#ffff4444"));
+                        layoutInternoLogin.setBackgroundColor(Color.parseColor("#E12929"));
                        // layoutInternoLogin.setForegroundTintList(ColorStateList.valueOf(Color.parseColor("#ffff4444")));
                         _userText.setTextColor(ColorStateList.valueOf(Color.parseColor("#ffffffff")));
                         _passwordText.setTextColor(ColorStateList.valueOf(Color.parseColor("#ffffffff")));
@@ -125,9 +125,9 @@ public class Login extends AppCompatActivity {
             public void onFailure(Call<DataConfiguracionEmpresa> call, Throwable t) {
                 Toast.makeText(Login.this,"FALLO EL WEB-SERVICE",Toast.LENGTH_LONG).show();
                 logoEmpres.setImageResource(R.drawable.bondi_blanco);
-                pantalla.setBackgroundColor(Color.parseColor("#0b7bff"));
+                pantalla.setBackgroundColor(Color.parseColor("#E12929"));
           //      pantalla.setForegroundTintList(ColorStateList.valueOf(Color.parseColor("#ffff4444")));
-                layoutInternoLogin.setBackgroundColor(Color.parseColor("#0b7bff"));
+                layoutInternoLogin.setBackgroundColor(Color.parseColor("#E12929"));
 //                layoutInternoLogin.setForegroundTintList(ColorStateList.valueOf(Color.parseColor("#ffff4444")));
                 _userText.setTextColor(ColorStateList.valueOf(Color.parseColor("#ffffffff")));
                 _passwordText.setTextColor(ColorStateList.valueOf(Color.parseColor("#ffffffff")));

@@ -77,18 +77,18 @@ public class Main extends AppCompatActivity implements View.OnClickListener, Sea
                             pantalla.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondosDePantalla()));
 
                         } else {
-                            pantalla.setBackgroundColor(Color.parseColor("#0b7bff"));
+                            pantalla.setBackgroundColor(Color.parseColor("#E12929"));
                         }
                         if (Farcade.configuracionEmpresa.getColorFondoLista() != null) {
                             listTrip.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista()));
                         } else {
-                            listTrip.setBackgroundColor(Color.parseColor("#0b7bff"));
+                            listTrip.setBackgroundColor(Color.parseColor("#E12929"));
                         }
                         // listTrip.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista())));
                         if (Farcade.configuracionEmpresa.getColorFondosDePantalla() != null) {
                             filtro.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondosDePantalla()));
                         } else {
-                            filtro.setBackgroundColor(Color.parseColor("#0b7bff"));
+                            filtro.setBackgroundColor(Color.parseColor("#E12929"));
                         }
                         if (Farcade.configuracionEmpresa.getColorLetras() != null) {
                             filtro.setHintTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorLetras()));
@@ -98,7 +98,7 @@ public class Main extends AppCompatActivity implements View.OnClickListener, Sea
                     }else{
                         Toast.makeText(Main.this,"CONFIGURACION POR DEFECTO",Toast.LENGTH_LONG).show();}
                 }else{
-                    pantalla.setBackgroundColor(Color.parseColor("#0b7bff"));
+                    pantalla.setBackgroundColor(Color.parseColor("#FF0000"));
                     Toast.makeText(Main.this,"NO SE PUDO CARGAR LA CONFIGURACION",Toast.LENGTH_LONG).show();}
             }
             @Override

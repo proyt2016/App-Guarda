@@ -1,4 +1,4 @@
-apply plugin: 'com.android.application'
+ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 23
@@ -10,8 +10,9 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
-        buildConfigField 'String', 'API_KEY', '"66f2689e-da76-4efa-acc3-659de5469804"'
-        buildConfigField 'String', 'API_URL', '"http://192.168.43.158:8080"'
+        buildConfigField 'String', 'API_KEY', '"0783a29b-ad00-4087-9863-ea6e4eabb599"'
+        buildConfigField 'String', 'APP_NAME', '"tenant-pasajes"'
+        buildConfigField 'String', 'API_URL', '"http://10.0.22.111:8080"'
 
 
     }

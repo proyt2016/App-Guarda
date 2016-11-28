@@ -27,6 +27,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.fedoraapps.www.appguarda.Api.PasajeApi;
+import com.fedoraapps.www.appguarda.Api.PrecioApi;
 import com.fedoraapps.www.appguarda.Api.PuntosRecorridoApi;
 import com.fedoraapps.www.appguarda.Shares.DataEmpleado;
 import com.fedoraapps.www.appguarda.Shares.DataPasajeConvertor;
@@ -58,15 +59,16 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
     Spinner origen;
     TextView tituloOrigen;
     TextView tituloDestino;
-    DataPuntoRecorridoConverter punto = new DataPuntoRecorridoConverter();
+   // DataPuntoRecorridoConverter punto = new DataPuntoRecorridoConverter();
     DataPuntoRecorridoConverter dest = new DataPuntoRecorridoConverter();
     DataPuntoRecorridoConverter ori = new DataPuntoRecorridoConverter();
     Double distancia;
     String fechaFormat = null;
-
+    Float precioPasaje;
     DataViajeConvertor VIAJE = new DataViajeConvertor();
     DataRecorridoConvertor reco;
     DataEmpleado emp = new DataEmpleado();
+    DataPuntoRecorridoConverter punto = new DataPuntoRecorridoConverter();
     Button generar;
     RelativeLayout fondoPantalla;
     String valOfSpinner;
@@ -112,12 +114,12 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
             if(Farcade.configuracionEmpresa.getColorFondosDePantalla()!=null){
                 fondoPantalla.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondosDePantalla()));}
             else{
-                fondoPantalla.setBackgroundColor(Color.parseColor("#0b7bff"));
+                fondoPantalla.setBackgroundColor(Color.parseColor("#E12929"));
             }
             if(Farcade.configuracionEmpresa.getColorFondoLista()!=null){
                 listaPuntos.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista()));}
             else{
-                listaPuntos.setBackgroundColor(Color.parseColor("#0b7bff"));
+                listaPuntos.setBackgroundColor(Color.parseColor("#E12929"));
             }
             if(Farcade.configuracionEmpresa.getColorTitulo()!=null){
                 tituloOrigen.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));}
@@ -132,7 +134,7 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
             if(Farcade.configuracionEmpresa.getColorBoton()!=null){
                 generar.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorBoton()));}
             else{
-                generar.setBackgroundColor(Color.parseColor("#5a595b"));
+                generar.setBackgroundColor(Color.parseColor("#E12929"));
             }
             if(Farcade.configuracionEmpresa.getColorLetras()!=null){
                 generar.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorLetras()));}
@@ -141,8 +143,8 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
             }
         }else{
                 //NO EXISTE CONFIGURACION
-                fondoPantalla.setBackgroundColor(Color.parseColor("#0b7bff"));
-                listaPuntos.setBackgroundColor(Color.parseColor("#0b7bff"));
+                fondoPantalla.setBackgroundColor(Color.parseColor("#E12929"));
+                listaPuntos.setBackgroundColor(Color.parseColor("#E12929"));
                 tituloOrigen.setTextColor(Color.parseColor("#ffffffff"));
                 tituloDestino.setTextColor(Color.parseColor("#ffffffff"));
                 generar.setBackgroundColor(Color.parseColor("#5a595b"));
@@ -269,7 +271,7 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
                                 ori.setId(puntoOrigen.getId());
                                 ori.setTipo(puntoOrigen.getTipo());
 
-                                DataPuntoRecorridoConverter punto = controller.getDestinoSeleccionado();
+                                 punto = controller.getDestinoSeleccionado();
 
 
                                 if (punto != null) {
@@ -293,11 +295,22 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
 
                                         System.out.println("CANTIDAD DE PASAJES DISPONIBLES--------"+" "+i);
 
-                                        if(i>1) {
+                                       if(i>1) {
+
+                                            Call<Float> call4 = PrecioApi.createService().getPrecio(puntoOrigen.getId(),punto.getId(),Farcade.recorridoSeleccionado.getRecorrido().getId());
+                                            call4.enqueue(new Callback<Float>() {
+                                                @Override
+                                                public void onResponse(Call<Float> call, Response<Float> response) {
+
+                                                    precioPasaje = response.body();
+                                                    System.out.println(" ===========>"+" "+response.body());
+
+
+                                                    if(response.isSuccessful()) {
 
 
 
-                                            DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, ori, dest, fechaFormat, null, null, emp, false, false, false);
+                                            DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, ori, dest, fechaFormat, null, null, emp, false, false, false);
 
 
 
@@ -367,6 +380,16 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
 
                                                 @Override
                                                 public void onFailure(Call<DataPasajeConvertor> call, Throwable t) {
+                                                    System.out.println("*****FALLO EL SERVICIO*****" + t.getCause());
+                                                }
+                                            });
+                                                    }else{
+                                                        noSeCreoPrecio().show();
+                                                    }
+                                                }
+
+                                                @Override
+                                                public void onFailure(Call<Float> call, Throwable t) {
                                                     System.out.println("*****FALLO EL SERVICIO*****" + t.getCause());
                                                 }
                                             });
@@ -597,7 +620,8 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Pasaje Vendido");
-        alertDialogBuilder.setMessage("Destino:" +" "+Farcade.DestinoSeleccionado.getNombre() +"\n");//+"Precio:"+" "+pasaje.getPrecio().getMonto());
+        alertDialogBuilder.setMessage("Destino:" +" "+Farcade.DestinoSeleccionado.getNombre() +"\n"
+        +"Monto:"+" "+precioPasaje);//+"Precio:"+" "+pasaje.getPrecio().getMonto());
         alertDialogBuilder.setIcon(R.drawable.icono_cash_black);;
 
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
@@ -661,6 +685,39 @@ public class VentaPasajesOnline extends AppCompatActivity implements View.OnClic
 
         return alertDialogBuilder.create();
     }
+    private AlertDialog noSeCreoPrecio()
+    {
+        // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Atencion!");
+        alertDialogBuilder.setMessage("No es posible calcular Monto");
+        alertDialogBuilder.setIcon(R.drawable.icono_alerta);
+
+        // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
+        DialogInterface.OnClickListener listenerOk = new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        };
+
+        // Creamos un nuevo OnClickListener para el boton Cancelar
+        DialogInterface.OnClickListener listenerCancelar = new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                return;
+            }
+        };
+
+        // Asignamos los botones positivo y negativo a sus respectivos listeners
+        alertDialogBuilder.setPositiveButton(R.string.ACEPTAR, listenerOk);
+        // alertDialogBuilder.setNegativeButton(R.string.Cancelar, listenerCancelar);
+
+        return alertDialogBuilder.create();
+    }
+
 
 
    /* IntentIntegrator integrator = new IntentIntegrator(VentaPasajesOnline.this);

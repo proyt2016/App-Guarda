@@ -23,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.fedoraapps.www.appguarda.Api.PasajeApi;
+import com.fedoraapps.www.appguarda.Api.PrecioApi;
 import com.fedoraapps.www.appguarda.Api.PuntosRecorridoApi;
 import com.fedoraapps.www.appguarda.Shares.DataEmpleado;
 import com.fedoraapps.www.appguarda.Shares.DataPasajeConvertor;
@@ -64,6 +65,7 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
     DataRecorridoConvertor reco;
     DataEmpleado emp = new DataEmpleado();
     Double distancia;
+    Float precioPasaje;
     Calendar dt;
     Button generar;
     String valOfSpinner;
@@ -124,7 +126,7 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
             if(Farcade.configuracionEmpresa.getColorFondosDePantalla()!=null){
                 fondoDePantalla.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondosDePantalla()));}
             else{
-                fondoDePantalla.setBackgroundColor(Color.parseColor("#0b7bff"));
+                fondoDePantalla.setBackgroundColor(Color.parseColor("#E12929"));
             }
             if(Farcade.configuracionEmpresa.getColorBoton()!=null){
                 generar.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorBoton()));}
@@ -139,7 +141,7 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
             if(Farcade.configuracionEmpresa.getColorFondoLista()!=null){
                 listaPuntos.setBackgroundColor(Color.parseColor(Farcade.configuracionEmpresa.getColorFondoLista()));}
             else{
-                listaPuntos.setBackgroundColor(Color.parseColor("#0b7bff"));
+                listaPuntos.setBackgroundColor(Color.parseColor("#E12929"));
             }
             if(Farcade.configuracionEmpresa.getColorTitulo()!=null){
                 tituloOrigen.setTextColor(Color.parseColor(Farcade.configuracionEmpresa.getColorTitulo()));}
@@ -153,10 +155,10 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
             }
         }else{
             //NO EXISTE CONFIGURACION
-            fondoDePantalla.setBackgroundColor(Color.parseColor("#0b7bff"));
+            fondoDePantalla.setBackgroundColor(Color.parseColor("#E12929"));
             generar.setBackgroundColor(Color.parseColor("#5a595b"));
             generar.setBackgroundColor(Color.parseColor("#ffffffff"));
-            listaPuntos.setBackgroundColor(Color.parseColor("#0b7bff"));
+            listaPuntos.setBackgroundColor(Color.parseColor("#E12929"));
             tituloOrigen.setTextColor(Color.parseColor("#ffffffff"));
             tituloDestino.setTextColor(Color.parseColor("#ffffffff"));
         }
@@ -283,19 +285,19 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
 
 
                                         if(i>1) {
-                                        /*    Call<Float> call4 = PrecioApi.createService().getPrecio(puntoOrigen.getId(),punto.getId(),Farcade.recorridoSeleccionado.getRecorrido().getId());
+                                            Call<Float> call4 = PrecioApi.createService().getPrecio(puntoOrigen.getId(),punto.getId(),Farcade.recorridoSeleccionado.getRecorrido().getId());
                                             call4.enqueue(new Callback<Float>() {
                                                 @Override
                                                 public void onResponse(Call<Float> call, Response<Float> response) {
 
-                                                    Float precioPasaje = response.body();
-                                                    System.out.println(" ===========>"+" "+precioPasaje);
+                                                     precioPasaje = response.body();
+                                                    System.out.println(" ===========>"+" "+response.body());
 
 
-                                                    if(response.isSuccessful()) {*/
+                                                    if(response.isSuccessful()) {
 
 
-                                                        DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, null, puntoOrigen, punto, fechaFormat, null, null, emp, true, true, false);
+                                                        DataPasajeConvertor pasaje = new DataPasajeConvertor(VIAJE, puntoOrigen, punto, fechaFormat, null, null, emp, true, true, false);
 
 
                                                         Call<DataPasajeConvertor> call3 = PasajeApi.createService().venderPasaje(pasaje);
@@ -365,7 +367,7 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
                                                                 System.out.println("*****FALLO EL SERVICIO*****" + t.getCause());
                                                             }
                                                         });
-                                                   /* }else{
+                                                   }else{
                                                         noSeCreoPrecio().show();
                                                     }
                                                 }
@@ -374,7 +376,7 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
                                                 public void onFailure(Call<Float> call, Throwable t) {
                                                     System.out.println("*****FALLO EL SERVICIO*****" + t.getCause());
                                                 }
-                                            });*/
+                                            });
                                         }else{
 
                                             SinPasajeDisponible().show();
@@ -471,8 +473,8 @@ public class VentaPasajesEfectivo extends AppCompatActivity implements View.OnCl
         // Instanciamos un nuevo AlertDialog Builder y le asociamos titulo y mensaje
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Pasaje Vendido");
-        alertDialogBuilder.setMessage("Destino:"+" "+pasaje.getDestino().toString()+"\n");
-                //  +"Monto:"+pasaje.getPrecio().getMonto());//+"Precio:"+" "+pasaje.getPrecio().getMonto());
+        alertDialogBuilder.setMessage("Destino:"+" "+pasaje.getDestino().toString()+"\n"
+                  +"Monto:"+" "+precioPasaje);//+"Precio:"+" "+pasaje.getPrecio().getMonto());
         alertDialogBuilder.setIcon(R.drawable.icono_cash_black);;
 
         // Creamos un nuevo OnClickListener para el boton OK que realice la conexion
